@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/3 | welcome to here</title>
+  <title>学习笔记 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/2018/03/index.html">
+  <meta name="description" content="学习学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/12/07/学习笔记/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="学习学习">
+<meta property="og:updated_time" content="2018-03-08T13:43:21.308Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="学习笔记">
+<meta name="twitter:description" content="学习学习">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -143,76 +147,230 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-学习笔记" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-08T08:22:21.378Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      学习笔记
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+        
+        <a href="/2017/12/07/学习笔记/" class="archive-article-date">
+  	<time datetime="2017-12-07T13:20:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-07</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>学习学习<br><a id="more"></a></p>
+<h2 id="一些web的注入点以及绕过方法"><a href="#一些web的注入点以及绕过方法" class="headerlink" title="一些web的注入点以及绕过方法"></a>一些web的注入点以及绕过方法</h2><ol>
+<li>sha1函数不能处理数组可通过构造数组来绕过<br>2.ereg是非二进制安全的，这类函数会将’\0’视为字符串结束符可用%00来截断<br>3.sql注入的时候有时不能只顾及过滤的还要考虑到没有过滤的<br>4.关键字的过滤<br>5.输入框内的长度绕过可通过抓包实现修改字符长度<br>6.strcmp只能处理字符串格式的，要绕过它可以采用将变量输入成数组形式的<br>7.http的封装可以由以下绕过？user=php://input&amp;file=php://filter/convert.base64-encode/resource=文件名称.php<br>8.md5绕过字符串加密后0e开头例子QNKCDZO   S155964671a  ……<br>9.sha1的绕过可以通过将字符串改为输入时数组<br>10.json绕过，json_decode函数解密成一个数组，判断数组中的key的值是否等于$key的值，但是$keyd不知道可以构造一个和任意字符串<br>返回为真的数组{“key”,true}<br>11.git源码泄露利用（web中常见的源码泄露<a href="http://www.hacksec.cn/Penetration-test/474.html" title="链接" target="_blank" rel="noopener">链接</a>）<br>12.mysql数据库中的查询函数extractvalue(filename,filepath)<br>13.php中mt_rand伪加密可以用逆向爆破来解密<br>14.salt加密<br>所谓加Salt，就是加点“佐料”。当用户首次提供密码时（通常是注册时），由系统自动往这个密码里加一些“Salt值”，<br>这个值是由系统随机生成的，并且只有系统知道。然后再散列。而当用户登录时，系统为用户提供的代码撒上同样的“Salt值”，然后散列，再比较散列值，<br>已确定密码是否正确。<br>15.file_get_contents将整个文件读入一个字符串<br>16.php中file_put_contents()使用php://filter访问时需要选择write参数，而include(),file_get_contents()需要选择read参数<br>17.phpinfo()返回php的所有信息,包括了 PHP 的编译选项及扩充配置、PHP 版本、服务器信息及环境变量、PHP 环境变量、操作系统版本信息、路径及环境变量配置、HTTP 标头、及版权宣告。<br>当远程包含打开时可以造成恶意代码执行拿shell。<br>18.order by 后面加上字段名，对字段列进行排序，关键字AES（升序）DESC（降序）</li>
+</ol>
+<h2 id="编码笔记"><a href="#编码笔记" class="headerlink" title="编码笔记"></a>编码笔记</h2><p>  1.当铺密码（将中文转换成数字，汉字出头笔画为多少就对应多少数字）<br>  2.jsfuck密码（由<img src="" alt="">组成可以在网页的控制台下运行解密）</p>
+<h2 id="杂项笔记"><a href="#杂项笔记" class="headerlink" title="杂项笔记"></a>杂项笔记</h2><p>   1.伪加密可以使用工具ZipCenOp.jar在cmd界面下运行<br>      解密命令：java -jar ZipCenOp.jar r 压缩包名称<br>      加密命令：java -jar ZipCenOp.jar e 压缩包名称<br>   2.MP3解密使用Decode.exe工具同样在cmd界面下输入Decode.exe -X mp3文件名 —P 密码<br>   3.将图片颜色色调进行反转可以使用stegslove.jar工具<br>   4.png 的文件头是 89 50 4E 47 png的图片高度和宽度信息在16~24之间<br>      JPEG (jpg)，文件头：FFD8FF<br>      GIF (gif)，文件头：47494638<br>      TIFF (tif)，文件头：49492A00<br>      Windows Bitmap (bmp)，文件头：424D<br>      CAD (dwg)，文件头：41433130<br>      Adobe Photoshop (psd)，文件头：38425053<br>      Rich Text Format (rtf)，文件头：7B5C727466<br>      XML (xml)，文件头：3C3F786D6C<br>      HTML (html)，文件头：68746D6C3E<br>      Email [thorough only] (eml)，文件头：44656C69766572792D646174653A<br>      Outlook Express (dbx)，文件头：CFAD12FEC5FD746F<br>      Outlook (pst)，文件头：2142444E<br>      MS Word/Excel (xls.or.doc)，文件头：D0CF11E0<br>      MS Access (mdb)，文件头：5374616E64617264204A<br>      WordPerfect (wpd)，文件头：FF575043<br>      Adobe Acrobat (pdf)，文件头：255044462D312E<br>      Quicken (qdf)，文件头：AC9EBD8F<br>      Windows Password (pwl)，文件头：E3828596<br>      ZIP Archive (zip)，文件头：504B0304<br>      RAR Archive (rar)，文件头：52617221<br>      Wave (wav)，文件头：57415645<br>      AVI (avi)，文件头：41564920<br>      Real Audio (ram)，文件头：2E7261FD<br>      Real Media (rm)，文件头：2E524D46<br>      MPEG (mpg)，文件头：000001BA<br>      MPEG (mpg)，文件头：000001B3<br>      Quicktime (mov)，文件头：6D6F6F76<br>      Windows Media (asf)，文件头：3026B2758E66CF11<br>      MIDI (mid)，文件头：4D546864<br>    5.在一些明知道有文件却找不到文件的时候可以考虑一下ntfs流找到这个流可以使用工具来找到有关隐藏以及寻找可以看网站<a href="http://www.cnblogs.com/Chesky/p/ALTERNATE_DATA_STREAMS.html" title="链接" target="_blank" rel="noopener">链接</a><br>    6.生成图种命令copy /b a.jpg+b.zip c.jpg<br>    7.wireshark的使用ssl加密的数据包需要把包作为传输会话私钥导入，还需要加载证书<br>    8.MP3如有听到丝丝的声音可以考虑是频域加密使用audition<br>    9.分离文件我们可以使用dd命令分离出隐藏文件：<br>     kali下：dd if=carter.jpg of=carter-1.jpg skip=140147 bs=1<br>     可以参考dd命令详解，这里if是指定输入文件，of是指定输出文件，skip是指定从输入文件开头跳过140147个块后再开始复制，<br>     bs设置每次读写块的大小为1字节 。最后我们可以得到这样的一张carter-1.jpg图片：</p>
+<pre><code> 10. jpg图片： $ff, $c0 (SOF0)
+  长度 (高字节, 低字节), 8+components*3     这里占两个字节
+  数据精度 (1 byte) 每个样本位数, 通常是 8 (大多数软件不支持 12 和 16)    这里占一个字节
+  图片高度 (高字节, 低字节), 如果不支持 DNL 就必须 &gt;0      这里占两个字节
+  图片宽度 (高字节, 低字节), 如果不支持 DNL 就必须 &gt;0      这里占两个字节
+11.通过py脚本将txt文本用一个key来做xor处理。
+</code></pre>
+      
 
-        <div class="article-info info-on-right">
-          
-          
-
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢请我吃糖<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/07/学习笔记/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/12/08/php-数据库开发学习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          php-数据库开发学习
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/12/07/php伪协议/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">php伪协议</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些web的注入点以及绕过方法"><span class="toc-number">1.</span> <span class="toc-text">一些web的注入点以及绕过方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编码笔记"><span class="toc-number">2.</span> <span class="toc-text">编码笔记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#杂项笔记"><span class="toc-number">3.</span> <span class="toc-text">杂项笔记</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="学习笔记" data-title="学习笔记" data-url="http://yoursite.com/2017/12/07/学习笔记/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2017/12/07/学习笔记/", 
+    sourceId: "学习笔记",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="学习笔记" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +393,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

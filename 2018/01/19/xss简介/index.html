@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/3 | welcome to here</title>
+  <title>xss学习 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/2018/03/index.html">
+  <meta name="description" content="xss（跨站脚本攻击）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xss学习">
+<meta property="og:url" content="http://yoursite.com/2018/01/19/xss简介/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="xss（跨站脚本攻击）">
+<meta property="og:updated_time" content="2018-01-19T14:53:05.596Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="xss学习">
+<meta name="twitter:description" content="xss（跨站脚本攻击）">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -143,76 +147,223 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-xss简介" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-08T08:22:21.378Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      xss学习
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+        
+        <a href="/2018/01/19/xss简介/" class="archive-article-date">
+  	<time datetime="2018-01-19T12:54:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-19</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>xss（跨站脚本攻击）<br><a id="more"></a></p>
+<h2 id="xss简介"><a href="#xss简介" class="headerlink" title="xss简介"></a>xss简介</h2><p>  是一种经常出现在web应用程序中的计算机安全漏洞，是由于web应用程序对用户的输入过滤<br>  不严而产生的。攻击者利用网站漏洞把恶意代码注入到网页中，当其他用户浏览这些网页时<br>  ，就会执行其中的恶意代码，对受害者可能采取cookie资料的窃取，会话劫持，钓鱼欺骗等<br>  攻击手段。</p>
+<h2 id="xss的危害"><a href="#xss的危害" class="headerlink" title="xss的危害"></a>xss的危害</h2><p>   1.网络钓鱼，包括盗取各类用户账号<br>  2.窃取用户cookie<br>   3.窃取用户浏览请回话<br>   4.强制弹出广告页面，刷流量<br>  5.网页挂马<br>   6.提升用户权限，进一步渗透网站<br>   7.传播跨站脚本蠕虫<br>   。。。。。。。。</p>
+<h2 id="xss分类"><a href="#xss分类" class="headerlink" title="xss分类"></a>xss分类</h2><p>   反射型xss（只能使用一次）<br>   存储型xss（存储到服务器中危害比较大）</p>
+<h2 id="判断是否存在xss漏洞方法"><a href="#判断是否存在xss漏洞方法" class="headerlink" title="判断是否存在xss漏洞方法"></a>判断是否存在xss漏洞方法</h2><p>   1.在浏览器后面加上<script>alert(“xss”)</script>,如果有弹框则说明存在xss漏洞。</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢请我吃糖<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/19/xss简介/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/03/06/渗透测试流程-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          渗透测试流程
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/01/08/上传漏洞fckeditor的利用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">上传漏洞fckeditor的利用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#xss简介"><span class="toc-number">1.</span> <span class="toc-text">xss简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xss的危害"><span class="toc-number">2.</span> <span class="toc-text">xss的危害</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xss分类"><span class="toc-number">3.</span> <span class="toc-text">xss分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#判断是否存在xss漏洞方法"><span class="toc-number">4.</span> <span class="toc-text">判断是否存在xss漏洞方法</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="xss简介" data-title="xss学习" data-url="http://yoursite.com/2018/01/19/xss简介/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2018/01/19/xss简介/", 
+    sourceId: "xss简介",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="xss简介" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +386,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

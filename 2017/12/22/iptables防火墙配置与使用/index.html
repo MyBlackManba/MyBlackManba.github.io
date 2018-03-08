@@ -6,14 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/3 | welcome to here</title>
+  <title>iptables防火墙配置与使用 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/2018/03/index.html">
+  <meta name="description" content="防火墙的工作原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iptables防火墙配置与使用">
+<meta property="og:url" content="http://yoursite.com/2017/12/22/iptables防火墙配置与使用/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="防火墙的工作原理">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fmphrwczr2j30jz0g4mxm.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fmpjx8uqs7j30dl0483z7.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fmpjuftf1dj30g0090jrv.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fmpjvape3cj30fr09jq3d.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fmpjs42pokj30fq09z757.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fmpk39xs2cj30c902zmy1.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fmpk42nxbzj30b006o766.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fmpk4t0wrwj30am03baaw.jpg">
+<meta property="og:updated_time" content="2018-01-07T06:50:36.280Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="iptables防火墙配置与使用">
+<meta name="twitter:description" content="防火墙的工作原理">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fmphrwczr2j30jz0g4mxm.jpg">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -143,76 +156,227 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-iptables防火墙配置与使用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-08T08:22:21.378Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      iptables防火墙配置与使用
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+        
+        <a href="/2017/12/22/iptables防火墙配置与使用/" class="archive-article-date">
+  	<time datetime="2017-12-22T04:43:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-22</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="防火墙的工作原理"><a href="#防火墙的工作原理" class="headerlink" title="防火墙的工作原理"></a>防火墙的工作原理</h3><a id="more"></a>
+<p>防火墙通过审查经过的每一个数据包，判断它是否有相匹配的过滤规则，根据规则的先后顺序进行一一比较，<br>直到满足其中的一条规则为止，然后依据控制机制做出相应的动作。如果都不满足，则将数据包丢弃，从而<br>保护网络的安全。</p>
+<h3 id="iptables概念"><a href="#iptables概念" class="headerlink" title="iptables概念"></a>iptables概念</h3><p>iptabels是与Linux内核集成的包过滤防火墙系统几乎所有的linux发行版本都会包含iptables的功能，它可<br>以代替昂贵的商业防火墙解决方案，完成封包过滤、封包重定向和网络地址转换NAT等功能。 </p>
+<h3 id="防火墙规则："><a href="#防火墙规则：" class="headerlink" title="防火墙规则："></a>防火墙规则：</h3><p>规则（rules）其实就是网络管理员预定义的条件，规则一般的定义为“如果数据包头符合这样的条件，就这<br>样处理这个数据包”。规则存储在内核空间的信息包过滤表中，这些规则分别指定了源地址、目的地址、传输<br>协议（如TCP、UDP、ICMP）和服务类型（如HTTP、FTP和SMTP）等。当数据包与规则匹配时，iptables就根据<br>规则所定义的方法来处理这些数据包，如放行（accept）、拒绝（reject）和丢弃（drop）等。防火墙的配置<br>就是增加，修改，删除这些规则。</p>
+<h3 id="链"><a href="#链" class="headerlink" title="链"></a>链</h3><p>链（chains）是数据包传播的路径，每一条链其实就是众多规则中的一个检查清单，每一条链中可以有一条或<br>数条规则。当一个数据包到达一个链时，iptables就会从链中第一条规则开始检查，看该数据包是否满足规则<br>所定义的条件。如果满足，系统就会根据该条规则所定义的方法处理该数据包；否则iptables将继续检查下一<br>条规则，如果该数据包不符合链中任一条规则，iptables就会根据该链预先定义的默认策略来处理数据包。</p>
+<h3 id="表"><a href="#表" class="headerlink" title="表"></a>表</h3><p>iptables内置了filter，nat和mangle三张表,分别用于实现包过滤，网络地址转换和包重构的功能。filter负责过<br>滤数据包，包括的规则链有input，output和forward；nat则涉及到网络地址转换，包括的规则链有prerouting，<br>postrouting和output；mangle表则主要应用在修改数据包内容上，用来做流量整形的，默认的规则链有：INPUT，<br>OUTPUT，NAT，POSTROUTING，PREROUTING；<br>     input匹配目的IP是本机的数据包，<br>     forward匹配流经本机的数据包，<br>     prerouting用来修改目的地址用来做DNAT，<br>     postrouting用来修改源地址用来做SNAT。</p>
+<h3 id="iptables数据包传输过程"><a href="#iptables数据包传输过程" class="headerlink" title="iptables数据包传输过程"></a>iptables数据包传输过程</h3><p><img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fmphrwczr2j30jz0g4mxm.jpg" alt="传输流程"><br>1）当一个数据包进入网卡时，它首先进入PREROUTING链，内核根据路由表和数据包目的IP判断是否需要转送出去。<br>2）如果数据包就是进入本机的，它就会沿着图向下移动，到达INPUT链。数据包到了INPUT链后，任何进程都会收到<br>   它。本机上运行的程序可以发送数据包，这些数据包会经过OUTPUT链，然后到达POSTROUTING链输出。<br>3）如果数据包是要转发出去的，且内核允许转发，数据包就会如图所示向右移动，经过FORWARD链，然后到达POSTROUT<br>   ING链输出。</p>
+<h3 id="linux下的iptables的使用"><a href="#linux下的iptables的使用" class="headerlink" title="linux下的iptables的使用"></a>linux下的iptables的使用</h3><p>1.启动和关闭防火墙 sudo Ufw enable/disable<br> <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fmpjx8uqs7j30dl0483z7.jpg" alt="image"><br>2.默认策略来处理数据包，默认策略的定义格式如下。  iptables  [-t表名] <-p> &lt;协议&gt; &lt;动作&gt;<br>   [-t表名]：指默认策略将应用于哪个表，可以使用filter、nat和mangle，如果没有指定使用哪个表，iptables就默认使用filter表。<br>   <-p>：定义默认策略。除了-p外的其他参数选项<br>   <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fmpjuftf1dj30g0090jrv.jpg" alt="image"><br>   &lt;链名&gt;：指默认策略将应用于哪个链，可以使用INPUT、OUTPUT、FORWARD、PREROUTING、OUTPUT和POSTROUTING。<br>   &lt;动作&gt;：处理数据包的动作，可以使用ACCEPT（接受数据包）和DROP（丢弃数据包）。动作选项的其他参数<br>   <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fmpjvape3cj30fr09jq3d.jpg" alt="image"><br>3.查看iptables规则<br>  iptables  [-t表名] <-l> [链名]<br>  <-l>：查看指定表和指定链的规则列表。<br>  与<-l>同类的其他的一些参数：<br>  <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fmpjs42pokj30fq09z757.jpg" alt="image"><br>4.增加、插入、删除和替换规则<br>  iptables  [-t表名]  <-a |="" i="" d="" r=""> 链名 [规则编号] [-i | o 网卡名称] [-p 协议类型] [-s 源IP地址 | 源子网] [–sport 源端口号]<br>  [-d目标IP地址 | 目标子网] [–dport目标端口号] &lt;-j动作&gt;<br>5.清除规则和计数器<br>  iptables  [-t表名] <-f |="" z=""><br>  -F：删除指定表中所有规则。<br>  -Z：将指定表中的数据包计数器和流量计数器归零。</-f></-a></-l></-l></-l></-p></-p></p>
+<h3 id="iptables配置防火墙的一些实例"><a href="#iptables配置防火墙的一些实例" class="headerlink" title="iptables配置防火墙的一些实例"></a>iptables配置防火墙的一些实例</h3><p>1.配置ICMP规则，防止ping攻击。<br>   命令：iptables  -A  FORWARD  -p  icmp  -j  DROP<br>   <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fmpk39xs2cj30c902zmy1.jpg" alt="image"><br>2.以分钟为周期，允许正常通过5个ICMP 数据包，超过之后仅允许每10秒通过一个ICMP包。<br>   <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fmpk42nxbzj30b006o766.jpg" alt="image"><br>   <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fmpk4t0wrwj30am03baaw.jpg" alt="image"><br>3.如果你的电脑中了冰河木马，木马服务器端想要使用反向连接，连接外部的客户端。请配置防火墙规则，禁止端口7626向外的连接<br>   Sudo  iptables  -A  FORWARD  –sport  7626  –p  tcp  –j  DROP </p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢请我吃糖<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/22/iptables防火墙配置与使用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/12/23/snort入侵检测/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          snort入侵检测
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/12/21/浅谈注册表/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浅谈注册表</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#防火墙的工作原理"><span class="toc-number">1.</span> <span class="toc-text">防火墙的工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iptables概念"><span class="toc-number">2.</span> <span class="toc-text">iptables概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防火墙规则："><span class="toc-number">3.</span> <span class="toc-text">防火墙规则：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链"><span class="toc-number">4.</span> <span class="toc-text">链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表"><span class="toc-number">5.</span> <span class="toc-text">表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iptables数据包传输过程"><span class="toc-number">6.</span> <span class="toc-text">iptables数据包传输过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux下的iptables的使用"><span class="toc-number">7.</span> <span class="toc-text">linux下的iptables的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#iptables配置防火墙的一些实例"><span class="toc-number">8.</span> <span class="toc-text">iptables配置防火墙的一些实例</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="iptables防火墙配置与使用" data-title="iptables防火墙配置与使用" data-url="http://yoursite.com/2017/12/22/iptables防火墙配置与使用/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2017/12/22/iptables防火墙配置与使用/", 
+    sourceId: "iptables防火墙配置与使用",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="iptables防火墙配置与使用" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +399,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

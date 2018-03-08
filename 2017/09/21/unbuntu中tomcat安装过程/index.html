@@ -6,14 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/3 | welcome to here</title>
+  <title>unbuntu中tomcat安装过程 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/2018/03/index.html">
+  <meta name="description" content="1、首先去官网下载jdk1.8版本；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unbuntu中tomcat安装过程">
+<meta property="og:url" content="http://yoursite.com/2017/09/21/unbuntu中tomcat安装过程/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="1、首先去官网下载jdk1.8版本；">
+<meta property="og:updated_time" content="2018-01-07T06:38:44.150Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="unbuntu中tomcat安装过程">
+<meta name="twitter:description" content="1、首先去官网下载jdk1.8版本；">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -143,76 +147,278 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-unbuntu中tomcat安装过程" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/08/hello-world/" class="archive-article-date">
-  	<time datetime="2018-03-08T08:22:21.378Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-08</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/08/hello-world/">Hello World</a>
+    <h1 class="article-title" itemprop="name">
+      unbuntu中tomcat安装过程
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+        
+        <a href="/2017/09/21/unbuntu中tomcat安装过程/" class="archive-article-date">
+  	<time datetime="2017-09-21T03:14:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、首先去官网下载jdk1.8版本；<br><a id="more"></a><br>下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html</a></p>
+<p>2、使用命令：tar -zxvf 下载/software/jdk-8u51-linux-i586.tar.gz   解压下载的压缩包；</p>
+<p>我的压缩包所在位置为“下载/software/jdk-8u51-linux-i586.tar.gz“。</p>
+<p>3、使用命令： sudo cp  jdk-1.8.0_51  /usr/lib/jvm/    将文件夹jdk-1.8.0_复制到/usr/lib/jvm/  </p>
+<p>不存在该目录产生的错误：</p>
+<p>oldman@oldman:~$ sudo cp jdk 1.8.0_51 /usr/lib/jvm<br>[sudo] password for oldman:<br>cp: target `/usr/lib/jvm’ is not a directory</p>
+<p>#因为没有jvm这个文件夹所以报错了</p>
+<p>创建这个文件夹的命令：</p>
+<p>oldman@oldman:/usr/lib$ mkdir jvm<br>mkdir: cannot create directory `jvm’: Permission denied</p>
+<p>#报错的原因是没有创建文件夹的权限，正确的命令是：sudo mkdir jvm</p>
+<p>文件夹名输入错误产生的错误：<br>oldman@oldman:~$ sudo cp jdk 1.8.0_51 /usr/lib/jvm/<br>cp: cannot stat <code>jdk&#39;: No such file or directory
+cp: cannot stat</code>1.8.0_51’: No such file or directory</p>
+<p>#报错是因为文件夹名输入错误，正确的文件夹名是jdk-1.8.0_51</p>
+<p>注意：我复制的时候还出现了这个错误：</p>
+<p>oldman@oldman:~$ sudo cp jdk_1.8.0_51 /usr/lib/jvm/<br>cp: omitting directory `jdk_1.8.0_51’</p>
+<p>原因是`jdk_1.8.0_51’这个目录下有子目录，正确命令是sudo cp -r jdk_1.8.0_51 /usr/lib/jvm/命令递归复制；</p>
+<p>4、配置环境变量</p>
+<p>使用命令：sudo gedit /etc/profile打开配置文件</p>
+<p>在文件的末尾加上如下内容：</p>
+<h1 id="for-java"><a href="#for-java" class="headerlink" title="for java"></a>for java</h1><p>export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_5<br>export JRE_HOME=${JAVA_HOME}/jre<br>export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib<br>export PATH=${JAVA_HOME}/bin:${JRE_HOME}/bin:$PATH保存并关闭。</p>
+<ol>
+<li>使用命令： source /etc/profile 使设置成效。</li>
+</ol>
+<p>6、使用命令下面的命令将刚才安装的jdk1.8设置为默认jdk<br>oldman@oldman:~$ sudo update-alternatives –install /usr/bin/java java /usr/lib/jvm/jdk_1.8.0_51/bin/java 300<br>update-alternatives: using /usr/lib/jvm/jdk_1.8.0_51/bin/java to provide /usr/bin/java (java) in auto mode.<br>oldman@oldman:~$ sudo  update-alternatives –install /usr/bin/javac javac /usr/lib/jvm/jdk_1.8.0_51/bin/javac 300<br>update-alternatives: using /usr/lib/jvm/jdk_1.8.0_51/bin/javac to provide /usr/bin/javac (javac) in auto mode.<br>oldman@oldman:~$ update-alternatives –config java</p>
+<p>#选择默认jdk版本，因为我这只装了一个，所以出现下面提示；如果有多个jdk版本就需要选择<br>There is only one alternative in link group java: /usr/lib/jvm/jdk_1.8.0_51/bin/java<br>Nothing to configure.</p>
+<p>7、安装完成。使用命令：java -version测试是否正确安装配置。<br>oldman@oldman:~$ java -version<br>java version “1.8.0_51”<br>Java(TM) SE Runtime Environment (build 1.8.0_51-b16)<br>Java HotSpot(TM) Server VM (build 25.51-b03, mixed mode)<br>8.下载Tomcat7<br>         打开Tomcat官网 <a href="http://tomcat.apache.org,在左边的导航栏的“Download&quot;中找到Tomcat7.0目录，点击后进入Tomcat7的页面，选择" target="_blank" rel="noopener">http://tomcat.apache.org,在左边的导航栏的“Download&quot;中找到Tomcat7.0目录，点击后进入Tomcat7的页面，选择</a> tar.gz这个文件类型，然后下载。<br>9.解压文件<br>        下载到本地目录（本人存放的目录是/home/xu/Downloads/)后，我们来解压这个文件。<br>打开终端，操作如下：</p>
+<p>$:sudo tar zvxf  ~/Downloads/apache-tomcat-7.0.32.tar.gz</p>
+<p>这样就可以解压出来了。</p>
+<p>10.配置环境</p>
+<pre><code>tomcat7需要在两个地方配置环境。打开终端，操作如下：
+1）打开系统配置文件，加入环境变量
 
-        <div class="article-info info-on-right">
-          
-          
+ $:sudo gedit /etc/profile
 
+这时就打开了系统环境配置文件，在文件后面加上以下几句：
+
+ export CLASSPATH=$CLASSPATH:%JAVA_HOME/lib/tools.jar
+ export TOMCAT_HOME=/home/xu/apache-tomcat-7.0.32
+ export CATALINA_HOME=$TOMCAT_HOME
+ export PATH=$PATH:$TOMCAT_HOME/bin
+
+保存退出。
+
+2）进入tomcat7解压文件夹中的bin目录
+
+$:cd /home/xu/apache-tomcat-7.0.32/bin
+$:sudo gedit catalina.sh
+
+这时tomcat7自身配置文件就打开了。我们找到  cygwin=false这一句，然后在这一句上面加入:
+
+JAVA_HOME=/home/xu/java/jdk1.6.0_35
+
+保存退出即可。
+</code></pre><p> 11.运行tomcat7<br>         进入tomcat的bin目录，执行下列语句：<br>         启动tomcat的命令：</p>
+<pre><code>$sudo ./startup.sh
+
+关闭tomcat的命令：
+
+$sudo ./shutdown.sh
+</code></pre><p>12.检验tomcat7是否在运行<br>         $: ps -ef|grep tomcat<br>         如果出现有tomcat的进程，那就是在运行了。<br>打开浏览器，在址址栏输入：<a href="http://localhost:8080,如果出现tomcat7页面，恭喜，安装成功" target="_blank" rel="noopener">http://localhost:8080,如果出现tomcat7页面，恭喜，安装成功</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢请我吃糖<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/09/21/unbuntu中tomcat安装过程/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/10/14/微信小程序制作简单教程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          微信小程序制作简单教程
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/09/02/sql注入语句大全/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sql注入语句大全</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#for-java"><span class="toc-number">1.</span> <span class="toc-text">for java</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="unbuntu中tomcat安装过程" data-title="unbuntu中tomcat安装过程" data-url="http://yoursite.com/2017/09/21/unbuntu中tomcat安装过程/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
+  
+  <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+<script>
+  var cloudTieConfig = {
+    url: "http://yoursite.com/2017/09/21/unbuntu中tomcat安装过程/", 
+    sourceId: "unbuntu中tomcat安装过程",
+    productKey: "true",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="//img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
   
 
-    
+  
+  <div id="SOHUCS" sid="unbuntu中tomcat安装过程" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "true",
+        conf: "true"
+    });
+</script>
+</script>
+  
+
+  
+
+  
 
 
           </div>
@@ -235,8 +441,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
