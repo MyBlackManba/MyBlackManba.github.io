@@ -6,29 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>渗透测试流程 | welcome to here</title>
+  <title>sql注入的预防 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。">
+  <meta name="description" content="所谓sql注入，就是通过把sql命令插入到web表单递交或输入域名或页面请求的查询字符串，最终达到">
 <meta property="og:type" content="article">
-<meta property="og:title" content="渗透测试流程">
-<meta property="og:url" content="http://yoursite.com/2018/03/06/渗透测试流程-1/index.html">
+<meta property="og:title" content="sql注入的预防">
+<meta property="og:url" content="http://yoursite.com/2018/03/10/sql注入的预防/index.html">
 <meta property="og:site_name" content="welcome to here">
-<meta property="og:description" content="通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3bzlx00mj30kq0dj0xo.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fp3bzxduxzj30fd08dwfd.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fp3c0jau2xj30qf0cwdle.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c6rjt4mj30k30dgadv.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c7dfwc5j30ot0eo40z.jpg">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c7tv89aj30u80d7jvx.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fp3c882w8uj30ms0efae0.jpg">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c3fejq5j30if0dbwhh.jpg">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c4xlpkrj30gx0de40y.jpg">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c5617ktj30ic0d6di4.jpg">
-<meta property="og:updated_time" content="2018-03-06T13:00:11.007Z">
+<meta property="og:description" content="所谓sql注入，就是通过把sql命令插入到web表单递交或输入域名或页面请求的查询字符串，最终达到">
+<meta property="og:updated_time" content="2018-03-10T14:06:07.622Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="渗透测试流程">
-<meta name="twitter:description" content="通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。">
-<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3bzlx00mj30kq0dj0xo.jpg">
+<meta name="twitter:title" content="sql注入的预防">
+<meta name="twitter:description" content="所谓sql注入，就是通过把sql命令插入到web表单递交或输入域名或页面请求的查询字符串，最终达到">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -158,35 +147,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-渗透测试流程-1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-sql注入的预防" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      渗透测试流程
+      sql注入的预防
     </h1>
   
 
         
-        <a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
+        <a href="/2018/03/10/sql注入的预防/" class="archive-article-date">
+  	<time datetime="2018-03-10T08:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。<br><a id="more"></a></p>
-<h2 id="1-测试网站的安全性"><a href="#1-测试网站的安全性" class="headerlink" title="1.测试网站的安全性"></a>1.测试网站的安全性</h2><p>  点击进入事先搭好的网站，选择其中随意的一个链接点击进入。如图所示<br>  <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3bzlx00mj30kq0dj0xo.jpg" alt="image"><br>     进行sql注入漏洞测试在链接的后面加上’出现报错，进行注入and 1=1显示正常，and 1=2注入出现报错<br>  <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fp3bzxduxzj30fd08dwfd.jpg" alt="image"><br>  以上结果说明该网站存在sql注入漏洞</p>
-<h2 id="2-利用sql注入漏洞破解后台管理员的账号和密码"><a href="#2-利用sql注入漏洞破解后台管理员的账号和密码" class="headerlink" title="2.利用sql注入漏洞破解后台管理员的账号和密码"></a>2.利用sql注入漏洞破解后台管理员的账号和密码</h2><pre><code>手工猜解过于麻烦使用sql注入工具就会快多了，这次使用的是啊d工具
-  ![image](http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c08b0olj30af06xwf3.jpg)
-通过使用工具逐一猜解得到表名，字段名，和其中的内容。用户名为linhai密码是一串经过MD5加密后的数字串
-</code></pre><p>可以通过在线MD5<a href="http://www.cmd5.com/" target="_blank" rel="noopener">解密</a>网站对字符串进行解密或者用专门的MD5解密工具进行解密，解密得到的密码是123456</p>
-<h2 id="3-登陆管理员界面"><a href="#3-登陆管理员界面" class="headerlink" title="3.登陆管理员界面"></a>3.登陆管理员界面</h2><p>   得到了管理员的密码和账号那接下来的任务就是要找到登陆管理员界面的页面。可以使用御剑这个扫描工具来扫描得到管理员<br>  登陆页面。扫描得到如下结果。<br>    <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fp3c0jau2xj30qf0cwdle.jpg" alt="image"><br>    登陆管理员账号进入网站后台。</p>
-<h2 id="4-拿下网站的webshell"><a href="#4-拿下网站的webshell" class="headerlink" title="4.拿下网站的webshell"></a>4.拿下网站的webshell</h2><p>   拿下网站的shell有很多种方法，具体要看后台是什么情况。就现在这个网站而言，先在文章管理中上传图片<br>  <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c6rjt4mj30k30dgadv.jpg" alt="image"><br>    上传了一个.aspx格式的脚本文件发现不能上传成功，那就将后缀改成.jpg格式上传成功复制下图片上传后的路径<br> <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c7dfwc5j30ot0eo40z.jpg" alt="image"><br>  我们将文件上传后，由于上传的是图片不能解析成脚本执行，在我们的这个网站有一个数据库备份功能，可以通过数据备份的方式重新命名脚本文件<br> 使其能够被执行。<br> <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c7tv89aj30u80d7jvx.jpg" alt="image"><br> 然后访问<a href="http://192.168.1.3/db/1.aspx输入脚本中所写的密码就拿到了webshell" target="_blank" rel="noopener">http://192.168.1.3/db/1.aspx输入脚本中所写的密码就拿到了webshell</a><br> <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fp3c882w8uj30ms0efae0.jpg" alt="image"></p>
-<h2 id="5-提权拿服务器权限"><a href="#5-提权拿服务器权限" class="headerlink" title="5.提权拿服务器权限"></a>5.提权拿服务器权限</h2><p>  在webshell里面有端口扫描我们进行端口扫描发现目标系统开放着43985端口，那就意味着我们可以用server-u来进行提权<br>  <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c3fejq5j30if0dbwhh.jpg" alt="image"><br>  在cmdshell中输入net user aaa 123456 /add来添加用户，net localgroup administrator aaa/add 来将之前创建的用户加入管理员。<br>  在用net user查看得到为管理员的aaa用户<br>  <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c4xlpkrj30gx0de40y.jpg" alt="image"><br>  由于在之前端口扫描得到3389端口开放，因此可以利用刚创建的用户和账号远程登录目标系统。<br>  <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c5617ktj30ic0d6di4.jpg" alt="image"></p>
+        <p>所谓sql注入，就是通过把sql命令插入到web表单递交或输入域名或页面请求的查询字符串，最终达到<br><a id="more"></a><br>欺骗服务器执行恶意的sql命令，比如先前的很多影视网站泄露vip会员密码大多就是通过web表单递交<br>   字符爆出的，这类表单特别容易受到sql注入式攻击，当应用程序输入内容来构造动态sql语句以访问数据<br>库时，会发生sql注入攻击。</p>
+<h1 id="预防sql注入方法"><a href="#预防sql注入方法" class="headerlink" title="预防sql注入方法"></a>预防sql注入方法</h1><h2 id="1-预编译语句集"><a href="#1-预编译语句集" class="headerlink" title="1.预编译语句集"></a>1.预编译语句集</h2><pre><code>采用预编译语句集，它内置了处理sql注入的能力，只要使用它的setxxx方法传值即可。
+</code></pre><p>  使用好处：<br>    (1)代码的可读性和可维护性<br>      （2）PreparedStatement尽最大可能提高性能<br>     (3)最重要的一点是极大地提高了安全性<br>  代码示例：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style=<span class="string">"font-size:14px;"</span>&gt;String sql=<span class="string">"select * from users where username=? and password=?"</span>;</span><br><span class="line">                       PreparedStatement preState=conn.prepareStatement(sql);</span><br><span class="line">				 preState.setString(1,username);</span><br><span class="line">				 preState.setString(2,password);</span><br><span class="line">				 ResultSet rs=preState.executeQuery();&lt;/span&gt;</span><br></pre></td></tr></table></figure></p>
+<p>  上述的原理是：sql注入只对sql语句的准备（编译）过程有破坏，而PreparedStatement已经准备好了，执行阶段<br>  只是把输入串当作数据处理，而不对sql语句进行解析，从而也就避免了sql注入。</p>
+<h2 id="2-使用正则表达式来过滤传入的参数"><a href="#2-使用正则表达式来过滤传入的参数" class="headerlink" title="2.使用正则表达式来过滤传入的参数"></a>2.使用正则表达式来过滤传入的参数</h2><p>  可以使用replace方法来实现正则对于输入参数的过滤：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="string">".*([';]+|(--)+).*"</span>,<span class="string">" "</span>)</span><br></pre></td></tr></table></figure></p>
+<p>  可以通过上面的代码来将传入的符合上述正则表达式的参数替换成空格，从而达到过滤。</p>
+<h2 id="字符串过滤"><a href="#字符串过滤" class="headerlink" title="字符串过滤"></a>字符串过滤</h2><p> 通用的方法：在||之间的参数可以根据自己程序的需要添加<br> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static boolean sql_inj(String str)</span><br><span class="line">&#123;</span><br><span class="line">   String injstr=<span class="string">"select|'|exec|insert|and|delete|update|count|*|%|chr|mid|master|truncate|or|,"</span>;</span><br><span class="line">String injstra=split(injstr,<span class="string">"|"</span>);</span><br><span class="line"><span class="keyword">for</span>(int i=0;i&lt;injstra.length;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="keyword">if</span>(str.indexof(injstra[i])&gt;=0)</span><br><span class="line">	       <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">   &#125;</span><br><span class="line"><span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 上述代码的思路是定义一串字符串，字符串包含了要过滤的信息以|为分隔符，判断输入的字符串是否包含了这个信息<br> 若有就会返回一个大于等于0的索引号。就能将其做过滤操作。</p>
 
       
 
@@ -266,7 +254,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/06/渗透测试流程-1/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/10/sql注入的预防/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,18 +268,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/10/sql注入的预防/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          sql注入的预防
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/01/19/xss简介/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">xss学习</div>
+    <a href="/2018/03/06/渗透测试流程-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">渗透测试流程</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -318,7 +297,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-测试网站的安全性"><span class="toc-number">1.</span> <span class="toc-text">1.测试网站的安全性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-利用sql注入漏洞破解后台管理员的账号和密码"><span class="toc-number">2.</span> <span class="toc-text">2.利用sql注入漏洞破解后台管理员的账号和密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-登陆管理员界面"><span class="toc-number">3.</span> <span class="toc-text">3.登陆管理员界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-拿下网站的webshell"><span class="toc-number">4.</span> <span class="toc-text">4.拿下网站的webshell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-提权拿服务器权限"><span class="toc-number">5.</span> <span class="toc-text">5.提权拿服务器权限</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#预防sql注入方法"><span class="toc-number">1.</span> <span class="toc-text">预防sql注入方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-预编译语句集"><span class="toc-number">1.1.</span> <span class="toc-text">1.预编译语句集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-使用正则表达式来过滤传入的参数"><span class="toc-number">1.2.</span> <span class="toc-text">2.使用正则表达式来过滤传入的参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串过滤"><span class="toc-number">1.3.</span> <span class="toc-text">字符串过滤</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -332,7 +311,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="渗透测试流程-1" data-title="渗透测试流程" data-url="http://yoursite.com/2018/03/06/渗透测试流程-1/"></div>
+	<div class="ds-thread" data-thread-key="sql注入的预防" data-title="sql注入的预防" data-url="http://yoursite.com/2018/03/10/sql注入的预防/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -355,8 +334,8 @@
   <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
 <script>
   var cloudTieConfig = {
-    url: "http://yoursite.com/2018/03/06/渗透测试流程-1/", 
-    sourceId: "渗透测试流程-1",
+    url: "http://yoursite.com/2018/03/10/sql注入的预防/", 
+    sourceId: "sql注入的预防",
     productKey: "true",
     target: "cloud-tie-wrapper"
   };
@@ -365,7 +344,7 @@
   
 
   
-  <div id="SOHUCS" sid="渗透测试流程-1" ></div> 
+  <div id="SOHUCS" sid="sql注入的预防" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
