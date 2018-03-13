@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>xss学习 | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="xss（跨站脚本攻击）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="xss学习">
+<meta property="og:url" content="http://yoursite.com/2018/01/19/xss简介/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="xss（跨站脚本攻击）">
+<meta property="og:updated_time" content="2018-03-12T01:33:37.130Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="xss学习">
+<meta name="twitter:description" content="xss（跨站脚本攻击）">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-xss简介" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/19/xss简介/" class="article-date">
+  <time datetime="2018-01-19T12:54:57.000Z" itemprop="datePublished">2018-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      xss学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>xss（跨站脚本攻击）<br><a id="more"></a></p>
+<h2 id="xss简介"><a href="#xss简介" class="headerlink" title="xss简介"></a>xss简介</h2><p>  是一种经常出现在web应用程序中的计算机安全漏洞，是由于web应用程序对用户的输入过滤<br>  不严而产生的。攻击者利用网站漏洞把恶意代码注入到网页中，当其他用户浏览这些网页时<br>  ，就会执行其中的恶意代码，对受害者可能采取cookie资料的窃取，会话劫持，钓鱼欺骗等<br>  攻击手段。</p>
+<h2 id="xss的危害"><a href="#xss的危害" class="headerlink" title="xss的危害"></a>xss的危害</h2><p>   1.网络钓鱼，包括盗取各类用户账号<br>  2.窃取用户cookie<br>   3.窃取用户浏览请回话<br>   4.强制弹出广告页面，刷流量<br>  5.网页挂马<br>   6.提升用户权限，进一步渗透网站<br>   7.传播跨站脚本蠕虫<br>   。。。。。。。。</p>
+<h2 id="xss分类"><a href="#xss分类" class="headerlink" title="xss分类"></a>xss分类</h2><p>   反射型xss（只能使用一次）<br>   存储型xss（存储到服务器中危害比较大）：含有xss恶意代码的数据存储在后台的数据库中<br>   DOM型xss</p>
+<h2 id="判断是否存在xss漏洞方法"><a href="#判断是否存在xss漏洞方法" class="headerlink" title="判断是否存在xss漏洞方法"></a>判断是否存在xss漏洞方法</h2><p>   1.在浏览器后面加上<script>alert(“xss”)</script>,如果有弹框则说明存在xss漏洞。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/19/xss简介/" data-id="cjep9mrp0000fzco0y51mn4tt" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/06/渗透测试流程-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          渗透测试流程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/08/上传漏洞fckeditor的利用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">上传漏洞fckeditor的利用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

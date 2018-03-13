@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>unbuntu中tomcat安装过程 | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、首先去官网下载jdk1.8版本；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="unbuntu中tomcat安装过程">
+<meta property="og:url" content="http://yoursite.com/2017/09/21/unbuntu中tomcat安装过程/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="1、首先去官网下载jdk1.8版本；">
+<meta property="og:updated_time" content="2018-01-07T06:38:44.150Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="unbuntu中tomcat安装过程">
+<meta name="twitter:description" content="1、首先去官网下载jdk1.8版本；">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-unbuntu中tomcat安装过程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/21/unbuntu中tomcat安装过程/" class="article-date">
+  <time datetime="2017-09-21T03:14:10.000Z" itemprop="datePublished">2017-09-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      unbuntu中tomcat安装过程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、首先去官网下载jdk1.8版本；<br><a id="more"></a><br>下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html</a></p>
+<p>2、使用命令：tar -zxvf 下载/software/jdk-8u51-linux-i586.tar.gz   解压下载的压缩包；</p>
+<p>我的压缩包所在位置为“下载/software/jdk-8u51-linux-i586.tar.gz“。</p>
+<p>3、使用命令： sudo cp  jdk-1.8.0_51  /usr/lib/jvm/    将文件夹jdk-1.8.0_复制到/usr/lib/jvm/  </p>
+<p>不存在该目录产生的错误：</p>
+<p>oldman@oldman:~$ sudo cp jdk 1.8.0_51 /usr/lib/jvm<br>[sudo] password for oldman:<br>cp: target `/usr/lib/jvm’ is not a directory</p>
+<p>#因为没有jvm这个文件夹所以报错了</p>
+<p>创建这个文件夹的命令：</p>
+<p>oldman@oldman:/usr/lib$ mkdir jvm<br>mkdir: cannot create directory `jvm’: Permission denied</p>
+<p>#报错的原因是没有创建文件夹的权限，正确的命令是：sudo mkdir jvm</p>
+<p>文件夹名输入错误产生的错误：<br>oldman@oldman:~$ sudo cp jdk 1.8.0_51 /usr/lib/jvm/<br>cp: cannot stat <code>jdk&#39;: No such file or directory
+cp: cannot stat</code>1.8.0_51’: No such file or directory</p>
+<p>#报错是因为文件夹名输入错误，正确的文件夹名是jdk-1.8.0_51</p>
+<p>注意：我复制的时候还出现了这个错误：</p>
+<p>oldman@oldman:~$ sudo cp jdk_1.8.0_51 /usr/lib/jvm/<br>cp: omitting directory `jdk_1.8.0_51’</p>
+<p>原因是`jdk_1.8.0_51’这个目录下有子目录，正确命令是sudo cp -r jdk_1.8.0_51 /usr/lib/jvm/命令递归复制；</p>
+<p>4、配置环境变量</p>
+<p>使用命令：sudo gedit /etc/profile打开配置文件</p>
+<p>在文件的末尾加上如下内容：</p>
+<h1 id="for-java"><a href="#for-java" class="headerlink" title="for java"></a>for java</h1><p>export JAVA_HOME=/usr/lib/jvm/jdk1.8.0_5<br>export JRE_HOME=${JAVA_HOME}/jre<br>export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib<br>export PATH=${JAVA_HOME}/bin:${JRE_HOME}/bin:$PATH保存并关闭。</p>
+<ol>
+<li>使用命令： source /etc/profile 使设置成效。</li>
+</ol>
+<p>6、使用命令下面的命令将刚才安装的jdk1.8设置为默认jdk<br>oldman@oldman:~$ sudo update-alternatives –install /usr/bin/java java /usr/lib/jvm/jdk_1.8.0_51/bin/java 300<br>update-alternatives: using /usr/lib/jvm/jdk_1.8.0_51/bin/java to provide /usr/bin/java (java) in auto mode.<br>oldman@oldman:~$ sudo  update-alternatives –install /usr/bin/javac javac /usr/lib/jvm/jdk_1.8.0_51/bin/javac 300<br>update-alternatives: using /usr/lib/jvm/jdk_1.8.0_51/bin/javac to provide /usr/bin/javac (javac) in auto mode.<br>oldman@oldman:~$ update-alternatives –config java</p>
+<p>#选择默认jdk版本，因为我这只装了一个，所以出现下面提示；如果有多个jdk版本就需要选择<br>There is only one alternative in link group java: /usr/lib/jvm/jdk_1.8.0_51/bin/java<br>Nothing to configure.</p>
+<p>7、安装完成。使用命令：java -version测试是否正确安装配置。<br>oldman@oldman:~$ java -version<br>java version “1.8.0_51”<br>Java(TM) SE Runtime Environment (build 1.8.0_51-b16)<br>Java HotSpot(TM) Server VM (build 25.51-b03, mixed mode)<br>8.下载Tomcat7<br>         打开Tomcat官网 <a href="http://tomcat.apache.org,在左边的导航栏的“Download&quot;中找到Tomcat7.0目录，点击后进入Tomcat7的页面，选择" target="_blank" rel="noopener">http://tomcat.apache.org,在左边的导航栏的“Download&quot;中找到Tomcat7.0目录，点击后进入Tomcat7的页面，选择</a> tar.gz这个文件类型，然后下载。<br>9.解压文件<br>        下载到本地目录（本人存放的目录是/home/xu/Downloads/)后，我们来解压这个文件。<br>打开终端，操作如下：</p>
+<p>$:sudo tar zvxf  ~/Downloads/apache-tomcat-7.0.32.tar.gz</p>
+<p>这样就可以解压出来了。</p>
+<p>10.配置环境</p>
+<pre><code>tomcat7需要在两个地方配置环境。打开终端，操作如下：
+1）打开系统配置文件，加入环境变量
+
+ $:sudo gedit /etc/profile
+
+这时就打开了系统环境配置文件，在文件后面加上以下几句：
+
+ export CLASSPATH=$CLASSPATH:%JAVA_HOME/lib/tools.jar
+ export TOMCAT_HOME=/home/xu/apache-tomcat-7.0.32
+ export CATALINA_HOME=$TOMCAT_HOME
+ export PATH=$PATH:$TOMCAT_HOME/bin
+
+保存退出。
+
+2）进入tomcat7解压文件夹中的bin目录
+
+$:cd /home/xu/apache-tomcat-7.0.32/bin
+$:sudo gedit catalina.sh
+
+这时tomcat7自身配置文件就打开了。我们找到  cygwin=false这一句，然后在这一句上面加入:
+
+JAVA_HOME=/home/xu/java/jdk1.6.0_35
+
+保存退出即可。
+</code></pre><p> 11.运行tomcat7<br>         进入tomcat的bin目录，执行下列语句：<br>         启动tomcat的命令：</p>
+<pre><code>$sudo ./startup.sh
+
+关闭tomcat的命令：
+
+$sudo ./shutdown.sh
+</code></pre><p>12.检验tomcat7是否在运行<br>         $: ps -ef|grep tomcat<br>         如果出现有tomcat的进程，那就是在运行了。<br>打开浏览器，在址址栏输入：<a href="http://localhost:8080,如果出现tomcat7页面，恭喜，安装成功" target="_blank" rel="noopener">http://localhost:8080,如果出现tomcat7页面，恭喜，安装成功</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/21/unbuntu中tomcat安装过程/" data-id="cjep9mrov000bzco046rhq7qm" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/10/14/微信小程序制作简单教程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          微信小程序制作简单教程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/02/sql注入语句大全/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">sql注入语句大全</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

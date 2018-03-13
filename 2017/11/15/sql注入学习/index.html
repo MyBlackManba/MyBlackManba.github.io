@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>sql注入学习 | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="长路漫漫，吾将上下而求索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql注入学习">
+<meta property="og:url" content="http://yoursite.com/2017/11/15/sql注入学习/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="长路漫漫，吾将上下而求索">
+<meta property="og:updated_time" content="2018-01-07T06:37:37.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sql注入学习">
+<meta name="twitter:description" content="长路漫漫，吾将上下而求索">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-sql注入学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/15/sql注入学习/" class="article-date">
+  <time datetime="2017-11-15T00:53:24.000Z" itemprop="datePublished">2017-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      sql注入学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>长路漫漫，吾将上下而求索<br><a id="more"></a></p>
+<h2 id="一些语法"><a href="#一些语法" class="headerlink" title="一些语法"></a>一些语法</h2><p>1.列出列中唯一的值可以采用distinct 列名来进行选择</p>
+<p>2.在进行登陆绕过的时候可以考虑万能密钥来绕过t’=’,这是因为一般的sql语句是<br>这样的：select <em> from user where userame=’’ and password=’’ 当在用户栏中<br>输入t’=’时，sql语句就变成了select </em> from user where username=’t’=’’ and<br>password=’t’=’’ username=’t’会返回false等号后面’’为空flase=null就会返回<br>正确，password也是同理。</p>
+<p>3.ip伪造在burp中设置为x_forwarded_for :ip号</p>
+<p>4.过滤掉了逗号后面，也就是说逗号是不能用，对于题目的提示，说会记录到db里面去，<br>所以后台程序可能用的是insert语句，没有使用select语句，所以寻常的注入不起作用<br>所以我们通过sleep进行测试 。sleep必须和and配合使用。</p>
+<p>5.sql注入中and的优先级高于or</p>
+<p>6.mysql_num_rows() 返回结果集中行的数目。此命令仅对 SELECT 语句有效。要取得被<br>INSERT，UPDATE 或者 DELETE 查询所影响到的行的数目，用 mysql_affected_rows()。</p>
+<p>7.mysql_query() 仅对 SELECT，SHOW，EXPLAIN 或 DESCRIBE 语句返回一个资源标识符，<br>如果查询执行不正确则返回 FALSE。</p>
+<p>8.mysql_fetch_array() 函数从结果集中取得一行作为关联数组，或数字数组，或二者兼有<br>返回根据从结果集取得的行生成的数组，如果没有更多行则返回 false。</p>
+<p>9.rollup的作用，他会根据某一个列进行组合，然后会产生null值，就是让最终的表中有多个null值</p>
+<p>10.select * from table limit 2,1;<br>含义是跳过2条取出1条数据，limit后面是从第2条开始读，读取1条信息，即读取第3条数据</p>
+<p>11.offset 定位在第几行开始</p>
+<p>12.注入中空格可以用%20，%0a，/*<em>/，/</em>!<em>/，/</em>!50000*/，+，()来替换</p>
+<p>13.绕过关键字过滤的方法有：关键字中间加/*<em>/隔断，/</em>!关键字<em>/，关键字中间加%0b隔断，<br>关键字重写（关关键字键字），大小写混合等等，尝试后/</em>!*/可以绕过。</p>
+<p>14.构造字符和数字的md5相等的例子v1=QNKCDZO,v2=240610708;（md5(‘QNKCDZO’) ==’0e830400451993494058024219903391’，<br>   md5(‘240610708’) ==’0e462097431906509019562988736854’）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/15/sql注入学习/" data-id="cjep9mror0009zco0uoj8z5x9" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/16/wifi干扰攻击/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          wifi干扰攻击
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/01/ctfwp之杂项/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">ctfwp之杂项</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

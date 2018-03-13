@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>浙江工商大学智商杯ctf杂项官方writeup | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目很简单。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浙江工商大学智商杯ctf杂项官方writeup">
+<meta property="og:url" content="http://yoursite.com/2017/12/11/浙江工商大学智商杯ctf杂项官方writeup/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="题目很简单。">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fmczgxva6wj30in045mxd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fmczh9w8v3j30b002q3zg.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fmcx1ivf4wj304k05dglf.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fmcxk8wq9pj30hv032glg.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fmcyg39dr3j30be0be3yv.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fmcyinm3fgj30bh0bht98.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fmcyx8xa9wj30k6055aav.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fmcyye0juzj30ii02rjrs.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fmcz6gl5v8j30e107iq34.jpg">
+<meta property="og:image" content="http://www.mamicode.com/info-detail-1610325.html">
+<meta property="og:updated_time" content="2018-01-07T06:42:39.903Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浙江工商大学智商杯ctf杂项官方writeup">
+<meta name="twitter:description" content="题目很简单。">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fmczgxva6wj30in045mxd.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-浙江工商大学智商杯ctf杂项官方writeup" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/11/浙江工商大学智商杯ctf杂项官方writeup/" class="article-date">
+  <time datetime="2017-12-11T08:00:16.000Z" itemprop="datePublished">2017-12-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浙江工商大学智商杯ctf杂项官方writeup
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目很简单。<br><a id="more"></a></p>
+<h2 id="1-挺过60秒才是真男人"><a href="#1-挺过60秒才是真男人" class="headerlink" title="1.挺过60秒才是真男人"></a>1.挺过60秒才是真男人</h2><p>  打开jar运行后可以发现有一个可以移动的块，只要没碰到绿帽子就不会爆炸。碰到后就会爆炸程序停止计时。<br>  而flag必须是要在60秒到70秒之间才能爆出来，超过70秒之后会重新循环。<br>     解法一.<br>         用解压软件打开jar包，找到里面的explode.class并删除就不会影响程序的计时。<br>         <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fmczgxva6wj30in045mxd.jpg" alt="image"><br>         静等到60秒就会爆flag到60秒就会爆flag<br>         <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fmczh9w8v3j30b002q3zg.jpg" alt="image"><br>     解法二。<br>        用jar包反汇编工具代开文件查看源代码即可查看flag<br>     解法三。<br>        手工玩出来（手动滑稽）</p>
+<h2 id="2-i-am-an-image"><a href="#2-i-am-an-image" class="headerlink" title="2.i am an image"></a>2.i am an image</h2><p>   这是一张jpg图片，下载后没有后缀名。如何发现是jpg格式的？<br>   用16进制编辑器打开。可以看到jfif（jpg图片头部规定的要有值）<br>   <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fmcx1ivf4wj304k05dglf.jpg" alt="image"><br>   然后发现16进制下的jpg图前三个16进制数不对，应该改为ff d8 ff。<br>   保存后发现发现还是没有flag，那就应该要想到图片的高度可能被改变。jpg图片的高度宽度为ff c0 后三位的内容，各占两位。<br>   修改高度后出flag。</p>
+<h2 id="3-woow-this-is-what"><a href="#3-woow-this-is-what" class="headerlink" title="3.woow!this is what ???"></a>3.woow!this is what ???</h2><p>  在import for next.txt文件内是通过base64加密后的一句话，主要是要知道410*410（下面图像的高度和宽度）<br>  flag.zip是伪加密，用伪加密解密工具ZipCenOp.jar来做  伪加密解密在终端运行命令 java -jar ZipCenOp.zip r flag.zip<br>  <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fmcxk8wq9pj30hv032glg.jpg" alt="image"><br>  打开文件后是无数个像素的三原色信息，像素种类只有(0,0,0)代表黑色，(255,255,255)代表白色，这就想到了这是张二维码的像素信息。<br>  那就通过脚本来还原这张二维码图片</p>
+<p>#coding:gb2312<br>import Image<br>f=open(“flag.txt”)<br>img=Image.new(‘1’,(410,410))<br>d=img.load()<br>img_arry=[]</p>
+<p>##stuple=set()<br>i=0<br>for line in f:<br>    line=line.strip().split(“,”)<br>    stuple =[]<br>    stuple.append(int(line[0][1:]))<br>    stuple.append(int(line[1][1:]))<br>    stuple.append(int(line[2][1:-1]))<br>    img_arry.append(tuple(stuple))<br>for x in range(410):<br>    for y in range(410):<br>       img.putpixel((x, y), img_arry[i][0])<br>       i+=1<br>img.save(“flag.jpg”)<br>  <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fmcyg39dr3j30be0be3yv.jpg" alt="image"><br>  还原后发现与正常二维码的黑白色块反了就用Stegsolve.jar神器来将图片xor下<br>  <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fmcyinm3fgj30bh0bht98.jpg" alt="image"></p>
+<h2 id="4-白茫茫黑乎乎"><a href="#4-白茫茫黑乎乎" class="headerlink" title="4.白茫茫黑乎乎"></a>4.白茫茫黑乎乎</h2><p>   1.txt中是是通过栅栏加密过的密文，栅栏数为8.<br>   解密后得到的是一张图片的网络地址。通过浏览器下载得到1.jpg<br>   hahahahaha.png图片是一张藏着2.jpg的图片，将图片放到kali下用binwalk跑一下，可以得到2.jpg的偏移量。<br>   <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fmcyx8xa9wj30k6055aav.jpg" alt="image"><br>   因为2.jpg文件过小，用binwalk -Me hahahahaha.jpg不能将图片分离。<br>   可以使用命令dd if=carter.jpg of=carter-1.jpg skip=140147 bs=1来分出图片 skip为文件偏移量。得到2.jpg<br>   <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fmcyye0juzj30ii02rjrs.jpg" alt="image"><br>   然后用Stegsolve.jar神器将两张图片结合出flag</p>
+<h2 id="5-flag-is-in-kobe’s-heart"><a href="#5-flag-is-in-kobe’s-heart" class="headerlink" title="5.flag is in kobe’s heart."></a>5.flag is in kobe’s heart.</h2><p>   解压后得到两个压缩包都是进过加密的。hahaha.zip的密钥是弱密钥经过7位纯数字加密，用zip爆破工具来秒出密钥。<br>    <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fmcz6gl5v8j30e107iq34.jpg" alt="image"><br>   解压后的内容是第二个压缩包的密钥。<br>   一张图片考到的知识点是ntfs流 <img src="http://www.mamicode.com/info-detail-1610325.html" alt="ntfs知识点"><br>   用nfts流工具打开后发现有张flag.jpg</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/11/浙江工商大学智商杯ctf杂项官方writeup/" data-id="cjep9mrp9000mzco01s18k1ve" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/12/微信小程序后台开发实例/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          微信小程序后台开发实例
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/08/php-数据库开发学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">php-数据库开发学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

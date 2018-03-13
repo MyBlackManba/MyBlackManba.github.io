@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>渗透测试流程 | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透测试流程">
+<meta property="og:url" content="http://yoursite.com/2018/03/06/渗透测试流程-1/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3bzlx00mj30kq0dj0xo.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fp3bzxduxzj30fd08dwfd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fp3c0jau2xj30qf0cwdle.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c6rjt4mj30k30dgadv.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c7dfwc5j30ot0eo40z.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c7tv89aj30u80d7jvx.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fp3c882w8uj30ms0efae0.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c3fejq5j30if0dbwhh.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c4xlpkrj30gx0de40y.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c5617ktj30ic0d6di4.jpg">
+<meta property="og:updated_time" content="2018-03-06T13:00:11.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="渗透测试流程">
+<meta name="twitter:description" content="通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3bzlx00mj30kq0dj0xo.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-渗透测试流程-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/06/渗透测试流程-1/" class="article-date">
+  <time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished">2018-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      渗透测试流程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。<br><a id="more"></a></p>
+<h2 id="1-测试网站的安全性"><a href="#1-测试网站的安全性" class="headerlink" title="1.测试网站的安全性"></a>1.测试网站的安全性</h2><p>  点击进入事先搭好的网站，选择其中随意的一个链接点击进入。如图所示<br>  <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3bzlx00mj30kq0dj0xo.jpg" alt="image"><br>     进行sql注入漏洞测试在链接的后面加上’出现报错，进行注入and 1=1显示正常，and 1=2注入出现报错<br>  <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fp3bzxduxzj30fd08dwfd.jpg" alt="image"><br>  以上结果说明该网站存在sql注入漏洞</p>
+<h2 id="2-利用sql注入漏洞破解后台管理员的账号和密码"><a href="#2-利用sql注入漏洞破解后台管理员的账号和密码" class="headerlink" title="2.利用sql注入漏洞破解后台管理员的账号和密码"></a>2.利用sql注入漏洞破解后台管理员的账号和密码</h2><pre><code>手工猜解过于麻烦使用sql注入工具就会快多了，这次使用的是啊d工具
+  ![image](http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c08b0olj30af06xwf3.jpg)
+通过使用工具逐一猜解得到表名，字段名，和其中的内容。用户名为linhai密码是一串经过MD5加密后的数字串
+</code></pre><p>可以通过在线MD5<a href="http://www.cmd5.com/" target="_blank" rel="noopener">解密</a>网站对字符串进行解密或者用专门的MD5解密工具进行解密，解密得到的密码是123456</p>
+<h2 id="3-登陆管理员界面"><a href="#3-登陆管理员界面" class="headerlink" title="3.登陆管理员界面"></a>3.登陆管理员界面</h2><p>   得到了管理员的密码和账号那接下来的任务就是要找到登陆管理员界面的页面。可以使用御剑这个扫描工具来扫描得到管理员<br>  登陆页面。扫描得到如下结果。<br>    <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fp3c0jau2xj30qf0cwdle.jpg" alt="image"><br>    登陆管理员账号进入网站后台。</p>
+<h2 id="4-拿下网站的webshell"><a href="#4-拿下网站的webshell" class="headerlink" title="4.拿下网站的webshell"></a>4.拿下网站的webshell</h2><p>   拿下网站的shell有很多种方法，具体要看后台是什么情况。就现在这个网站而言，先在文章管理中上传图片<br>  <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c6rjt4mj30k30dgadv.jpg" alt="image"><br>    上传了一个.aspx格式的脚本文件发现不能上传成功，那就将后缀改成.jpg格式上传成功复制下图片上传后的路径<br> <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c7dfwc5j30ot0eo40z.jpg" alt="image"><br>  我们将文件上传后，由于上传的是图片不能解析成脚本执行，在我们的这个网站有一个数据库备份功能，可以通过数据备份的方式重新命名脚本文件<br> 使其能够被执行。<br> <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c7tv89aj30u80d7jvx.jpg" alt="image"><br> 然后访问<a href="http://192.168.1.3/db/1.aspx输入脚本中所写的密码就拿到了webshell" target="_blank" rel="noopener">http://192.168.1.3/db/1.aspx输入脚本中所写的密码就拿到了webshell</a><br> <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fp3c882w8uj30ms0efae0.jpg" alt="image"></p>
+<h2 id="5-提权拿服务器权限"><a href="#5-提权拿服务器权限" class="headerlink" title="5.提权拿服务器权限"></a>5.提权拿服务器权限</h2><p>  在webshell里面有端口扫描我们进行端口扫描发现目标系统开放着43985端口，那就意味着我们可以用server-u来进行提权<br>  <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fp3c3fejq5j30if0dbwhh.jpg" alt="image"><br>  在cmdshell中输入net user aaa 123456 /add来添加用户，net localgroup administrator aaa/add 来将之前创建的用户加入管理员。<br>  在用net user查看得到为管理员的aaa用户<br>  <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c4xlpkrj30gx0de40y.jpg" alt="image"><br>  由于在之前端口扫描得到3389端口开放，因此可以利用刚创建的用户和账号远程登录目标系统。<br>  <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fp3c5617ktj30ic0d6di4.jpg" alt="image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/06/渗透测试流程-1/" data-id="cjep9mrpa000nzco0rv7v4s5h" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/10/sql注入的预防/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          sql注入的预防
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/19/xss简介/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">xss学习</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

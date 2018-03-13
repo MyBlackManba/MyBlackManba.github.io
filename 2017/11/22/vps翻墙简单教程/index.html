@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>vps翻墙简单教程 | welcome to here</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="让你快速看到外面的世界">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vps翻墙简单教程">
+<meta property="og:url" content="http://yoursite.com/2017/11/22/vps翻墙简单教程/index.html">
+<meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="让你快速看到外面的世界">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1flqyvghvogj319z0lmq7s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1flqz0yo6wcj30d60ad74i.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1flqz2d743qj30gq01h743.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1flqz1tluhuj311y0lcq57.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1flqz2opkdpj30td0edjsf.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1flqys5gv1cj30ol0j90v4.jpg">
+<meta property="og:updated_time" content="2018-01-07T06:39:10.163Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vps翻墙简单教程">
+<meta name="twitter:description" content="让你快速看到外面的世界">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1flqyvghvogj319z0lmq7s.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="welcome to here" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">welcome to here</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vps翻墙简单教程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/22/vps翻墙简单教程/" class="article-date">
+  <time datetime="2017-11-22T07:51:35.000Z" itemprop="datePublished">2017-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vps翻墙简单教程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>让你快速看到外面的世界<br><a id="more"></a><br>最近vpn被封的厉害，很多以前快速实用的翻墙方法都不能使用了，连强大的goagent代理服务都没幸免。下面所要介绍的翻墙方法是基于vps的。</p>
+<p>1.首先需要在购买一台国外的服务器。购买<a href="https://www.vultr.com/" target="_blank" rel="noopener">网址</a>。大概2.5$每月。<br><img src="http://ww4.sinaimg.cn/large/0069oIoUgy1flqyvghvogj319z0lmq7s.jpg" alt="图片"><br>第一个箭头可以查看用户名和密码，第二个可以远程连接国外服务器(这里也可以用PuTTY连接,文章最后会发所有工具的链接）</p>
+<p>2.对服务器进行配置设置端口号，密码，加密方式等操作<br>  登入putty登陆终端界面输入用户名以及密码开始配置<br>  sudo vim /etc/shadowsocks/config.json（配置命令）<br>  进入config.json后配置如下信息<br>  {<br>        “server”:”45.63.17.127”,<br>        “server_port”:（自己定义建议8989以上）,<br>        “local_port”:1080,<br>        “password”:”自己的密码”,<br>        “timeout”:300,<br>        “method”:”aes-256-cfb”<br>  }<br>  netstat -pantu（用来查看服务器各端口进程）<br>  ss-server -c /etc/shadowsocks/config.json（启动配置好的服务）<br>  nohup ss-server -c /etc/shadowsocks/config.json（改为后台运行）<br>  服务器配置完成</p>
+<p>  3.准备翻墙客户端————Shadowsocks.exe（文末链接有提供）<br>     点击运行（简单吧！[手动滑稽]）<br>     <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1flqz0yo6wcj30d60ad74i.jpg" alt="客户端界面"><br>     按照界面箭头指示输入相应内容。<br>     输完确定即可</p>
+<p> 4.chrome上安装代理插件（插件文末链接有提供）<br>        <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1flqz2d743qj30gq01h743.jpg" alt="文件包中的名字"><br>        打开chrome中的插件页面寻找位置如下<br>        <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1flqz1tluhuj311y0lcq57.jpg" alt="图片"><br>        在chrome中打开插件将代理设成如下即可<br>        <img src="http://ww1.sinaimg.cn/large/0069oIoUgy1flqz2opkdpj30td0edjsf.jpg" alt="图片"><br>        插件设置完成后需要点击应用选项</p>
+<p> 5.测试是否成功<br> <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1flqys5gv1cj30ol0j90v4.jpg" alt="图片"><br> 成功。。。。。。。<br> 各种平台翻墙详细教程<a href="https://www.diycode.cc/topics/738" target="_blank" rel="noopener">网址</a><br> 想看看外面世界吗？快动手吧！哈哈哈哈哈哈哈哈哈<a href="http://pan.baidu.com/s/1i5u2wTZ" target="_blank" rel="noopener">工具链接</a> 密码：95sw</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/22/vps翻墙简单教程/" data-id="cjep9mroy000dzco0uu8i2m4n" class="article-share-link">Teilen</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/26/震网病毒/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          震网病毒
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/22/ctfwp之web/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">ctfwp之web</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/12/csrf学习/">web学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/xss简介/">xss学习</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 BlackManba<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
