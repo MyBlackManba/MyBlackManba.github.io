@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/12/18/php学习/index.html">
 <meta property="og:site_name" content="welcome to here">
 <meta property="og:description" content="good goog study  day day up">
-<meta property="og:updated_time" content="2018-03-08T13:49:06.827Z">
+<meta property="og:updated_time" content="2018-03-19T09:58:45.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php学习">
 <meta name="twitter:description" content="good goog study  day day up">
@@ -208,7 +208,8 @@ catch (类型指示 $e){
    getTrace()  取得包含了产生异常的代码回退路劲的数组，回退路径中提示了在发生异常是所执行的函数
    getTraceAsString()  取得包含了产生异常的代码回退路径的格式化字符串
 9.自己定义的异常需要继承exception类
-</code></pre>
+</code></pre><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p> mysql_real_escape_string()被视为mysql_escape_string()和addslashes()的替代品。会转译字符串中特殊字符,例如’会被转译成\’,但该函数不会转义%和_<br>转义 SQL 语句中使用的字符串中的特殊字符，并考虑到连接的当前字符集。<br> 利用宽字节注入可以绕过这一过滤。<br> 宽字节注入利用的是mysql中的一个特性：mysql在使用gbk编码的时候会将两个字符认为是汉字（前一个字符的ascii码要大于128）。当使用<br> mysql_real_escape_string函数后’变成\’,构造注入%df’就可以绕过。</p>
+
       
 
       

