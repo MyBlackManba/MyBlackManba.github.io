@@ -16,7 +16,7 @@
 <meta property="og:description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fpj0x87rfij30jw0b9q4j.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fpj1fd28poj30jd0b0gnc.jpg">
-<meta property="og:updated_time" content="2018-03-25T03:20:36.499Z">
+<meta property="og:updated_time" content="2018-03-26T03:52:12.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web安全">
 <meta name="twitter:description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
@@ -220,7 +220,8 @@ webshell文件
 <h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><p>   web允许用户上传恶意代码文件，并在服务器上运行。<br>   上传一句话webshell&lt;?php @eval($_GET[‘cmd’]);?&gt;<br>   使用方法：抓包改包判断文件类型<br>             制作内涵图 使用copy 1.jpg/b+1.txt 2.jpg<br>   nigix畸形解析：xxx.xxx/xxx.php（只要前面的文件存在就会当成php文件执行）<br>预防方法：<br>  1.阻止非法文件上传<br>   文件后缀名的白名单，文件类型和文件内容的判断<br>  2.组织非法文件执行<br>       文件重命名， 文件压缩重生成，存储目录执行权限，存储目录与web分离</p>
 <h2 id="sql注入-1"><a href="#sql注入-1" class="headerlink" title="sql注入"></a>sql注入</h2><p>   回显注入：<br>        mysql中载入文件信息load_file(“路径”)<br>        写入webshell的union select into outfile  “路径”<br>        当使用sqlmap注入时若有链接跳转需用–second-order来跳转<br>    盲注：（数据库的执行结果不会直接显示到页面上，页面只会显示真和假两种状态）<br>       基于时间： 最常用if函数if(expr1,expr2(true),expr3(false))最为常用的函数是sleep()和benchmark(count,expr)里面的count参数为重复次数可以将重复次数提高来达到延时的效果。<br>       基于bool：根据页面的返回真假<br>     cast(expression as data_type)翻译为 数据类型转换(表达式 as 新的数据类型)<br>     ifnull(expr1,expr2)如果expr1是null，返回expr2，否则返回本身<br>     sqlmap检测cookie参数要将level设置成2以上<br>    预防方法：<br>        参数化sql语句，预编译<br>        数据类型的检测<br>        用户输入过滤</p>
 <h2 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h2><p>   客户端代码注入通常是javascript。</p>
-<h3 id="存储型xss"><a href="#存储型xss" class="headerlink" title="存储型xss"></a>存储型xss</h3><pre><code>攻击代码在数据库里输出在http响应中
+<pre><code>### 存储型xss
+     攻击代码在数据库里输出在http响应中
 </code></pre><h3 id="反射型xss"><a href="#反射型xss" class="headerlink" title="反射型xss"></a>反射型xss</h3><pre><code>攻击代码在url里输出在http响应中
 攻击思路：
 ![image](http://ww2.sinaimg.cn/large/0069oIoUgy1fpo75xaaplj30dx0ah75t.jpg)
@@ -237,36 +238,35 @@ webshell文件
 <h2 id="web安全框架建设"><a href="#web安全框架建设" class="headerlink" title="web安全框架建设"></a>web安全框架建设</h2><pre><code>### 企业的sdl（安全开发生产周期）流程：
     提升web应用的安全性，减少web应用的安全漏洞。
    ![image](http://ww4.sinaimg.cn/large/0069oIoUgy1fpou23etcwj30bu06p3za.jpg)
-### 漏洞和事件处理：
-  发现方法：
-    1.安全需求分析
-           使用web框架和语言的选型建议
-           敏感信息如密码的保存方案（如加盐后强hash的方案）
-           是否有上传功能
-    2.安全扫描：
-         通过扫描器发现安全问题
-         自动化
-         周期性执行
-    3.入侵检测
-         项目上线之后进行监控
-         包含多种检测方式
-         通过监控入侵行为发现安全问题    
-    4.日志分析
-       可疑日志+人工分析
-       可疑日志+扫描器
-    5.简历src（安全应急响应中心）    
-  处理方法:
-     1.输入检查
-        在服务端检查
-        数据合法性校验：类型，范围，长度
-        尽可能使用‘白名单’    
-     2.    输出检查
-           在数据输出的点，也需要做一些特定的过滤和转义
-           比如xss，输出到html标签时就需要进行html编码    
-     3.waf防御
-         web application firewall
-         web应用防火墙
-         能够拦截攻击，如针对sql注入，xss和远程代码执行等漏洞进行的攻击
+</code></pre><h3 id="漏洞和事件处理："><a href="#漏洞和事件处理：" class="headerlink" title="漏洞和事件处理："></a>漏洞和事件处理：</h3><pre><code>发现方法：
+  1.安全需求分析
+         使用web框架和语言的选型建议
+         敏感信息如密码的保存方案（如加盐后强hash的方案）
+         是否有上传功能
+  2.安全扫描：
+       通过扫描器发现安全问题
+       自动化
+       周期性执行
+  3.入侵检测
+       项目上线之后进行监控
+       包含多种检测方式
+       通过监控入侵行为发现安全问题    
+  4.日志分析
+     可疑日志+人工分析
+     可疑日志+扫描器
+  5.简历src（安全应急响应中心）    
+处理方法:
+   1.输入检查
+      在服务端检查
+      数据合法性校验：类型，范围，长度
+      尽可能使用‘白名单’    
+   2.    输出检查
+         在数据输出的点，也需要做一些特定的过滤和转义
+         比如xss，输出到html标签时就需要进行html编码    
+   3.waf防御
+       web application firewall
+       web应用防火墙
+       能够拦截攻击，如针对sql注入，xss和远程代码执行等漏洞进行的攻击
 </code></pre>
       
 
