@@ -6,14 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>welcome to here</title>
+  <title>docker下web环境搭建 | welcome to here</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="welcome to here">
-<meta property="og:url" content="http://yoursite.com/page/6/index.html">
+  <meta name="description" content="终于从docker的坑里面爬出来了，各种环境配置真的是烦。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker下web环境搭建">
+<meta property="og:url" content="http://yoursite.com/2018/04/22/docker下web环境搭建/index.html">
 <meta property="og:site_name" content="welcome to here">
+<meta property="og:description" content="终于从docker的坑里面爬出来了，各种环境配置真的是烦。">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fqlbjoyawqj306m01jgld.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fqlbt5n75pj30mz060t8z.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUgy1fqlc5pi09tj30hf03kmx3.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fqlc7sm8rwj30no0280sn.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUgy1fqlcspfavpj30l808gq2x.jpg">
+<meta property="og:updated_time" content="2018-04-22T05:09:08.855Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="welcome to here">
+<meta name="twitter:title" content="docker下web环境搭建">
+<meta name="twitter:description" content="终于从docker的坑里面爬出来了，各种环境配置真的是烦。">
+<meta name="twitter:image" content="http://ww4.sinaimg.cn/large/0069oIoUgy1fqlbjoyawqj306m01jgld.jpg">
   
     <link rel="alternative" href="/atom.xml" title="welcome to here" type="application/atom+xml">
   
@@ -145,34 +155,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-sql注入学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-docker下web环境搭建" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/15/sql注入学习/">sql注入学习</a>
+    <h1 class="article-title" itemprop="name">
+      docker下web环境搭建
     </h1>
   
 
         
-        <a href="/2017/11/15/sql注入学习/" class="archive-article-date">
-  	<time datetime="2017-11-15T00:53:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+        <a href="/2018/04/22/docker下web环境搭建/" class="archive-article-date">
+  	<time datetime="2018-04-22T04:02:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>长路漫漫，吾将上下而求索<br>
-        
-          <a class="article-more-a" href="/2017/11/15/sql注入学习/#more">more >></a>
-        
+        <p>终于从docker的坑里面爬出来了，各种环境配置真的是烦。<br><a id="more"></a></p>
+<h2 id="docker的安装"><a href="#docker的安装" class="headerlink" title="docker的安装"></a>docker的安装</h2><p>linux的内核版本需要在3.10以上才能安装docker<br><img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fqlbjoyawqj306m01jgld.jpg" alt="image"><br>获取最新版本的docker安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~$ wget -qO- https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure></p>
+<p>安装完成后启动docker<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~$ sudo service docker start</span><br></pre></td></tr></table></figure></p>
+<p>详细教程点击<a href="http://www.runoob.com/docker/ubuntu-docker-install.html" target="_blank" rel="noopener">教程</a></p>
+<h2 id="lamp的镜像下载"><a href="#lamp的镜像下载" class="headerlink" title="lamp的镜像下载"></a>lamp的镜像下载</h2><p>使用如下命令搜索lamp镜像<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search lamp</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fqlbt5n75pj30mz060t8z.jpg" alt="image"><br>使用如下命令下载镜像这里我们选择linode/lamp<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull linode/lamp</span><br></pre></td></tr></table></figure></p>
+<p>使用如下命令产看镜像<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww3.sinaimg.cn/large/0069oIoUgy1fqlc5pi09tj30hf03kmx3.jpg" alt="image"></p>
+<h2 id="创建web容器环境"><a href="#创建web容器环境" class="headerlink" title="创建web容器环境"></a>创建web容器环境</h2><p>使用如下命令创建一个容器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t -d -p 0.0.0.0:35353:80 --name kobe -v <span class="variable">$PWD</span>/kobe:/var/www  linode/lamp /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>-i和-t参数是与进入容器的交互式命令<br>-d参数是使得容器能够在后台持续运行<br>-p参数是将容器中的80端口映射到物理机的35353端口上<br>–name 制定容器的名字<br>-v 将物理机上目录挂载到容器中的相应目录下，$PWD值得是当前目录。<br>使用如下命令产看正在运行的容器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://ww4.sinaimg.cn/large/0069oIoUgy1fqlc7sm8rwj30no0280sn.jpg" alt="image"><br>使用该容器进入容器内部命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -i -t kobe /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>由于是web环境进入容器后，因为是lamp的集成环境。所以需要启动apache2和mysql的服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service apache2 start</span><br><span class="line">service mysql start</span><br></pre></td></tr></table></figure></p>
+<p>这里就有一个坑点当你在启动mysql的时候会发现一直在报错。缺失mysql.sock文件，这个文件是连接数据库的关键文件，<br>但其他配置都没有问题为什么会出现这个错误呢？<br>百度了好久，尝试了何种方法才爬出这个坑。原来mysql.sock 的目录是在/var/run/mysqld下这个只有root用户才有权限<br>操作，那就配置权限吧！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R mysql.mysql /var/run/mysqld</span><br></pre></td></tr></table></figure></p>
+<p>配置玩权限后重启mysql服务，启动成功。<br>然后想进入mysql中发现由于是集成环境根本不知道mysql的密码。<br>于是就去修改mysql的配置文件my.cnf<br>注释掉配置文件中[mysqld]的密码选项并添加跳过密码的命令操作如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#skip external locking</span></span><br><span class="line">skip grant tables</span><br></pre></td></tr></table></figure></p>
+<p>之后就可以进入mysql数据库，修改密码并将之前的配置文件修改回来。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">update user <span class="built_in">set</span> password=password(<span class="string">'1111111'</span>) <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>之后就没有问题了按常规步骤进行操作就行。<br>浏览器中输入ip端口网页正常显示<br><img src="http://ww1.sinaimg.cn/large/0069oIoUgy1fqlcspfavpj30l808gq2x.jpg" alt="iamge"></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -181,16 +223,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/15/sql注入学习/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/04/22/docker下web环境搭建/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/19/系统提权的一些方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">系统提权的一些方法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -210,272 +311,14 @@
 
 
 
-
-  
-    <article id="post-ctfwp之杂项" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/01/ctfwp之杂项/">ctfwp之杂项</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/01/ctfwp之杂项/" class="archive-article-date">
-  	<time datetime="2017-11-01T03:22:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>做题做题<br>
-        
-          <a class="article-more-a" href="/2017/11/01/ctfwp之杂项/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/01/ctfwp之杂项/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-微信小程序制作简单教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/14/微信小程序制作简单教程/">微信小程序制作简单教程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/10/14/微信小程序制作简单教程/" class="archive-article-date">
-  	<time datetime="2017-10-14T13:22:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>软件工程<br>
-        
-          <a class="article-more-a" href="/2017/10/14/微信小程序制作简单教程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/14/微信小程序制作简单教程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-unbuntu中tomcat安装过程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/21/unbuntu中tomcat安装过程/">unbuntu中tomcat安装过程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/21/unbuntu中tomcat安装过程/" class="archive-article-date">
-  	<time datetime="2017-09-21T03:14:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1、首先去官网下载jdk1.8版本；<br>
-        
-          <a class="article-more-a" href="/2017/09/21/unbuntu中tomcat安装过程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/21/unbuntu中tomcat安装过程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sql注入语句大全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/02/sql注入语句大全/">sql注入语句大全</a>
-    </h1>
-  
-
-        
-        <a href="/2017/09/02/sql注入语句大全/" class="archive-article-date">
-  	<time datetime="2017-09-02T08:38:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.判断有无注入点<br>
-        
-          <a class="article-more-a" href="/2017/09/02/sql注入语句大全/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/09/02/sql注入语句大全/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -498,8 +341,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
