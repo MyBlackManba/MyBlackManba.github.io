@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/11/27/python中的一些图片处理/index.html">
 <meta property="og:site_name" content="welcome to here">
 <meta property="og:description" content="图像处理功能">
-<meta property="og:updated_time" content="2018-03-08T13:50:27.983Z">
+<meta property="og:updated_time" content="2018-04-23T12:39:31.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python中的一些图片处理">
 <meta name="twitter:description" content="图像处理功能">
@@ -170,12 +170,31 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>图像处理功能<br><a id="more"></a><br>通过使用python中的PILku中的一些来实现。<br>代码例子：</p>
-<h2 id="1-将文字写入图片中。"><a href="#1-将文字写入图片中。" class="headerlink" title="1.将文字写入图片中。"></a>1.将文字写入图片中。</h2><p>#coding:gb2312<br>import Image,ImageDraw,ImageFont<br>ttfont = ImageFont.truetype(“simhei.ttf”,20)<br>im = Image.open(“u=2502784142,1814154128&amp;fm=27&amp;gp=0.jpg”)<br>draw = ImageDraw.Draw(im)<br>draw.text((60,120),’hahah’, fill=(0,0,0),font=ttfont)<br>im.save(‘1.jpg’)</p>
-<h2 id="2-生成二维码图片"><a href="#2-生成二维码图片" class="headerlink" title="2.生成二维码图片"></a>2.生成二维码图片</h2><p>import qrcode<br>qr = qrcode.QRCode(<br>    version=1, ##version：值为1~40的整数，控制二维码的大小（最小值是1，是个12×12的矩阵）。 如果想让程序自动确定，将值设置为 None 并使用 fit 参数即可。<br>    error_correction=qrcode.constants.ERROR_CORRECT_L,   ##error_correction：控制二维码的错误纠正功能。可取值下列4个常量。<br>    box_size=10,     ##box_size：控制二维码中每个小格子包含的像素数。<br>    border=4,   ##border：控制边框（二维码与图片边界的距离）包含的格子数（默认为4，是相关标准规定的最小值）<br>)<br>qr.add_data(‘hello, qrcode’)<br>qr.make(fit=True)<br>img = qr.make_image()<br>img.save(‘123.png’)<br>error_correct的几种情况<br>ERROR_CORRECT_L：大约7%或更少的错误能被纠正。<br>ERROR_CORRECT_M（默认）：大约15%或更少的错误能被纠正。<br>ROR_CORRECT_H：大约30%或更少的错误能被纠正。</p>
-<h2 id="3-取出图片中每个像素并输入到txt中"><a href="#3-取出图片中每个像素并输入到txt中" class="headerlink" title="3.取出图片中每个像素并输入到txt中"></a>3.取出图片中每个像素并输入到txt中</h2><p>#coding:gb2312<br>import Image<br>img=Image.open(“3.bmp”)<br>img_arry=img.load()<br>f=open(“flag.txt”,’w’)<br>for x in range(410):<br>    for y in range(410):<br>        s=str(img_arry[x,y])<br>        f.write(s)<br>        f.write(‘\n’)</p>
-<h2 id="4-根据一个含有像素的txt文件生成图片"><a href="#4-根据一个含有像素的txt文件生成图片" class="headerlink" title="4.根据一个含有像素的txt文件生成图片"></a>4.根据一个含有像素的txt文件生成图片</h2><p>#coding:gb2312</p>
-<p>import Image<br>f=open(“flag.txt”)<br>img=Image.new(‘1’,(410,410))<br>d=img.load()<br>img_arry=[]</p>
-<p>##stuple=set()<br>i=0<br>for line in f:<br>    line=line.strip().split(“,”)<br>    stuple =[]<br>    stuple.append(int(line[0][1:]))<br>    stuple.append(int(line[1][1:]))<br>    stuple.append(int(line[2][1:-1]))<br>    img_arry.append(tuple(stuple))<br>for x in range(410):<br>    for y in range(410):<br>       img.putpixel((x, y), img_arry[i][0])<br>       i+=1<br>img.save(“flag.jpg”)</p>
+<h2 id="1-将文字写入图片中。"><a href="#1-将文字写入图片中。" class="headerlink" title="1.将文字写入图片中。"></a>1.将文字写入图片中。</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:gb2312</span></span><br><span class="line"><span class="keyword">import</span> Image,ImageDraw,ImageFont</span><br><span class="line">ttfont = ImageFont.truetype(<span class="string">"simhei.ttf"</span>,<span class="number">20</span>)</span><br><span class="line">im = Image.open(<span class="string">"u=2502784142,1814154128&amp;fm=27&amp;gp=0.jpg"</span>)</span><br><span class="line">draw = ImageDraw.Draw(im)</span><br><span class="line">draw.text((<span class="number">60</span>,<span class="number">120</span>),<span class="string">'hahah'</span>, fill=(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>),font=ttfont)</span><br><span class="line">im.save(<span class="string">'1.jpg'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="2-生成二维码图片"><a href="#2-生成二维码图片" class="headerlink" title="2.生成二维码图片"></a>2.生成二维码图片</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import qrcode </span><br><span class="line">qr = qrcode.QRCode(     </span><br><span class="line">    version=1, <span class="comment">##version：值为1~40的整数，控制二维码的大小（最小值是1，是个12×12的矩阵）。 如果想让程序自动确定，将值设置为 None 并使用 fit 参数即可。    </span></span><br><span class="line">    error_correction=qrcode.constants.ERROR_CORRECT_L,   <span class="comment">##error_correction：控制二维码的错误纠正功能。可取值下列4个常量。  </span></span><br><span class="line">    box_size=10,     <span class="comment">##box_size：控制二维码中每个小格子包含的像素数。</span></span><br><span class="line">    border=4,   <span class="comment">##border：控制边框（二维码与图片边界的距离）包含的格子数（默认为4，是相关标准规定的最小值）</span></span><br><span class="line">) </span><br><span class="line">qr.add_data(<span class="string">'hello, qrcode'</span>) </span><br><span class="line">qr.make(fit=True)  </span><br><span class="line">img = qr.make_image()</span><br><span class="line">img.save(<span class="string">'123.png'</span>)</span><br><span class="line">error_correct的几种情况</span><br><span class="line">ERROR_CORRECT_L：大约7%或更少的错误能被纠正。</span><br><span class="line">ERROR_CORRECT_M（默认）：大约15%或更少的错误能被纠正。</span><br><span class="line">ROR_CORRECT_H：大约30%或更少的错误能被纠正。</span><br></pre></td></tr></table></figure>
+<h2 id="3-取出图片中每个像素并输入到txt中"><a href="#3-取出图片中每个像素并输入到txt中" class="headerlink" title="3.取出图片中每个像素并输入到txt中"></a>3.取出图片中每个像素并输入到txt中</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:gb2312</span></span><br><span class="line">import Image</span><br><span class="line">img=Image.open(<span class="string">"3.bmp"</span>)</span><br><span class="line">img_arry=img.load()</span><br><span class="line">f=open(<span class="string">"flag.txt"</span>,<span class="string">'w'</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(410):</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(410):</span><br><span class="line">        s=str(img_arry[x,y])</span><br><span class="line">        f.write(s)</span><br><span class="line">        f.write(<span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="4-根据一个含有像素的txt文件生成图片"><a href="#4-根据一个含有像素的txt文件生成图片" class="headerlink" title="4.根据一个含有像素的txt文件生成图片"></a>4.根据一个含有像素的txt文件生成图片</h2><pre><code class="python"><span class="comment">#coding:gb2312</span>
+
+<span class="keyword">import</span> Image
+f=open(<span class="string">"flag.txt"</span>)
+img=Image.new(<span class="string">'1'</span>,(<span class="number">410</span>,<span class="number">410</span>))
+d=img.load()
+img_arry=[]
+<span class="comment">##stuple=set()</span>
+i=<span class="number">0</span>
+<span class="keyword">for</span> line <span class="keyword">in</span> f:
+    line=line.strip().split(<span class="string">","</span>)
+    stuple =[]
+    stuple.append(int(line[<span class="number">0</span>][<span class="number">1</span>:]))
+    stuple.append(int(line[<span class="number">1</span>][<span class="number">1</span>:]))
+    stuple.append(int(line[<span class="number">2</span>][<span class="number">1</span>:<span class="number">-1</span>]))
+    img_arry.append(tuple(stuple))
+<span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">410</span>):
+    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">410</span>):
+       img.putpixel((x, y), img_arry[i][<span class="number">0</span>])
+       i+=<span class="number">1</span>
+img.save(<span class="string">"flag.jpg"</span>)
+</code></pre>
 
       
 
