@@ -154,6 +154,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-资产检测及新增服务通知" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/13/资产检测及新增服务通知/">利用python脚本进行资产监测</a>
+    </h1>
+  
+
+        
+        <a href="/2019/01/13/资产检测及新增服务通知/" class="archive-article-date">
+  	<time datetime="2019-01-13T05:32:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="写在前头一些与本文无关的话"><a href="#写在前头一些与本文无关的话" class="headerlink" title="写在前头一些与本文无关的话"></a>写在前头一些与本文无关的话</h2><p>&lt;! –more–&gt;<br>好久好久没有写博客了，上次写的那篇离现在也有大半年了。这大半年去了公司实习，公司事情比较多也没时间整理。<br>好吧！主要还是因为懒，在这期间也想恢复想blog的，但又被心中那个黑天使给按下了一直堕落到现在，最近才幡然<br>醒悟。决定之后大概每周整理更新一篇关于自己最近一周学到的新知识或工作中遇到的问题及解决办法。前路很长，希<br>望我能带着坚持做下去，努力成长。</p>
+<h2 id="正文内容"><a href="#正文内容" class="headerlink" title="正文内容"></a>正文内容</h2><h3 id="脚本编写初衷"><a href="#脚本编写初衷" class="headerlink" title="脚本编写初衷"></a>脚本编写初衷</h3><p>前几个星期吧，都在做某个运营商的项目主要的任务是对运营商的资产服务识别，以及弱口令等常规漏洞的检查。由于<br>IP数量巨大，客户自己都不知道有哪些资产服务且有些端口服务开关不定，给工作带来了极大的干扰，导致一些服务上<br>的弱口令及常规未授权访问漏洞在第一轮没有清扫干净，例如海康、ftp、ssh弱口令等。因此在第一轮排查后想写个脚<br>本来监测客户的IP资产，当有新的服务端口开放时用邮件进行通知，再进行排查。根据实际漏洞情况及时间安排进行三<br>轮监控：</p>
+<p>第一阶段针对团体名、telnet、海康摄像后台弱口令，redis、Memcached未授权访问漏洞对下面端口服务进行监控：<br>telnet 23，snmp 161，Redis 6379，Memcached 11211，Rtsp 554</p>
+<p>第二阶段主要是对数据库的一些弱口令及未授权登陆的排查，对下面端口服务进行监测：<br>MongoDB 27017，Oracle 1521 ，SQLServer 1433，MySQL 3306，Pointbase 9092，DB2 5000，Sybase 4100</p>
+<p>第三阶段是对主机系统可能存在的弱口令进行监测：<br>ftp 21，ssh 22，RDP 3389</p>
+<h3 id="脚本编写过程"><a href="#脚本编写过程" class="headerlink" title="脚本编写过程"></a>脚本编写过程</h3><h4 id="大体思路"><a href="#大体思路" class="headerlink" title="大体思路"></a>大体思路</h4><p>1.使用python调用nmap对指定资产以及端口服务进行扫描并将扫描结果导出为xml文本。<br>2.使用python下的xml模块解析上一步导出的xml文本，将开放了指定监测服务端口的IP存入数据库。<br>3.第一次排查完成后开始后续检测当有新的IP出现监测服务时，将该IP存入数据库，并把IP及开放端口邮件发送至我邮箱。<br>4.上述完成后程序休眠3小时后开始下一次检测。</p>
+<h4 id="脚本模块"><a href="#脚本模块" class="headerlink" title="脚本模块"></a>脚本模块</h4><h5 id="扫描模块"><a href="#扫描模块" class="headerlink" title="扫描模块"></a>扫描模块</h5><p>调用nmap对资产进行扫描，我所采用的nmap命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -p ports -Pn -iL filename -oX result.xml</span><br></pre></td></tr></table></figure></p>
+<p>扫描模块代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scanner</span><span class="params">(filename,ports,i)</span>:</span></span><br><span class="line">    strTime = time.strftime(<span class="string">"%Y-%m-%d-%H%M%S"</span>, time.localtime(time.time()))</span><br><span class="line">    <span class="keyword">print</span> strTime + <span class="string">'   资产开始第%d次端口扫描\n'</span> % i</span><br><span class="line">    os.system(<span class="string">"nmap -sS -p "</span>+ports+<span class="string">" -Pn -iL "</span>+filename+<span class="string">" -oX "</span>+str(i)+<span class="string">".xml"</span>)</span><br><span class="line">    <span class="keyword">print</span> time.strftime(<span class="string">"%Y-%m-%d-%H%M%S"</span>, time.localtime(time.time())) + <span class="string">"     资产完成第%d次扫描，开始解析"</span> % i</span><br><span class="line">    file=<span class="string">'&#123;x&#125;.xml'</span>.format(x=i)</span><br><span class="line">    analysis(file,i)</span><br></pre></td></tr></table></figure></p>
+<h5 id="解析模块"><a href="#解析模块" class="headerlink" title="解析模块"></a>解析模块</h5><p>使用python的xml模块来对扫描模块的xml文本进行解析，关于xml模块的教程可参考该<a href="https://www.cnblogs.com/chaguang/articles/8510165.html" target="_blank" rel="noopener">网址</a><br>解析模块如下所示：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">analysis</span><span class="params">(file,i)</span>:</span></span><br><span class="line">    tree = ET.parse(file)</span><br><span class="line">    root = tree.getroot()</span><br><span class="line">    list=[]</span><br><span class="line">    <span class="keyword">for</span> temp <span class="keyword">in</span> root.findall(<span class="string">'host'</span>):</span><br><span class="line">        ports = <span class="string">''</span></span><br><span class="line">        ip = temp.find(<span class="string">'address'</span>).get(<span class="string">'addr'</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            xml_ports = temp.find(<span class="string">'ports'</span>).findall(<span class="string">'port'</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">             <span class="keyword">print</span> ip + <span class="string">"没有检测出"</span></span><br><span class="line">             <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> temp1 <span class="keyword">in</span> xml_ports:</span><br><span class="line">            <span class="keyword">if</span> temp1.find(<span class="string">'state'</span>).get(<span class="string">'state'</span>) == <span class="string">'open'</span>:</span><br><span class="line">                port = temp1.get(<span class="string">'portid'</span>)</span><br><span class="line">                ports = ports + <span class="string">' '</span> + port</span><br><span class="line">        cursor.execute(<span class="string">'select count(*) from host where ip=?'</span>,(ip,))</span><br><span class="line">        result=cursor.fetchall()</span><br><span class="line">        <span class="keyword">if</span> len(ports)&gt;<span class="number">0</span> <span class="keyword">and</span> str(result)==<span class="string">'[(0,)]'</span>:</span><br><span class="line">            store(ip,ports)</span><br><span class="line">            list.append((ip+<span class="string">':'</span>+ports))</span><br><span class="line">    cursor.close()</span><br><span class="line">    conn.commit()</span><br><span class="line">    conn.close()</span><br><span class="line">    <span class="keyword">if</span> len(list)!=<span class="number">0</span> <span class="keyword">and</span> i!=<span class="number">1</span>:</span><br><span class="line">        send_email(list)</span><br><span class="line">    <span class="keyword">elif</span> i!=<span class="number">1</span> <span class="keyword">and</span> len(list)==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"本次没有新地址出现"</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"本次解析完成!休息一小时候继续工作。\n"</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="存储模块"><a href="#存储模块" class="headerlink" title="存储模块"></a>存储模块</h5><p>该脚本采用的是python自带的sqlite3模块进行数据库的创建，由于SQLite本身是C写的，而且体积很小，实现简单所以<br>，经常被集成到各种应用程序中，甚至在iOS和Android的App中都可以集成。具体教程参见<a href="http://www.runoob.com/sqlite/sqlite-python.html" target="_blank" rel="noopener">菜鸟教程</a><br>创建数据、获取游标、执行sql语句<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">conn=sqlite3.connect(<span class="string">'host.db'</span>)</span><br><span class="line">cursor=conn.cursor()</span><br><span class="line">cursor.execute(<span class="string">r"insert into host (ip,ports) values ('&#123;ip&#125;', '&#123;ports&#125;')"</span>.format(ip=ip,ports=ports))</span><br><span class="line">```	</span><br><span class="line"><span class="comment">##### 邮件发送模块</span></span><br><span class="line">采用了python下的smtp模块进行了邮件的发送，具体教程参考该[网址](https://www.liaoxuefeng.com/wiki/<span class="number">001374738125095</span>c955c1e6d8bb493182103fac9270762a000/<span class="number">001386832745198026</span>a685614e7462fb57dbf733cc9f3ad000)</span><br><span class="line">邮件模块代码如下：</span><br><span class="line">``` python</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_email</span><span class="params">(list)</span>:</span></span><br><span class="line">    sender=<span class="string">"你的163邮箱"</span></span><br><span class="line">    receiver=[<span class="string">"yangtao5@nsfocus.com"</span>,<span class="string">"dingwenchao2@nsfocus.com"</span>,<span class="string">"panwenxiang@nsfocus.com"</span>,<span class="string">"wangguangteng@nsfocus.com"</span>]</span><br><span class="line">    str=<span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> list:</span><br><span class="line">        str=str+ip+<span class="string">"\n"</span></span><br><span class="line">    text=MIMEText(<span class="string">"the new open address and ports:\n"</span>+str,<span class="string">'plain'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line">    message=MIMEMultipart(<span class="string">'mixed'</span>)</span><br><span class="line">    message[<span class="string">'From'</span>]=<span class="string">'你的163邮箱'</span></span><br><span class="line">    message[<span class="string">'To'</span>]=<span class="string">';'</span>.join(receiver)</span><br><span class="line">    message[<span class="string">'Subject'</span>]=<span class="string">'new address!!!!!!'</span></span><br><span class="line">    message.attach(text)</span><br><span class="line">    smtp=smtplib.SMTP()</span><br><span class="line">    smtp.connect(<span class="string">'smtp.163.com'</span>)</span><br><span class="line">    smtp.login(<span class="string">'你的163邮箱'</span>,<span class="string">'你的163邮箱密码'</span>)</span><br><span class="line">    smtp.sendmail(sender,receiver,message.as_string())</span><br><span class="line">    smtp.quit()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"已发现新地址，邮件已发送完成\n"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="整个脚本内容"><a href="#整个脚本内容" class="headerlink" title="整个脚本内容"></a>整个脚本内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:gbk</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"><span class="keyword">from</span> email.mime.multipart <span class="keyword">import</span> MIMEMultipart</span><br><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scanner</span><span class="params">(filename,ports,i)</span>:</span></span><br><span class="line">    strTime = time.strftime(<span class="string">"%Y-%m-%d-%H%M%S"</span>, time.localtime(time.time()))</span><br><span class="line">    <span class="keyword">print</span> strTime + <span class="string">'   资产开始第%d次端口扫描\n'</span> % i</span><br><span class="line">    os.system(<span class="string">"nmap -sS -p "</span>+ports+<span class="string">" -Pn -iL "</span>+filename+<span class="string">" -oX "</span>+str(i)+<span class="string">".xml"</span>)</span><br><span class="line">    <span class="keyword">print</span> time.strftime(<span class="string">"%Y-%m-%d-%H%M%S"</span>, time.localtime(time.time())) + <span class="string">"     资产完成第%d次扫描，开始解析"</span> % i</span><br><span class="line">    file=<span class="string">'&#123;x&#125;.xml'</span>.format(x=i)</span><br><span class="line">    analysis(file,i)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">analysis</span><span class="params">(file,i)</span>:</span></span><br><span class="line">    tree = ET.parse(file)</span><br><span class="line">    root = tree.getroot()</span><br><span class="line">    list=[]</span><br><span class="line">    <span class="keyword">for</span> temp <span class="keyword">in</span> root.findall(<span class="string">'host'</span>):</span><br><span class="line">        ports = <span class="string">''</span></span><br><span class="line">        ip = temp.find(<span class="string">'address'</span>).get(<span class="string">'addr'</span>)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            xml_ports = temp.find(<span class="string">'ports'</span>).findall(<span class="string">'port'</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">             <span class="keyword">print</span> ip + <span class="string">"没有检测出"</span></span><br><span class="line">             <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> temp1 <span class="keyword">in</span> xml_ports:</span><br><span class="line">            <span class="keyword">if</span> temp1.find(<span class="string">'state'</span>).get(<span class="string">'state'</span>) == <span class="string">'open'</span>:</span><br><span class="line">                port = temp1.get(<span class="string">'portid'</span>)</span><br><span class="line">                ports = ports + <span class="string">' '</span> + port</span><br><span class="line">        cursor.execute(<span class="string">'select count(*) from host where ip=?'</span>,(ip,))</span><br><span class="line">        result=cursor.fetchall()</span><br><span class="line">        <span class="keyword">if</span> len(ports)&gt;<span class="number">0</span> <span class="keyword">and</span> str(result)==<span class="string">'[(0,)]'</span>:</span><br><span class="line">            store(ip,ports)</span><br><span class="line">            list.append((ip+<span class="string">':'</span>+ports))</span><br><span class="line">    cursor.close()</span><br><span class="line">    conn.commit()</span><br><span class="line">    conn.close()</span><br><span class="line">    <span class="keyword">if</span> len(list)!=<span class="number">0</span> <span class="keyword">and</span> i!=<span class="number">1</span>:</span><br><span class="line">        send_email(list)</span><br><span class="line">    <span class="keyword">elif</span> i!=<span class="number">1</span> <span class="keyword">and</span> len(list)==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"本次没有新地址出现"</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"本次解析完成!休息一小时候继续工作。\n"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">store</span><span class="params">(ip,ports)</span>:</span></span><br><span class="line">    cursor.execute(<span class="string">r"insert into host (ip,ports) values ('&#123;ip&#125;', '&#123;ports&#125;')"</span>.format(ip=ip,ports=ports))</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"success"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">send_email</span><span class="params">(list)</span>:</span></span><br><span class="line">    sender=<span class="string">"你的163邮箱"</span></span><br><span class="line">    receiver=[<span class="string">"yangtao5@nsfocus.com"</span>,<span class="string">"dingwenchao2@nsfocus.com"</span>,<span class="string">"panwenxiang@nsfocus.com"</span>,<span class="string">"wangguangteng@nsfocus.com"</span>]</span><br><span class="line">    str=<span class="string">""</span></span><br><span class="line">    <span class="keyword">for</span> ip <span class="keyword">in</span> list:</span><br><span class="line">        str=str+ip+<span class="string">"\n"</span></span><br><span class="line">    text=MIMEText(<span class="string">"the new open address and ports:\n"</span>+str,<span class="string">'plain'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line">    message=MIMEMultipart(<span class="string">'mixed'</span>)</span><br><span class="line">    message[<span class="string">'From'</span>]=<span class="string">'你的163邮箱'</span></span><br><span class="line">    message[<span class="string">'To'</span>]=<span class="string">';'</span>.join(receiver)</span><br><span class="line">    message[<span class="string">'Subject'</span>]=<span class="string">'new address!!!!!!'</span></span><br><span class="line">    message.attach(text)</span><br><span class="line">    smtp=smtplib.SMTP()</span><br><span class="line">    smtp.connect(<span class="string">'smtp.163.com'</span>)</span><br><span class="line">    smtp.login(<span class="string">'你的163邮箱'</span>,<span class="string">'你的163邮箱密码'</span>)</span><br><span class="line">    smtp.sendmail(sender,receiver,message.as_string())</span><br><span class="line">    smtp.quit()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"已发现新地址，邮件已发送完成\n"</span></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    i=<span class="number">1</span></span><br><span class="line">    prase = argparse.ArgumentParser(usage=<span class="string">"python port_scanner.py --file=filename --ports=p1,p2,p3......"</span>,description=<span class="string">"the script is for large assets monitoring"</span>)</span><br><span class="line">    prase.add_argument(<span class="string">'--file'</span>, type=str, help=<span class="string">"IP_assets'filename to be scanned"</span>)</span><br><span class="line">    prase.add_argument(<span class="string">'--ports'</span>, type=str, help=<span class="string">"ports which are needed to be scanned"</span>)</span><br><span class="line">    <span class="keyword">if</span> len(sys.argv)&lt;<span class="number">2</span>:</span><br><span class="line">        <span class="keyword">print</span> prase.usage+<span class="string">'\n input -h for help'</span></span><br><span class="line">    ports = prase.parse_args().ports</span><br><span class="line">    filename=prase.parse_args().file</span><br><span class="line">    conn=sqlite3.connect(<span class="string">'host.db'</span>)</span><br><span class="line">    cursor=conn.cursor()</span><br><span class="line">    cursor.execute(<span class="string">'create table if not exists host (id INTEGER PRIMARY KEY AUTOINCREMENT,ip VARCHAR(16) UNIQUE NOT NULL,ports TEXT)'</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        conn = sqlite3.connect(<span class="string">'host.db'</span>)</span><br><span class="line">        cursor = conn.cursor()</span><br><span class="line">        scanner(filename,ports,i)</span><br><span class="line">        time.sleep(<span class="number">10800</span>)</span><br><span class="line">        i=i+<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="实现效果："><a href="#实现效果：" class="headerlink" title="实现效果："></a>实现效果：</h3><p>将该脚本部署到了客户提供的服务器上进行资产检测，以下是运行截图<br><img src="http://ww3.sinaimg.cn/large/0069oIoUly1fz51dvsnvhj30da06nwei.jpg" alt="image"><br>当有新地址出现时邮件截图<br><img src="http://ww1.sinaimg.cn/large/0069oIoUly1fz51gnm2z4j30lu05tdgi.jpg" alt="image"></p>
+<h2 id="最后一点打算"><a href="#最后一点打算" class="headerlink" title="最后一点打算"></a>最后一点打算</h2><p>想把这个脚本用改成网页形式，放在服务端可随时使用。但放在服务端和web形式需要考虑一些可能会存在的安全问题，有空了把它实现以下。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/13/资产检测及新增服务通知/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-2018ZJGSCTFwriteup" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -414,74 +489,9 @@
 
 
   
-    <article id="post-csrf学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/12/csrf学习/">web学习</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/12/csrf学习/" class="archive-article-date">
-  	<time datetime="2018-03-12T01:35:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>csrf 全称：Cross-site request forgery(跨站请求伪造)<br>利用用户已登陆的身份，在用户毫不知情的情况下以用户的名义完成非法操作。<br>
-        
-          <a class="article-more-a" href="/2018/03/12/csrf学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/12/csrf学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
