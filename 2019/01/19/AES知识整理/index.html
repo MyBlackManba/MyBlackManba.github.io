@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ww3.sinaimg.cn/large/0069oIoUly1fyz39gndanj30g40g975j.jpg">
-  <title>spider&#39;s blog</title>
+  <title>AES知识整理 | spider&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个记录生活、学习、工作的blog。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="spider&#39;s blog">
-<meta property="og:url" content="http://ww3.sinaimg.cn/large/0069oIoUly1fyz39gndanj30g40g975j.jpg/page/2/index.html">
+  <meta name="description" content="之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AES知识整理">
+<meta property="og:url" content="http://ww3.sinaimg.cn/large/0069oIoUly1fyz39gndanj30g40g975j.jpg/2019/01/19/AES知识整理/index.html">
 <meta property="og:site_name" content="spider&#39;s blog">
-<meta property="og:description" content="一个记录生活、学习、工作的blog。">
+<meta property="og:description" content="之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUly1fzl38ux8wbj30ex08jtc6.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUly1fzl3pzoo2fj30gh0fhdhp.jpg">
+<meta property="og:updated_time" content="2019-01-27T15:49:34.943Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spider&#39;s blog">
-<meta name="twitter:description" content="一个记录生活、学习、工作的blog。">
+<meta name="twitter:title" content="AES知识整理">
+<meta name="twitter:description" content="之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/0069oIoUly1fzl38ux8wbj30ex08jtc6.jpg">
   
     <link rel="alternative" href="/atom.xml" title="spider&#39;s blog" type="application/atom+xml">
   
@@ -152,34 +156,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-web安全" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-AES知识整理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/15/web安全/">web安全</a>
+    <h1 class="article-title" itemprop="name">
+      AES知识整理
     </h1>
   
 
         
-        <a href="/2018/03/15/web安全/" class="archive-article-date">
-  	<time datetime="2018-03-15T05:01:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-15</time>
+        <a href="/2019/01/19/AES知识整理/" class="archive-article-date">
+  	<time datetime="2019-01-19T04:01:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>web安全工具以及一些招式<br>实现原理以及测试思路的是靠更重要<br>
-        
-          <a class="article-more-a" href="/2018/03/15/web安全/#more">more >></a>
-        
+        <p>  之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。<br><a id="more"></a><br>当时是和北区的一位大佬做的，测试中发现请求和返回数据包都是经过加密的。通过逆向<br>小程序得到客户端源码。虽然代码做了部分混淆，但通过分析后还是找到客户端程序对数<br>据包加密、解密的函数。系统采用的是AES加密，且采用的是最不安全的ECB模式，密钥固<br>定。之后使用解密工具或在线网站进行解密，最终找到短信轰炸，实名绕过登陆等漏洞。<br>竞标成功。弄完后，发现自己对AES的一些细节处以及几种模式有点不熟悉，故整理了一下<br>AES的一些知识。<br>   有关小程序客户端源码获取可参考该<a href="https://blog.csdn.net/qq_41139830/article/details/80531802" target="_blank" rel="noopener">blog</a></p>
+<h2 id="1-AES简介"><a href="#1-AES简介" class="headerlink" title="1. AES简介"></a>1. AES简介</h2><p>   AES是一个迭代的、对称密钥分组加密的密码算法，算法所使用的密钥长度可以是128比特<br>、192bit、256bit，密钥的长度决定了之后进行轮加密的次数，并且使用128bit分组加密解<br>密数据。与公共的密钥密码使用密钥对不同，对称密钥密码使用相同的密钥加密和解密数据。<br>通过分组密码返回的加密数据的位数与输入数据相同。迭代加密使用一个循环结构，在该循<br>环中重复置换和替换输入的数据。加密主要通过s盒变换、行变换、列变换进行置换、混淆、<br>扩散操作。<br>AES加密的大致流程如下图所示；<br>         <img src="http://ww3.sinaimg.cn/large/0069oIoUly1fzl38ux8wbj30ex08jtc6.jpg" alt="image"><br>加密器扩展后如下图所示：<br>         <img src="http://ww4.sinaimg.cn/large/0069oIoUly1fzl3pzoo2fj30gh0fhdhp.jpg" alt="image"><br>具体加密实现细节的实现可参考该篇图文结合详解<a href="https://blog.csdn.net/lrwwll/article/details/78069013" target="_blank" rel="noopener">blog</a></p>
+<h2 id="2-AES四种模式"><a href="#2-AES四种模式" class="headerlink" title="2. AES四种模式"></a>2. AES四种模式</h2><h3 id="ECB模式"><a href="#ECB模式" class="headerlink" title="ECB模式"></a>ECB模式</h3>
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -188,16 +210,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/15/web安全/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ww3.sinaimg.cn/large/0069oIoUly1fyz39gndanj30g40g975j.jpg/2019/01/19/AES知识整理/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/13/资产检测及新增服务通知/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用python脚本进行资产监测</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -217,272 +298,14 @@
 
 
 
-
-  
-    <article id="post-csrf学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/12/csrf学习/">web学习</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/12/csrf学习/" class="archive-article-date">
-  	<time datetime="2018-03-12T01:35:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>csrf 全称：Cross-site request forgery(跨站请求伪造)<br>利用用户已登陆的身份，在用户毫不知情的情况下以用户的名义完成非法操作。<br>
-        
-          <a class="article-more-a" href="/2018/03/12/csrf学习/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/12/csrf学习/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sql注入的预防" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/10/sql注入的预防/">sql注入的预防</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/10/sql注入的预防/" class="archive-article-date">
-  	<time datetime="2018-03-10T08:41:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>所谓sql注入，就是通过把sql命令插入到web表单递交或输入域名或页面请求的查询字符串，最终达到<br>
-        
-          <a class="article-more-a" href="/2018/03/10/sql注入的预防/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/10/sql注入的预防/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-渗透测试流程-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/06/渗透测试流程-1/">渗透测试流程</a>
-    </h1>
-  
-
-        
-        <a href="/2018/03/06/渗透测试流程-1/" class="archive-article-date">
-  	<time datetime="2018-03-06T12:59:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>通过自己搭了一个网站环境来，具体阐述一下web网站的完整渗透测试过程，有不足的还望指正。<br>
-        
-          <a class="article-more-a" href="/2018/03/06/渗透测试流程-1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/03/06/渗透测试流程-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-xss简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/19/xss简介/">xss学习</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/19/xss简介/" class="archive-article-date">
-  	<time datetime="2018-01-19T12:54:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>xss（跨站脚本攻击）<br>
-        
-          <a class="article-more-a" href="/2018/01/19/xss简介/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/19/xss简介/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -505,8 +328,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
