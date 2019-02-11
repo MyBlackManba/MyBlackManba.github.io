@@ -19,7 +19,8 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUly1g02h7o3d4lj30jn07zjtc.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUly1g02izcnoxxj30fc081jti.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUly1g02ixuvrnxj30g608yjvd.jpg">
-<meta property="og:updated_time" content="2019-02-11T08:09:30.582Z">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUly1g02jnwy3hpj30g60a8jvt.jpg">
+<meta property="og:updated_time" content="2019-02-11T08:13:12.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AES知识整理">
 <meta name="twitter:description" content="之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。">
@@ -185,10 +186,8 @@
 <h3 id="CBC模式"><a href="#CBC模式" class="headerlink" title="CBC模式"></a>CBC模式</h3><p>   CBC模式的加密过程如下所示：<br>   <img src="http://ww3.sinaimg.cn/large/0069oIoUly1g02izcnoxxj30fc081jti.jpg" alt="image"><br>想较于ECB模式，CBC模式加入了初始向量与明文块进行异或操作增加了随机性安全性高于ECB。<br>优点：<br>不容易进行主动攻击、适合传输长度长的报文，是SSL、IPSec的标准。<br>缺点：<br>不利于并行计算、误差传输、需要初始化向量IV</p>
 <h3 id="CFB模式"><a href="#CFB模式" class="headerlink" title="CFB模式"></a>CFB模式</h3><p>   CFB模式的加密方式如下所示：<br>   <img src="http://ww4.sinaimg.cn/large/0069oIoUly1g02ixuvrnxj30g608yjvd.jpg" alt="image"><br>与前两种模式的差别，CFB模式主要是对唯一固定的向量进行了左移n在补位，在对左移补位后的<br>向量进行加密再与明文进行异或。<br>优点：<br>隐藏了明文模式、分组密码转化为流模式、可以及时加密传送小于分组的数据。<br>缺点：<br>不利于并行计算、误差传输、初始IV唯一固定。</p>
 <h3 id="OFB模式"><a href="#OFB模式" class="headerlink" title="OFB模式"></a>OFB模式</h3><pre><code>OFB模式的加密方式如下所示：
-![image](http://ww3.sinaimg.cn/large/0069oIoUly1g02jnwy3hpj30g60a8jvt.jpg)
-</code></pre><p>OFB模式大致过程与CFB模式一致。<br>优点：<br>隐藏了明文模式、分组密码转化为流模式、可以及时加密传送小于分组的数据。<br>缺点：<br>不利于并行计算、误差传输、初始IV唯一固定、可能会对明文进行主动攻击。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><pre><code>AES为现在客户端与服务端进行通信的主流加密方式，而AES的四种方式中CBC模式是采用最多的
-</code></pre><p>一种。</p>
+</code></pre><p><img src="http://ww3.sinaimg.cn/large/0069oIoUly1g02jnwy3hpj30g60a8jvt.jpg" alt="image"><br>OFB模式大致过程与CFB模式一致。<br>优点：<br>隐藏了明文模式、分组密码转化为流模式、可以及时加密传送小于分组的数据。<br>缺点：<br>不利于并行计算、误差传输、初始IV唯一固定、可能会对明文进行主动攻击。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>   AES为现在客户端与服务端进行通信的主流加密方式，而AES的四种方式中CBC模式是采用最多的<br>一种。</p>
 <h2 id="参考BLOG"><a href="#参考BLOG" class="headerlink" title="参考BLOG"></a>参考BLOG</h2><p><a href="https://www.2cto.com/kf/201707/659430.html" target="_blank" rel="noopener">https://www.2cto.com/kf/201707/659430.html</a><br><a href="https://blog.csdn.net/qq_38289815/article/details/80900813" target="_blank" rel="noopener">https://blog.csdn.net/qq_38289815/article/details/80900813</a><br><a href="https://www.cnblogs.com/txw1958/p/aes.html" target="_blank" rel="noopener">https://www.cnblogs.com/txw1958/p/aes.html</a><br><a href="https://blog.csdn.net/lrwwll/article/details/78069013" target="_blank" rel="noopener">https://blog.csdn.net/lrwwll/article/details/78069013</a><br><a href="https://blog.csdn.net/coloriy/article/details/78139074" target="_blank" rel="noopener">https://blog.csdn.net/coloriy/article/details/78139074</a><br><a href="https://segmentfault.com/a/1190000011658363?utm_source=tag-newest" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011658363?utm_source=tag-newest</a>   </p>
 
       
