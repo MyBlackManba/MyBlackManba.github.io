@@ -6,17 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://ww3.sinaimg.cn/large/0069oIoUly1fyz39gndanj30g40g975j.jpg">
-  <title>Archives: 2019 | spider&#39;s blog</title>
+  <title>AES知识整理 | spider&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一个记录生活、学习、工作的blog。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="spider&#39;s blog">
-<meta property="og:url" content="http://ww3.sinaimg.cn/large/0069oIoUly1fyz39gndanj30g40g975j.jpg/archives/2019/index.html">
+  <meta name="description" content="之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AES知识整理">
+<meta property="og:url" content="http://ww3.sinaimg.cn/large/0069oIoUly1fyz39gndanj30g40g975j.jpg/2019/01/20/AES知识整理/index.html">
 <meta property="og:site_name" content="spider&#39;s blog">
-<meta property="og:description" content="一个记录生活、学习、工作的blog。">
+<meta property="og:description" content="之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUly1fzl38ux8wbj30ex08jtc6.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUly1fzl3pzoo2fj30gh0fhdhp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/0069oIoUly1g02h7o3d4lj30jn07zjtc.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/0069oIoUly1g02izcnoxxj30fc081jti.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/0069oIoUly1g02ixuvrnxj30g608yjvd.jpg">
+<meta property="og:updated_time" content="2019-02-11T08:09:30.582Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spider&#39;s blog">
-<meta name="twitter:description" content="一个记录生活、学习、工作的blog。">
+<meta name="twitter:title" content="AES知识整理">
+<meta name="twitter:description" content="之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/0069oIoUly1fzl38ux8wbj30ex08jtc6.jpg">
   
     <link rel="alternative" href="/atom.xml" title="spider&#39;s blog" type="application/atom+xml">
   
@@ -152,76 +159,166 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-AES知识整理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      AES知识整理
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/20/AES知识整理/" class="archive-article-date">
+
+        
+        <a href="/2019/01/20/AES知识整理/" class="archive-article-date">
   	<time datetime="2019-01-20T04:01:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-20</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/20/AES知识整理/">AES知识整理</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  之前有个售前任务，和多个友商一起竞标一个项目，给了个小程序看哪家挖的洞质量高。<br><a id="more"></a><br>当时是和北区的一位大佬做的，测试中发现请求和返回数据包都是经过加密的。通过逆向<br>小程序得到客户端源码。虽然代码做了部分混淆，但通过分析后还是找到客户端程序对数<br>据包加密、解密的函数。系统采用的是AES加密，且采用的是最不安全的ECB模式，密钥固<br>定。之后使用解密工具或在线网站进行解密，最终找到短信轰炸，实名绕过登陆等漏洞。<br>竞标成功。弄完后，发现自己对AES的一些细节处以及几种模式有点不熟悉，故整理了一下<br>AES的一些知识。<br>   有关小程序客户端源码获取可参考该<a href="https://blog.csdn.net/qq_41139830/article/details/80531802" target="_blank" rel="noopener">blog</a></p>
+<h2 id="1-AES简介"><a href="#1-AES简介" class="headerlink" title="1. AES简介"></a>1. AES简介</h2><p>   AES是一个迭代的、对称密钥分组加密的密码算法，算法所使用的密钥长度可以是128比特<br>、192bit、256bit，密钥的长度决定了之后进行轮加密的次数，并且使用128bit分组加密解<br>密数据。与公共的密钥密码使用密钥对不同，对称密钥密码使用相同的密钥加密和解密数据。<br>通过分组密码返回的加密数据的位数与输入数据相同。迭代加密使用一个循环结构，在该循<br>环中重复置换和替换输入的数据。加密主要通过s盒变换、行变换、列变换进行置换、混淆、<br>扩散操作，解密过程为加密的逆过程。<br>AES加密的大致流程如下图所示；<br>         <img src="http://ww3.sinaimg.cn/large/0069oIoUly1fzl38ux8wbj30ex08jtc6.jpg" alt="image"><br>加密器扩展后如下图所示：<br>         <img src="http://ww4.sinaimg.cn/large/0069oIoUly1fzl3pzoo2fj30gh0fhdhp.jpg" alt="image"><br>具体加密实现细节的实现可参考该篇图文结合详解<a href="https://blog.csdn.net/lrwwll/article/details/78069013" target="_blank" rel="noopener">blog</a></p>
+<h2 id="2-AES四种模式"><a href="#2-AES四种模式" class="headerlink" title="2. AES四种模式"></a>2. AES四种模式</h2><h3 id="ECB模式"><a href="#ECB模式" class="headerlink" title="ECB模式"></a>ECB模式</h3><p>   ECB模式的加密过程如下所示：<br>   <img src="http://ww1.sinaimg.cn/large/0069oIoUly1g02h7o3d4lj30jn07zjtc.jpg" alt="image"><br>ECB模式进行加密，密文顺序即为对应明文顺序分块加密后的排列顺序。为最不安全的AES方法<br>，当截获数据包时更改敏感信息处的密文如银行卡号等，可造成严重后果。<br>优点：<br>简单、有利于并行计算、误差不会被传送。<br>缺点:<br>不能隐藏明文模式、可能会对明文发起主动攻击。</p>
+<h3 id="CBC模式"><a href="#CBC模式" class="headerlink" title="CBC模式"></a>CBC模式</h3><p>   CBC模式的加密过程如下所示：<br>   <img src="http://ww3.sinaimg.cn/large/0069oIoUly1g02izcnoxxj30fc081jti.jpg" alt="image"><br>想较于ECB模式，CBC模式加入了初始向量与明文块进行异或操作增加了随机性安全性高于ECB。<br>优点：<br>不容易进行主动攻击、适合传输长度长的报文，是SSL、IPSec的标准。<br>缺点：<br>不利于并行计算、误差传输、需要初始化向量IV</p>
+<h3 id="CFB模式"><a href="#CFB模式" class="headerlink" title="CFB模式"></a>CFB模式</h3><p>   CFB模式的加密方式如下所示：<br>   <img src="http://ww4.sinaimg.cn/large/0069oIoUly1g02ixuvrnxj30g608yjvd.jpg" alt="image"><br>与前两种模式的差别，CFB模式主要是对唯一固定的向量进行了左移n在补位，在对左移补位后的<br>向量进行加密再与明文进行异或。<br>优点：<br>隐藏了明文模式、分组密码转化为流模式、可以及时加密传送小于分组的数据。<br>缺点：<br>不利于并行计算、误差传输、初始IV唯一固定。</p>
+<h3 id="OFB模式"><a href="#OFB模式" class="headerlink" title="OFB模式"></a>OFB模式</h3><pre><code>OFB模式的加密方式如下所示：
+![image](http://ww3.sinaimg.cn/large/0069oIoUly1g02jnwy3hpj30g60a8jvt.jpg)
+</code></pre><p>OFB模式大致过程与CFB模式一致。<br>优点：<br>隐藏了明文模式、分组密码转化为流模式、可以及时加密传送小于分组的数据。<br>缺点：<br>不利于并行计算、误差传输、初始IV唯一固定、可能会对明文进行主动攻击。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><pre><code>AES为现在客户端与服务端进行通信的主流加密方式，而AES的四种方式中CBC模式是采用最多的
+</code></pre><p>一种。</p>
+<h2 id="参考BLOG"><a href="#参考BLOG" class="headerlink" title="参考BLOG"></a>参考BLOG</h2><p><a href="https://www.2cto.com/kf/201707/659430.html" target="_blank" rel="noopener">https://www.2cto.com/kf/201707/659430.html</a><br><a href="https://blog.csdn.net/qq_38289815/article/details/80900813" target="_blank" rel="noopener">https://blog.csdn.net/qq_38289815/article/details/80900813</a><br><a href="https://www.cnblogs.com/txw1958/p/aes.html" target="_blank" rel="noopener">https://www.cnblogs.com/txw1958/p/aes.html</a><br><a href="https://blog.csdn.net/lrwwll/article/details/78069013" target="_blank" rel="noopener">https://blog.csdn.net/lrwwll/article/details/78069013</a><br><a href="https://blog.csdn.net/coloriy/article/details/78139074" target="_blank" rel="noopener">https://blog.csdn.net/coloriy/article/details/78139074</a><br><a href="https://segmentfault.com/a/1190000011658363?utm_source=tag-newest" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011658363?utm_source=tag-newest</a>   </p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://ww3.sinaimg.cn/large/0069oIoUly1fyz39gndanj30g40g975j.jpg/2019/01/20/AES知识整理/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/01/13/资产检测及新增服务通知/" class="archive-article-date">
-  	<time datetime="2019-01-13T05:32:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/13/资产检测及新增服务通知/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">利用python脚本进行资产监测</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/13/资产检测及新增服务通知/">利用python脚本进行资产监测</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -244,8 +341,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
